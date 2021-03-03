@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 @Table(name = "Booking")
 public class Booking {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Booking_ID", nullable = false)
     private int id;
 
@@ -19,8 +20,7 @@ public class Booking {
     @Column(name = "End", nullable = false)
     private Timestamp end;
 
-    public Booking(int id, int num, Timestamp start, Timestamp end) {
-        this.id = id;
+    public Booking(int num, Timestamp start, Timestamp end) {
         this.num = num;
         this.start = start;
         this.end = end;
