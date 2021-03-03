@@ -91,7 +91,7 @@ public class RoomHandler {
         List<Room> tmp = new ArrayList<>( this.getRooms() );
         for ( Room r : tmp ) {
             for ( Booking b : this.getBookings() ) {
-                if ( Integer.parseInt(r.getNum()) == b.getNum() && (t.after(b.getStart()) && t.before(b.getEnd())) ) {
+                if ( Integer.parseInt(r.getNum()) == b.getNum() && checkTimeAvailable( t, b.getStart(), b.getEnd() ) ) {
                     tmp.remove( r );
                 }
             }
@@ -99,5 +99,15 @@ public class RoomHandler {
         return tmp;
     }
 
-
+    /**
+     * Method to check if time is between two other times.
+     *
+     * @param t Timestamp to be checked
+     * @param st Lower-end time
+     * @param et Upper-end time
+     * @return If <code>t</code> is between <code>st</code> and <code>et</code>.
+     */
+    public boolean checkTimeAvailable ( Timestamp t, Timestamp st, Timestamp et ) {
+        return (t.after(st) && t.before(et));
+    }
 }
