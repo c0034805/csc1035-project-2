@@ -9,16 +9,16 @@ public class ModuleRequirements {
     @Column(name = "ID",nullable = false)
     private String id;
 
-    @Column(name = "No_of_Lecturers")
+    @Column(name = "No_of_Lecturers",nullable = false)
     private int lecturers;
 
-    @Column(name = "Lecture_Length")
+    @Column(name = "Lecture_Length",nullable = false)
     private int llength;
 
-    @Column(name = "No_of_Practicals")
+    @Column(name = "No_of_Practicals",nullable = false)
     private int practicals;
 
-    @Column(name = "Practical_Length")
+    @Column(name = "Practical_Length",nullable = false)
     private int plength;
 
     public ModuleRequirements(String id, int lecturers, int llength, int practicals, int plength) {
