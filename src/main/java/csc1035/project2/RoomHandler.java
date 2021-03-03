@@ -10,9 +10,11 @@ import java.util.List;
 // TODO: Please someone switch the room number to integers and remove all instances of `Integer.parseInt`
 public class RoomHandler {
 
-
     private List<Room> rooms;
     private List<Booking> bookings;
+    private List<ModuleBooking> moduleBookings;
+    private List<StudentBooking> studentBookings;
+    private List<StaffBooking> staffBookings;
 
     /**
      * RoomHandler constructor method.
@@ -21,6 +23,9 @@ public class RoomHandler {
         IController ic = new Controller();
         rooms = new ArrayList<Room>(ic.getAll(Room.class));
         bookings = new ArrayList<Booking>(ic.getAll(Booking.class));
+        moduleBookings = new ArrayList<ModuleBooking>(ic.getAll(ModuleBooking.class));
+        staffBookings = new ArrayList<StaffBooking>(ic.getAll(StaffBooking.class));
+        studentBookings = new ArrayList<StudentBooking>(ic.getAll(StudentBooking.class));
     }
 
     /**
@@ -39,6 +44,33 @@ public class RoomHandler {
      */
     public List<Booking> getBookings() {
         return bookings;
+    }
+
+    /**
+     * <code>moduleBookings</code> getter method.
+     *
+     * @return All module bookings in database.
+     */
+    public List<ModuleBooking> getModuleBookings() {
+        return moduleBookings;
+    }
+
+    /**
+     * <code>staffBookings</code> getter method.
+     *
+     * @return All staff bookings in database.
+     */
+    public List<StaffBooking> getStaffBookings() {
+        return staffBookings;
+    }
+
+    /**
+     * <code>studentBookings</code> getter method.
+     *
+     * @return All student bookings in database.
+     */
+    public List<StudentBooking> getStudentBookings() {
+        return studentBookings;
     }
 
     /**
@@ -61,6 +93,7 @@ public class RoomHandler {
         ic.update( sb );
     }
 
+    public void cancelReservation ( )
     /**
      * Method to return all rooms with a reservation.
      *

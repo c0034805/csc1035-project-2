@@ -7,3 +7,4 @@
 * (ERICK) `getAvailableRooms()` now takes timestamp.
 * (ERICK) Created `reserveRoomStudent` method.
 * (ERICK) Created `checkTimeAvailable` method.
+* (ERICK) Added lists for booking relationships.
