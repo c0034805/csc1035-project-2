@@ -56,4 +56,15 @@ public class RoomHandler {
         return tmp;
     }
 
+
+    public List<Room> getAvailableRooms () {
+        List<Room> tmp = new ArrayList<>();
+        List<Room> reserveRooms = new ArrayList<>(this.getReservedRooms());
+        for ( Room r : this.getRooms() ) {
+            if ( !reserveRooms.contains( r ) ) {
+                tmp.add( r );
+            }
+        }
+        return tmp;
+    }
 }
