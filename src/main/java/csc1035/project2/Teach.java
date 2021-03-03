@@ -6,11 +6,11 @@ import javax.persistence.*;
 @Table(name = "Teach")
 public class Teach {
     @Id
+    @Column(name = "Module_ID", nullable = false)
+    private int mid;
+
     @Column(name = "Staff_ID", nullable = false)
     private String sid;
-
-    @Column(name = "Module_ID", nullable = false, unique = true)
-    private int mid;
 
     public Teach(String sid, int mid) {
         this.sid = sid;
