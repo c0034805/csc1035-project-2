@@ -5,3 +5,4 @@
 * (ERICK) Created `getAvailableRooms()` method.
 * (ERICK) Booking ID is now auto-generated.
 * (ERICK) `getAvailableRooms()` now takes timestamp.
+* (ERICK) Created `reserveRoomStudent` method.

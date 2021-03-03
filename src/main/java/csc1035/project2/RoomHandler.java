@@ -41,6 +41,25 @@ public class RoomHandler {
         return bookings;
     }
 
+    /**
+     * Method to reserve a room for a student.
+     *
+     * <p>Method does not check if student is able to book a room at the specified times nor if they have
+     * already booked this. This is to be checked through the interface for booking system using
+     * other methods.</p>
+     *
+     * @param s Student object for booking
+     * @param r Room to be booked
+     * @param st Reservation starting time
+     * @param et Reservation ending time
+     */
+    public void reserveRoomStudent ( Students s, Room r, Timestamp st, Timestamp et ) {
+        Booking b = new Booking( Integer.parseInt(r.getNum()), st, et );
+        IController ic = new Controller();
+        ic.update( b );
+        StudentBooking sb = new StudentBooking( b.getId(), s.getId() );
+        ic.update( sb );
+    }
 
     /**
      * Method to return all rooms with a reservation.
@@ -79,4 +98,6 @@ public class RoomHandler {
         }
         return tmp;
     }
+
+
 }
