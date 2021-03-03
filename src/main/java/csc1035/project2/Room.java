@@ -1,9 +1,7 @@
 package csc1035.project2;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Rooms")
@@ -21,6 +19,9 @@ public class Room {
 
     @Column(name = "Social_Distancing_Capacity")
     private int sd_cap;
+
+    @OneToMany(mappedBy = "room")
+    private List<Room> rooms;
 
     public Room() {}
 

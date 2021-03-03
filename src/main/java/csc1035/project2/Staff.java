@@ -1,6 +1,7 @@
 package csc1035.project2;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Staff")
@@ -14,6 +15,12 @@ public class Staff{
 
     @Column(name = "Last_Name", nullable = false)
     private String lastname;
+
+    @OneToMany(mappedBy = "staff")
+    private List<StaffBooking> staffBookings;
+
+    @OneToMany(mappedBy = "staff")
+    private List<Teach> teach;
 
     public Staff(String id, String firstname, String lastname) {
         this.id = id;

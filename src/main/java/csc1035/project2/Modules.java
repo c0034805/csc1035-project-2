@@ -1,6 +1,7 @@
 package csc1035.project2;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Modules")
@@ -17,6 +18,21 @@ public class Modules {
 
     @Column(name = "Weeks", nullable = false)
     private int weeks;
+
+    @OneToOne
+    @JoinColumn(name = "ID", referencedColumnName = "ID")
+    private ModuleRequirements moduleRequirements;
+
+    @OneToOne
+    @JoinColumn(name = "ID", referencedColumnName = "Module_ID")
+    private Take take;
+
+    @OneToOne
+    @JoinColumn(name = "ID", referencedColumnName = "Module_ID")
+    private Teach teach;
+
+    @OneToMany(mappedBy = "moduleBooking")
+    private List<ModuleBooking> moduleBookings;
 
     public Modules(String id, String name, int credits, int weeks) {
         this.id = id;

@@ -21,6 +21,9 @@ public class ModuleRequirements {
     @Column(name = "Practical_Length",nullable = false)
     private int plength;
 
+    @OneToOne(mappedBy = "moduleRequirements")
+    private Modules modules;
+
     public ModuleRequirements(String id, int lecturers, int llength, int practicals, int plength) {
         this.id = id;
         this.lecturers = lecturers;

@@ -12,6 +12,13 @@ public class Take {
     @Column(name = "Student_ID", nullable = false)
     private int sid;
 
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Students student;
+
+    @OneToOne(mappedBy = "take")
+    private Modules module;
+
     public Take(int sid, String mid) {
         this.sid = sid;
         this.mid = mid;

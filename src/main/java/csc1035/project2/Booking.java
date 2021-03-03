@@ -19,6 +19,22 @@ public class Booking {
     @Column(name = "End", nullable = false)
     private Timestamp end;
 
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Room room;
+
+    @OneToOne
+    @JoinColumn(name = "Booking_ID", referencedColumnName = "Booking_ID")
+    private StaffBooking staffBooking;
+
+    @OneToOne
+    @JoinColumn(name = "Booking_ID", referencedColumnName = "Booking_ID")
+    private StudentBooking studentBooking;
+
+    @OneToOne
+    @JoinColumn(name = "Booking_ID", referencedColumnName = "Booking_ID")
+    private ModuleBooking moduleBooking;
+
     public Booking(int id, int num, Timestamp start, Timestamp end) {
         this.id = id;
         this.num = num;
