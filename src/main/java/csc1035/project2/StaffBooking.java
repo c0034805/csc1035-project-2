@@ -12,6 +12,13 @@ public class StaffBooking {
     @Column(name = "Staff_ID",nullable = false)
     private String sid;
 
+    @OneToOne(mappedBy = "staffBooking")
+    private Booking booking;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Staff staff;
+
     public StaffBooking(int bid, String sid) {
         this.bid = bid;
         this.sid = sid;

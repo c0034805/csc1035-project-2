@@ -7,7 +7,6 @@ import java.sql.Timestamp;
 @Table(name = "Booking")
 public class Booking {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Booking_ID", nullable = false)
     private int id;
 
@@ -20,7 +19,24 @@ public class Booking {
     @Column(name = "End", nullable = false)
     private Timestamp end;
 
-    public Booking(int num, Timestamp start, Timestamp end) {
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Room room;
+
+    @OneToOne
+    @JoinColumn(name = "Booking_ID", referencedColumnName = "Booking_ID")
+    private StaffBooking staffBooking;
+
+    @OneToOne
+    @JoinColumn(name = "Booking_ID", referencedColumnName = "Booking_ID")
+    private StudentBooking studentBooking;
+
+    @OneToOne
+    @JoinColumn(name = "Booking_ID", referencedColumnName = "Booking_ID")
+    private ModuleBooking moduleBooking;
+
+    public Booking(int id, int num, Timestamp start, Timestamp end) {
+        this.id = id;
         this.num = num;
         this.start = start;
         this.end = end;

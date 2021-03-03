@@ -12,6 +12,13 @@ public class Teach {
     @Column(name = "Staff_ID", nullable = false)
     private String sid;
 
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Staff staff;
+
+    @OneToOne(mappedBy = "teach")
+    private Modules module;
+
     public Teach(String sid, int mid) {
         this.sid = sid;
         this.mid = mid;

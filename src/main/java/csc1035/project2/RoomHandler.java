@@ -41,11 +41,6 @@ public class RoomHandler {
         return bookings;
     }
 
-    /*
-    public void reserveRoomStudent ( Students s, Room r, Timestamp st, Timestamp et ) {
-        Booking b = new Booking( Integer.parseInt(r.getNum()), st, et );
-    }
-    */
 
     /**
      * Method to return all rooms with a reservation.
