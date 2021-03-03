@@ -6,11 +6,11 @@ import javax.persistence.*;
 @Table(name = "Module_Booking")
 public class ModuleBooking {
     @Id
-    @Column(name = "Module_ID", nullable = false)
-    private String id;
-
     @Column(name = "Booking_ID", nullable = false)
     private int bid;
+
+    @Column(name = "Module_ID", nullable = false)
+    private String id;
 
     public ModuleBooking(String id, int bid) {
         this.id = id;
