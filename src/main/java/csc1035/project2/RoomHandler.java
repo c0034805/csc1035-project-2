@@ -63,6 +63,18 @@ public class RoomHandler {
     }
 
     /**
+     * Method to cancel reservation by id.
+     *
+     * @param id Booking id to cancel.
+     */
+    // TODO: Make sure to test when deleting a reservation that the module/student/staff booking also deletes.
+    public void cancelReservation ( int id ) {
+        IController ic = new Controller();
+        ic.delete( Booking.class, id );
+        refreshRoomHandler();
+    }
+
+    /**
      * Method to return all rooms with a reservation.
      *
      * @return List of all reserved rooms.

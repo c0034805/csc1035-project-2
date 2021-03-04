@@ -9,3 +9,4 @@
 * (ERICK) Created `checkTimeAvailable()` method.
 * (ERICK) Added lists for booking relationships.
 * (ERICK) Created `refreshRoomHandler()` method.
+* (ERICK) Created `cancelReservation()`method.
