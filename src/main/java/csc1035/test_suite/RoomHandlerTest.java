@@ -142,7 +142,7 @@ public class RoomHandlerTest {
     }
 
     @Test
-    public void getReservedRoomsReturnsCorrect(){
+    public void getReservedRoomsReturnsCorrectSize(){
         studentReservation(11,12);
         Timestamp middle = new Timestamp(2021, 6, 22,
                 11, 30,0,0);
@@ -153,6 +153,22 @@ public class RoomHandlerTest {
 
         //just a couple years after that reservation
         Assertions.assertEquals(1,handler.getReservedRooms(after).size());
+
+    }
+
+    @Test
+    public void getAvailableRoomsReturnsCorrectSize(){
+        studentReservation(11,12);
+        Timestamp middle = new Timestamp(2021, 6, 22,
+                11, 30,0,0);
+        Timestamp after = new Timestamp(2999, 6, 22,
+                11, 30,0,0);
+
+        int difference = handler.getReservedRooms(middle).size() - handler.getReservedRooms(after).size();
+
+        //checks that the available list size after the reservations is the same as the room list size
+        Assertions.assertEquals(controller.getAll(Room.class).size(),handler.getAvailableRooms(after).size());
+        Assertions.assertEquals(1,difference);
 
     }
 
