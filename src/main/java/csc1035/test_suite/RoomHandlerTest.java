@@ -41,7 +41,7 @@ public class RoomHandlerTest {
         Assertions.assertTrue(checker);
     }
 
-    public void studentReservation(){
+    public void studentReservation(int startHr, int endHr){
         Students s = (Students) controller.getById(Students.class,216906208);
         Room r = (Room) controller.getById(Room.class,"0.379");
 
@@ -55,10 +55,31 @@ public class RoomHandlerTest {
 
     @Test
     public void reserveRoomStudentReservesRoom(){
-        studentReservation();
-        //need to figure out how the booking ID gets made
+
+        studentReservation(11,12);
+        Assertions.assertEquals(1,controller.getAll(Booking.class).size());
+        Assertions.assertEquals(1,controller.getAll(StudentBooking.class).size());
+
+        studentReservation(13,23);
+        Assertions.assertEquals(2,controller.getAll(Booking.class).size());
+        Assertions.assertEquals(2,controller.getAll(StudentBooking.class).size());
 
     }
+
+    @Test
+    public void cancelReservationCancelsStudent(){
+        studentReservation(11,12);
+        List<Booking> bookings = controller.getAll(Booking.class);
+        Assertions.assertEquals(1,bookings.size());
+        Assertions.assertEquals(1,controller.getAll(StudentBooking.class).size());
+
+        handler.cancelReservation(bookings.get(0).getId());
+
+        Assertions.assertEquals(0,controller.getAll(Booking.class).size());
+        Assertions.assertEquals(0,controller.getAll(StudentBooking.class).size());
+    }
+
+
 
 
 
