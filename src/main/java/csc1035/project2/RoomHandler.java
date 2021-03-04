@@ -29,48 +29,16 @@ public class RoomHandler {
     }
 
     /**
-     * <code>rooms</code> getter method.
-     *
-     * @return All rooms in database.
+     * Method to update RoomHandler after a change to database is made.
      */
-    public List<Room> getRooms() {
-        return rooms;
-    }
+    public void refreshRoomHandler() {
+        IController ic = new Controller();
+        this.setRooms( new ArrayList<Room>(ic.getAll(Room.class)) );
+        this.setBookings( new ArrayList<Booking>(ic.getAll(Booking.class)) );
+        this.setModuleBookings( new ArrayList<ModuleBooking>(ic.getAll(ModuleBooking.class)) );
+        this.setStaffBookings( new ArrayList<StaffBooking>(ic.getAll(StaffBooking.class)) );
+        this.setStudentBookings( new ArrayList<StudentBooking>(ic.getAll(StudentBooking.class)) );
 
-    /**
-     * <code>bookings</code> getter method.
-     *
-     * @return All bookings in database.
-     */
-    public List<Booking> getBookings() {
-        return bookings;
-    }
-
-    /**
-     * <code>moduleBookings</code> getter method.
-     *
-     * @return All module bookings in database.
-     */
-    public List<ModuleBooking> getModuleBookings() {
-        return moduleBookings;
-    }
-
-    /**
-     * <code>staffBookings</code> getter method.
-     *
-     * @return All staff bookings in database.
-     */
-    public List<StaffBooking> getStaffBookings() {
-        return staffBookings;
-    }
-
-    /**
-     * <code>studentBookings</code> getter method.
-     *
-     * @return All student bookings in database.
-     */
-    public List<StudentBooking> getStudentBookings() {
-        return studentBookings;
     }
 
     /**
@@ -91,9 +59,9 @@ public class RoomHandler {
         ic.update( b );
         StudentBooking sb = new StudentBooking( b.getId(), s.getId() );
         ic.update( sb );
+        refreshRoomHandler();
     }
 
-    public void cancelReservation ( )
     /**
      * Method to return all rooms with a reservation.
      *
@@ -142,5 +110,95 @@ public class RoomHandler {
      */
     public boolean checkTimeAvailable ( Timestamp t, Timestamp st, Timestamp et ) {
         return (t.after(st) && t.before(et));
+    }
+
+    /**
+     * <code>rooms</code> getter method.
+     *
+     * @return All rooms in database.
+     */
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    /**
+     * <code>bookings</code> getter method.
+     *
+     * @return All bookings in database.
+     */
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    /**
+     * <code>moduleBookings</code> getter method.
+     *
+     * @return All module bookings in database.
+     */
+    public List<ModuleBooking> getModuleBookings() {
+        return moduleBookings;
+    }
+
+    /**
+     * <code>staffBookings</code> getter method.
+     *
+     * @return All staff bookings in database.
+     */
+    public List<StaffBooking> getStaffBookings() {
+        return staffBookings;
+    }
+
+    /**
+     * <code>studentBookings</code> getter method.
+     *
+     * @return All student bookings in database.
+     */
+    public List<StudentBooking> getStudentBookings() {
+        return studentBookings;
+    }
+
+    /**
+     * <code>rooms</code> setter method.
+     *
+     * @param rooms New room list.
+     */
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
+    }
+
+    /**
+     * <code>bookings</code> setter method.
+     *
+     * @param bookings New bookings list.
+     */
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
+    /**
+     * <code>moduleBookings</code> setter method.
+     *
+     * @param moduleBookings New module bookings list.
+     */
+    public void setModuleBookings(List<ModuleBooking> moduleBookings) {
+        this.moduleBookings = moduleBookings;
+    }
+
+    /**
+     * <code>staffBookings</code> setter method.
+     *
+     * @param staffBookings New staff bookings list.
+     */
+    public void setStaffBookings(List<StaffBooking> staffBookings) {
+        this.staffBookings = staffBookings;
+    }
+
+    /**
+     * <code>studentBookings</code> setter method.
+     *
+     * @param studentBookings New student bookings list.
+     */
+    public void setStudentBookings(List<StudentBooking> studentBookings) {
+        this.studentBookings = studentBookings;
     }
 }
