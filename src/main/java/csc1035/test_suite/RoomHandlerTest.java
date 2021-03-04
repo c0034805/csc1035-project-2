@@ -52,6 +52,28 @@ public class RoomHandlerTest {
 
         handler.reserveRoomStudent(s,r,start,end);
     }
+    public void staffReservation(int startHr, int endHr){
+        Staff s = (Staff) controller.getById(Staff.class,"NUC3292317");
+        Room r = (Room) controller.getById(Room.class,"0.379");
+
+        Timestamp start = new Timestamp(2021, 6, 22,
+                12, 0,0,0);
+        Timestamp end = new Timestamp(2021, 6, 22,
+                13, 0,0,0);
+
+        handler.reserveRoomStaff(s,r,start,end);
+    }
+    public void moduleReservation(int startHr, int endHr){
+        Module m = (Module) controller.getById(Module.class,"RSI3393");
+        Room r = (Room) controller.getById(Room.class,"0.379");
+
+        Timestamp start = new Timestamp(2021, 6, 22,
+                12, 0,0,0);
+        Timestamp end = new Timestamp(2021, 6, 22,
+                13, 0,0,0);
+
+        handler.reserveRoomModule(m,r,start,end);
+    }
 
     @Test
     public void reserveRoomStudentReservesRoom(){
@@ -78,8 +100,6 @@ public class RoomHandlerTest {
         Assertions.assertEquals(0,controller.getAll(Booking.class).size());
         Assertions.assertEquals(0,controller.getAll(StudentBooking.class).size());
     }
-
-
 
 
 
