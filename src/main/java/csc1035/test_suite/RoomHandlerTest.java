@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,9 +47,9 @@ public class RoomHandlerTest {
         Room r = (Room) controller.getById(Room.class,"0.379");
 
         Timestamp start = new Timestamp(2021, 6, 22,
-                12, 0,0,0);
+                startHr, 0,0,0);
         Timestamp end = new Timestamp(2021, 6, 22,
-                13, 0,0,0);
+                endHr, 0,0,0);
 
         handler.reserveRoomStudent(s,r,start,end);
     }
@@ -57,9 +58,9 @@ public class RoomHandlerTest {
         Room r = (Room) controller.getById(Room.class,"0.379");
 
         Timestamp start = new Timestamp(2021, 6, 22,
-                12, 0,0,0);
+                startHr, 0,0,0);
         Timestamp end = new Timestamp(2021, 6, 22,
-                13, 0,0,0);
+                endHr, 0,0,0);
 
         handler.reserveRoomStaff(s,r,start,end);
     }
@@ -68,9 +69,9 @@ public class RoomHandlerTest {
         Room r = (Room) controller.getById(Room.class,"0.379");
 
         Timestamp start = new Timestamp(2021, 6, 22,
-                12, 0,0,0);
+                startHr, 0,0,0);
         Timestamp end = new Timestamp(2021, 6, 22,
-                13, 0,0,0);
+                endHr, 0,0,0);
 
         handler.reserveRoomModule(m,r,start,end);
     }
@@ -85,6 +86,30 @@ public class RoomHandlerTest {
         studentReservation(13,23);
         Assertions.assertEquals(2,controller.getAll(Booking.class).size());
         Assertions.assertEquals(2,controller.getAll(StudentBooking.class).size());
+
+    }
+    @Test
+    public void reserveRoomStaffReservesRoom(){
+
+        staffReservation(11,12);
+        Assertions.assertEquals(1,controller.getAll(Booking.class).size());
+        Assertions.assertEquals(1,controller.getAll(StaffBooking.class).size());
+
+        staffReservation(13,23);
+        Assertions.assertEquals(2,controller.getAll(Booking.class).size());
+        Assertions.assertEquals(2,controller.getAll(StaffBooking.class).size());
+
+    }
+    @Test
+    public void reserveRoomModuleReservesRoom(){
+
+        moduleReservation(11,12);
+        Assertions.assertEquals(1,controller.getAll(Booking.class).size());
+        Assertions.assertEquals(1,controller.getAll(ModuleBooking.class).size());
+
+        moduleReservation(13,23);
+        Assertions.assertEquals(2,controller.getAll(Booking.class).size());
+        Assertions.assertEquals(2,controller.getAll(ModuleBooking.class).size());
 
     }
 
@@ -115,6 +140,22 @@ public class RoomHandlerTest {
         Assertions.assertEquals(1,controller.getAll(Booking.class).size());
         Assertions.assertEquals(1,controller.getAll(StudentBooking.class).size());
     }
+
+    @Test
+    public void getReservedRoomsReturnsCorrect(){
+        studentReservation(11,12);
+        Timestamp middle = new Timestamp(2021, 6, 22,
+                11, 30,0,0);
+        Timestamp after = new Timestamp(2999, 6, 22,
+                11, 30,0,0);
+
+        Assertions.assertEquals(1,handler.getReservedRooms(middle).size());
+
+        //just a couple years after that reservation
+        Assertions.assertEquals(1,handler.getReservedRooms(after).size());
+
+    }
+
 
 
 
