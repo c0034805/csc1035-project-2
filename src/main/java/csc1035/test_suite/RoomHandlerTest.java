@@ -89,16 +89,22 @@ public class RoomHandlerTest {
     }
 
     @Test
-    public void cancelReservationCancelsStudent(){
+    public void cancelReservationCancelsAllTypes(){
         studentReservation(11,12);
+        staffReservation(12,13);
+        moduleReservation(13,14);
         List<Booking> bookings = controller.getAll(Booking.class);
         Assertions.assertEquals(1,bookings.size());
         Assertions.assertEquals(1,controller.getAll(StudentBooking.class).size());
 
         handler.cancelReservation(bookings.get(0).getId());
+        handler.cancelReservation(bookings.get(1).getId());
+        handler.cancelReservation(bookings.get(2).getId());
 
         Assertions.assertEquals(0,controller.getAll(Booking.class).size());
         Assertions.assertEquals(0,controller.getAll(StudentBooking.class).size());
+        Assertions.assertEquals(0,controller.getAll(ModuleBooking.class).size());
+        Assertions.assertEquals(0,controller.getAll(StaffBooking.class).size());
     }
 
 
