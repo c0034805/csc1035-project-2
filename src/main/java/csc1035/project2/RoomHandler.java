@@ -49,11 +49,11 @@ public class RoomHandler {
      * @param r Room to be booked.
      * @param st Reservation starting time.
      * @param et Reservation ending time.
-     * @return Booking ID if booking successful, -1 if not.
+     * @return Booking ID if booking successful, blank if not.
      */
-    public int reserveRoomStudent ( Students s, Room r, Timestamp st, Timestamp et ) {
+    public String reserveRoomStudent ( Students s, Room r, Timestamp st, Timestamp et ) {
         if ( checkRoomTimeAvailable( r, st, et) ) {
-            Booking b = new Booking(Integer.parseInt(r.getNum()), st, et);
+            Booking b = new Booking(r.getNum(), st, et);
             IController ic = new Controller();
             ic.update(b);
             StudentBooking sb = new StudentBooking(b.getId(), s.getId());
@@ -61,12 +61,12 @@ public class RoomHandler {
             refreshRoomHandler();
             return b.getId();
         }
-        return -1;
+        return "";
     }
 
-    public int reserveRoomStaff ( Staff s, Room r, Timestamp st, Timestamp et ) {
+    public String reserveRoomStaff ( Staff s, Room r, Timestamp st, Timestamp et ) {
         if ( checkRoomTimeAvailable( r, st, et) ) {
-            Booking b = new Booking(Integer.parseInt(r.getNum()), st, et);
+            Booking b = new Booking(r.getNum(), st, et);
             IController ic = new Controller();
             ic.update(b);
             StaffBooking sb = new StaffBooking(b.getId(), s.getId());
@@ -74,9 +74,8 @@ public class RoomHandler {
             refreshRoomHandler();
             return b.getId();
         }
-        return -1;
+        return "";
     }
-    // TODO: Shouldn't module ID be an integer?
 
     /**
      * Method to display booking details.
@@ -117,7 +116,7 @@ public class RoomHandler {
         List<Room> tmp = new ArrayList<>();
         for ( Room r : this.getRooms() ) {
             for ( Booking b : this.getBookings() ) {
-                if ( Integer.parseInt(r.getNum()) == b.getNum() ) {
+                if ( r.getNum() == b.getNum() ) {
                     tmp.add( r );
                 }
             }
@@ -138,7 +137,7 @@ public class RoomHandler {
         List<Room> tmp = new ArrayList<>( this.getRooms() );
         for ( Room r : tmp ) {
             for ( Booking b : this.getBookings() ) {
-                if ( Integer.parseInt(r.getNum()) == b.getNum() && checkTimeAvailable( t, b.getStart(), b.getEnd() ) ) {
+                if ( r.getNum() == b.getNum() && checkTimeAvailable( t, b.getStart(), b.getEnd() ) ) {
                     tmp.remove( r );
                 }
             }
@@ -168,7 +167,7 @@ public class RoomHandler {
      */
     public boolean checkRoomTimeAvailable ( Room r, Timestamp st, Timestamp et ) {
         for ( Booking b : this.getBookings() ) {
-            if ( b.getNum() == Integer.parseInt(r.getNum()) ) {
+            if ( b.getNum() == r.getNum() ) {
                 if ( !checkTimeAvailable(st, b.getStart(), b.getEnd()) ) {
                     System.out.println( "Starting time " + st + " conflicts with booking with time " +
                                         b.getStart() + "-" + b.getEnd() );

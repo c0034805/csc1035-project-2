@@ -12,7 +12,7 @@ public class Booking {
     private String id;
 
     @Column(name = "Room_Number", nullable = false)
-    private int num;
+    private String num;
 
     @Column(name = "Start", nullable = false)
     private Timestamp start;
@@ -36,8 +36,7 @@ public class Booking {
     @JoinColumn(name = "Booking_ID", referencedColumnName = "Booking_ID")
     private ModuleBooking moduleBooking;
 
-    public Booking(int id, int num, Timestamp start, Timestamp end) {
-        this.id = id;
+    public Booking(String num, Timestamp start, Timestamp end) {
         this.num = num;
         this.start = start;
         this.end = end;
@@ -46,19 +45,19 @@ public class Booking {
     public Booking() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getNum() {
+    public String getNum() {
         return num;
     }
 
-    public void setNum(int num) {
+    public void setNum(String num) {
         this.num = num;
     }
 

@@ -1,6 +1,6 @@
 # CHANGELOG
 
-##### v0.2 [03.03.2021]: Room Booking Methids
+##### v0.2 [03.03.2021]: Room Booking Methods
 * (ERICK) Created `getReservedRooms()` method.
 * (ERICK) Created `getAvailableRooms()` method.
 * (ERICK) Booking ID is now auto-generated.
@@ -16,3 +16,4 @@
 * (ERICK) `reserveRoomStudent` returns booking id.
 * (ERICK) Created `bookingConfirmation` method.
 * (ERICK) Created `reserveRoomStaff` method.
+* (ERICK) Methods now accommodate string IDs.
