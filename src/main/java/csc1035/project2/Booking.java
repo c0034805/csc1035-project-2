@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 public class Booking {
     @Id
     @Column(name = "Booking_ID", nullable = false)
-    private int id;
+    private String id;
 
     @Column(name = "Room_Number", nullable = false)
     private int num;
@@ -35,7 +35,7 @@ public class Booking {
     @JoinColumn(name = "Booking_ID", referencedColumnName = "Booking_ID")
     private ModuleBooking moduleBooking;
 
-    public Booking(int id, int num, Timestamp start, Timestamp end) {
+    public Booking(String id, int num, Timestamp start, Timestamp end) {
         this.id = id;
         this.num = num;
         this.start = start;
@@ -45,11 +45,11 @@ public class Booking {
     public Booking() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
