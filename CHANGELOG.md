@@ -12,8 +12,9 @@
 * (ERICK) Created `cancelReservation()`method.
 
 ##### v0.3 [05.03.2021]: 
-* (ERICK) Created `checkRoomTimeAvailable` method.
-* (ERICK) `reserveRoomStudent` returns booking id.
-* (ERICK) Created `bookingConfirmation` method.
-* (ERICK) Created `reserveRoomStaff` method.
+* (ERICK) Created `checkRoomTimeAvailable()` method.
+* (ERICK) `reserveRoomStudent()` returns booking id.
+* (ERICK) Created `bookingConfirmation()` method.
+* (ERICK) Created `reserveRoomStaff()` method.
 * (ERICK) Methods now accommodate string IDs.
+* (ERICK) Created `reserveRoomStaff()` method.

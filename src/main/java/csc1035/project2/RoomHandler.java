@@ -64,6 +64,17 @@ public class RoomHandler {
         return "";
     }
 
+    /**
+     * Method to reserve a room for a staff.
+     *
+     * <p>Method returns booking ID for use in I/O.</p>
+     *
+     * @param s Staff object for booking.
+     * @param r Room to be booked.
+     * @param st Reservation starting time.
+     * @param et Reservation ending time.
+     * @return Booking ID if booking successful, blank if not.
+     */
     public String reserveRoomStaff ( Staff s, Room r, Timestamp st, Timestamp et ) {
         if ( checkRoomTimeAvailable( r, st, et) ) {
             Booking b = new Booking(r.getNum(), st, et);
@@ -71,6 +82,30 @@ public class RoomHandler {
             ic.update(b);
             StaffBooking sb = new StaffBooking(b.getId(), s.getId());
             ic.update(sb);
+            refreshRoomHandler();
+            return b.getId();
+        }
+        return "";
+    }
+
+    /**
+     * Method to reserve a room for a module.
+     *
+     * <p>Method returns booking ID for use in I/O.</p>
+     *
+     * @param m Module object for booking.
+     * @param r Room to be booked.
+     * @param st Reservation starting time.
+     * @param et Reservation ending time.
+     * @return Booking ID if booking successful, blank if not.
+     */
+    public String reserveRoomStaff ( Modules m, Room r, Timestamp st, Timestamp et ) {
+        if ( checkRoomTimeAvailable( r, st, et) ) {
+            Booking b = new Booking(r.getNum(), st, et);
+            IController ic = new Controller();
+            ic.update(b);
+            ModuleBooking mb = new ModuleBooking(b.getId(), m.getId());
+            ic.update(mb);
             refreshRoomHandler();
             return b.getId();
         }
