@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 // This might end up mapping to the Reservations table. See how we use it.
-// TODO: Please someone switch the room number to integers and remove all instances of `Integer.parseInt`
 public class RoomHandler {
 
     private List<Room> rooms;
@@ -41,12 +40,9 @@ public class RoomHandler {
 
     }
 
+    // TODO: Add reservation methods for staff and modules when test suite is done.
     /**
      * Method to reserve a room for a student.
-     *
-     * <p>Method does not check if student is able to book a room at the specified times nor if they have
-     * already booked this. This is to be checked through the interface for booking system using
-     * other methods.</p>
      *
      * @param s Student object for booking
      * @param r Room to be booked
@@ -54,20 +50,22 @@ public class RoomHandler {
      * @param et Reservation ending time
      */
     public void reserveRoomStudent ( Students s, Room r, Timestamp st, Timestamp et ) {
-        Booking b = new Booking( Integer.parseInt(r.getNum()), st, et );
-        IController ic = new Controller();
-        ic.update( b );
-        StudentBooking sb = new StudentBooking( b.getId(), s.getId() );
-        ic.update( sb );
-        refreshRoomHandler();
+        if ( checkRoomTimeAvailable( r, st, et) ) {
+            Booking b = new Booking(Integer.parseInt(r.getNum()), st, et);
+            IController ic = new Controller();
+            ic.update(b);
+            StudentBooking sb = new StudentBooking(b.getId(), s.getId());
+            ic.update(sb);
+            refreshRoomHandler();
+        }
     }
 
+    // TODO: Make sure to test when deleting a reservation that the module/student/staff booking also deletes.
     /**
      * Method to cancel reservation by id.
      *
      * @param id Booking id to cancel.
      */
-    // TODO: Make sure to test when deleting a reservation that the module/student/staff booking also deletes.
     public void cancelReservation ( int id ) {
         IController ic = new Controller();
         ic.delete( Booking.class, id );
@@ -121,7 +119,33 @@ public class RoomHandler {
      * @return If <code>t</code> is between <code>st</code> and <code>et</code>.
      */
     public boolean checkTimeAvailable ( Timestamp t, Timestamp st, Timestamp et ) {
-        return (t.after(st) && t.before(et));
+        return !(t.after(st) && t.before(et));
+    }
+
+    /**
+     * Method to check if booked time overlaps with previous bookings of the same room.
+     *
+     * @param r Room
+     * @param st Booking start time
+     * @param et Booking finish time
+     * @return True if times given are available
+     */
+    public boolean checkRoomTimeAvailable ( Room r, Timestamp st, Timestamp et ) {
+        for ( Booking b : this.getBookings() ) {
+            if ( b.getNum() == Integer.parseInt(r.getNum()) ) {
+                if ( !checkTimeAvailable(st, b.getStart(), b.getEnd()) ) {
+                    System.out.println( "Starting time " + st + " conflicts with booking with time " +
+                                        b.getStart() + "-" + b.getEnd() );
+                    return false;
+                }
+                else if ( !checkTimeAvailable(et, b.getStart(), b.getEnd()) ) {
+                    System.out.println( "Finish time " + et + " conflicts with booking with time " +
+                                        b.getStart() + "-" + b.getEnd() );
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**
