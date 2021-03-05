@@ -180,6 +180,15 @@ public class RoomHandler {
         return tmp;
     }
 
+    public void updateRoomDetails ( Room r, String num, String type, int cap, int sd_cap ) {
+        r.setNum( num );
+        r.setType( type );
+        r.setCap( cap );
+        r.setSd_cap( sd_cap );
+        IController ic = new Controller();
+        ic.update( r );
+    }
+
     /**
      * Method to check if time is between two other times.
      *
@@ -216,6 +225,22 @@ public class RoomHandler {
             }
         }
         return true;
+    }
+
+    /**
+     * Checks if string is an integer.
+     *
+     * @param s String to check.
+     * @return If string is purely an integer.
+     */
+    public boolean isInteger( String s ) {
+        try {
+            int i =  Integer.parseInt( s );
+            return true;
+        }
+        catch ( NumberFormatException nfe ) {
+            return false;
+        }
     }
 
     /**
