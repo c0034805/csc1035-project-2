@@ -44,12 +44,15 @@ public class RoomHandler {
     /**
      * Method to reserve a room for a student.
      *
+     * <p>Method returns booking ID for use in I/O.</p>
+     *
      * @param s Student object for booking
      * @param r Room to be booked
      * @param st Reservation starting time
      * @param et Reservation ending time
+     * @return Booking ID if booking successful, -1 if not.
      */
-    public void reserveRoomStudent ( Students s, Room r, Timestamp st, Timestamp et ) {
+    public int reserveRoomStudent ( Students s, Room r, Timestamp st, Timestamp et ) {
         if ( checkRoomTimeAvailable( r, st, et) ) {
             Booking b = new Booking(Integer.parseInt(r.getNum()), st, et);
             IController ic = new Controller();
@@ -57,7 +60,9 @@ public class RoomHandler {
             StudentBooking sb = new StudentBooking(b.getId(), s.getId());
             ic.update(sb);
             refreshRoomHandler();
+            return b.getId();
         }
+        return -1;
     }
 
     // TODO: Make sure to test when deleting a reservation that the module/student/staff booking also deletes.

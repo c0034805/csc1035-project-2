@@ -13,3 +13,4 @@
 
 ##### v0.3 [05.03.2021]: 
 * (ERICK) Created `checkRoomTimeAvailable` method.
+* (ERICK) `reserveRoomStudent` returns booking id.
