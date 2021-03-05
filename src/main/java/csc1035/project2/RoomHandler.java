@@ -40,7 +40,6 @@ public class RoomHandler {
 
     }
 
-    // TODO: Add reservation methods for staff and modules when test suite is done.
     /**
      * Method to reserve a room for a student.
      *
@@ -64,6 +63,20 @@ public class RoomHandler {
         }
         return -1;
     }
+
+    public int reserveRoomStaff ( Staff s, Room r, Timestamp st, Timestamp et ) {
+        if ( checkRoomTimeAvailable( r, st, et) ) {
+            Booking b = new Booking(Integer.parseInt(r.getNum()), st, et);
+            IController ic = new Controller();
+            ic.update(b);
+            StaffBooking sb = new StaffBooking(b.getId(), s.getId());
+            ic.update(sb);
+            refreshRoomHandler();
+            return b.getId();
+        }
+        return -1;
+    }
+    // TODO: Shouldn't module ID be an integer?
 
     /**
      * Method to display booking details.

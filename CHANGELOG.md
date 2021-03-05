@@ -15,3 +15,4 @@
 * (ERICK) Created `checkRoomTimeAvailable` method.
 * (ERICK) `reserveRoomStudent` returns booking id.
 * (ERICK) Created `bookingConfirmation` method.
+* (ERICK) Created `reserveRoomStaff` method.
