@@ -7,10 +7,10 @@ import javax.persistence.*;
 public class StudentBooking {
     @Id
     @Column(name = "Booking_ID", nullable = false)
-    private int bid;
+    private String bid;
 
     @Column(name = "Student_ID", nullable = false)
-    private int sid;
+    private String sid;
 
     @OneToOne(mappedBy = "studentBooking")
     private Booking booking;
@@ -19,7 +19,7 @@ public class StudentBooking {
     @JoinColumn(nullable = false)
     private Students student;
 
-    public StudentBooking(int bid, int sid) {
+    public StudentBooking(String bid, String sid) {
         this.bid = bid;
         this.sid = sid;
     }
@@ -27,19 +27,19 @@ public class StudentBooking {
     public StudentBooking() {
     }
 
-    public int getBid() {
+    public String getBid() {
         return bid;
     }
 
-    public void setBid(int bid) {
+    public void setBid(String bid) {
         this.bid = bid;
     }
 
-    public int getSid() {
+    public String getSid() {
         return sid;
     }
 
-    public void setSid(int sid) {
+    public void setSid(String sid) {
         this.sid = sid;
     }
 }

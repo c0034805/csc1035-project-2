@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Teach {
     @Id
     @Column(name = "Module_ID", nullable = false)
-    private int mid;
+    private String mid;
 
     @Column(name = "Staff_ID", nullable = false)
     private String sid;
@@ -19,7 +19,7 @@ public class Teach {
     @OneToOne(mappedBy = "teach")
     private Modules module;
 
-    public Teach(String sid, int mid) {
+    public Teach(String sid, String mid) {
         this.sid = sid;
         this.mid = mid;
     }
@@ -35,11 +35,11 @@ public class Teach {
         this.sid = sid;
     }
 
-    public int getMid() {
+    public String getMid() {
         return mid;
     }
 
-    public void setMid(int mid) {
+    public void setMid(String mid) {
         this.mid = mid;
     }
 }

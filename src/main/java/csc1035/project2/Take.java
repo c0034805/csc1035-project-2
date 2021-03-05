@@ -10,7 +10,7 @@ public class Take {
     private String mid;
 
     @Column(name = "Student_ID", nullable = false)
-    private int sid;
+    private String sid;
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -19,7 +19,7 @@ public class Take {
     @OneToOne(mappedBy = "take")
     private Modules module;
 
-    public Take(int sid, String mid) {
+    public Take(String sid, String mid) {
         this.sid = sid;
         this.mid = mid;
     }
@@ -27,11 +27,11 @@ public class Take {
     public Take() {
     }
 
-    public int getSid() {
+    public String getSid() {
         return sid;
     }
 
-    public void setSid(int sid) {
+    public void setSid(String sid) {
         this.sid = sid;
     }
 

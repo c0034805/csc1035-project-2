@@ -8,7 +8,7 @@ import java.util.List;
 public class Students {
     @Id
     @Column(name = "ID", nullable = false)
-    private int id;
+    private String id;
 
     @Column(name = "First_Name", nullable = false)
     private String firstname;
@@ -22,7 +22,7 @@ public class Students {
     @OneToMany(mappedBy = "student")
     private List<Take> take;
 
-    public Students(int id, String firstname, String lastname) {
+    public Students(String id, String firstname, String lastname) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -31,11 +31,11 @@ public class Students {
     public Students() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -9,7 +9,7 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Booking_ID", nullable = false)
-    private int id;
+    private String id;
 
     @Column(name = "Room_Number", nullable = false)
     private int num;
@@ -36,7 +36,8 @@ public class Booking {
     @JoinColumn(name = "Booking_ID", referencedColumnName = "Booking_ID")
     private ModuleBooking moduleBooking;
 
-    public Booking(int num, Timestamp start, Timestamp end) {
+    public Booking(int id, int num, Timestamp start, Timestamp end) {
+        this.id = id;
         this.num = num;
         this.start = start;
         this.end = end;
