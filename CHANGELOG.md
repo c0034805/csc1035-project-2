@@ -20,3 +20,4 @@
 * (ERICK) Created `reserveRoomStaff()` method.
 * (ERICK) Created `isInteger()` method.
 * (ERICK) Created `updateRoomDetails()` method.
+* `cancelReservation()` takes string instead of int.

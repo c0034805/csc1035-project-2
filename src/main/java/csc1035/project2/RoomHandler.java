@@ -136,7 +136,7 @@ public class RoomHandler {
      *
      * @param id Booking id to cancel.
      */
-    public void cancelReservation ( int id ) {
+    public void cancelReservation ( String id ) {
         IController ic = new Controller();
         ic.delete( Booking.class, id );
         refreshRoomHandler();
