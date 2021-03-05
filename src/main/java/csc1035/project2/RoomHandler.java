@@ -46,10 +46,10 @@ public class RoomHandler {
      *
      * <p>Method returns booking ID for use in I/O.</p>
      *
-     * @param s Student object for booking
-     * @param r Room to be booked
-     * @param st Reservation starting time
-     * @param et Reservation ending time
+     * @param s Student object for booking.
+     * @param r Room to be booked.
+     * @param st Reservation starting time.
+     * @param et Reservation ending time.
      * @return Booking ID if booking successful, -1 if not.
      */
     public int reserveRoomStudent ( Students s, Room r, Timestamp st, Timestamp et ) {
@@ -63,6 +63,24 @@ public class RoomHandler {
             return b.getId();
         }
         return -1;
+    }
+
+    /**
+     * Method to display booking details.
+     *
+     * <p>This method is to be used in the user interface to display the information before the user
+     * confirms the booking and updates the database.</p>
+     *
+     * @param bt String for displaying which booking type it is.
+     * @param b Booking info to be displayed.
+     */
+    public void bookingConfirmation ( String bt, Booking b ) {
+        System.out.println( "Booking Confirmation: \n\n" +
+                            "Booking Type: " + bt + "\n" +
+                            "Room: " + b.getNum() + "\n" +
+                            "Start Time: " + b.getStart() + "\n" +
+                            "Finish Time: " + b.getEnd() + "\n" +
+                            "Booking ID: " + b.getId() + "\n");
     }
 
     // TODO: Make sure to test when deleting a reservation that the module/student/staff booking also deletes.
@@ -100,7 +118,7 @@ public class RoomHandler {
      * <p>Method checks if a room is within a booking and if the timestamp given is within the allocated time of
      * the booking. If so then it removes it from the temporary list and returns the remaining rooms.</p>
      *
-     * @param t Timestamp to check against
+     * @param t Timestamp to check against.
      * @return List of all available rooms at a specified time.
      */
     public List<Room> getAvailableRooms ( Timestamp t ) {
@@ -118,9 +136,9 @@ public class RoomHandler {
     /**
      * Method to check if time is between two other times.
      *
-     * @param t Timestamp to be checked
-     * @param st Lower-end time
-     * @param et Upper-end time
+     * @param t Timestamp to be checked.
+     * @param st Lower-end time.
+     * @param et Upper-end time.
      * @return If <code>t</code> is between <code>st</code> and <code>et</code>.
      */
     public boolean checkTimeAvailable ( Timestamp t, Timestamp st, Timestamp et ) {
@@ -130,10 +148,10 @@ public class RoomHandler {
     /**
      * Method to check if booked time overlaps with previous bookings of the same room.
      *
-     * @param r Room
-     * @param st Booking start time
-     * @param et Booking finish time
-     * @return True if times given are available
+     * @param r Room.
+     * @param st Booking start time.
+     * @param et Booking finish time.
+     * @return True if times given are available.
      */
     public boolean checkRoomTimeAvailable ( Room r, Timestamp st, Timestamp et ) {
         for ( Booking b : this.getBookings() ) {
