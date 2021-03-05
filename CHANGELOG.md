@@ -19,3 +19,4 @@
 * (ERICK) Methods now accommodate string IDs.
 * (ERICK) Created `reserveRoomStaff()` method.
 * (ERICK) Created `isInteger()` method.
+* (ERICK) Created `updateRoomDetails()` method.

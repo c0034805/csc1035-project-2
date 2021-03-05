@@ -180,6 +180,15 @@ public class RoomHandler {
         return tmp;
     }
 
+    /**
+     * Method to update a room's details.
+     *
+     * @param r Room to be updated.
+     * @param num Room number to update to.
+     * @param type Room type to update to.
+     * @param cap Person cap to update to.
+     * @param sd_cap Social distanced person cap to update to.
+     */
     public void updateRoomDetails ( Room r, String num, String type, int cap, int sd_cap ) {
         r.setNum( num );
         r.setType( type );
@@ -187,6 +196,7 @@ public class RoomHandler {
         r.setSd_cap( sd_cap );
         IController ic = new Controller();
         ic.update( r );
+        refreshRoomHandler();
     }
 
     /**
