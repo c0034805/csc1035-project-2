@@ -37,7 +37,7 @@ public class StaffBooking {
      * @param bid The booking ID.
      * @param sid The staff member's ID.
      */
-    public StaffBooking(int bid, String sid) {
+    public StaffBooking(String bid, String sid) {
         this.bid = bid;
         this.sid = sid;
     }

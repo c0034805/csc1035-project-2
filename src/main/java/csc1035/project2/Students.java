@@ -41,7 +41,7 @@ public class Students {
      * @param firstname The student's first name.
      * @param lastname The student's ast name.
      */
-    public Students(int id, String firstname, String lastname) {
+    public Students(String id, String firstname, String lastname) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;

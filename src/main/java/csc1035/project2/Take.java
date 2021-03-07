@@ -38,7 +38,7 @@ public class Take {
      * @param sid The student ID.
      * @param mid The module ID.
      */
-    public Take(int sid, String mid) {
+    public Take(String sid, String mid) {
         this.sid = sid;
         this.mid = mid;
     }

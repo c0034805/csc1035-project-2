@@ -38,7 +38,7 @@ public class Teach {
      * @param sid The staff ID.
      * @param mid The module ID.
      */
-    public Teach(String sid, int mid) {
+    public Teach(String sid, String mid) {
         this.sid = sid;
         this.mid = mid;
     }

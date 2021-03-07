@@ -55,7 +55,7 @@ public class Booking {
      * @param start The beginning of the booking.
      * @param end The end of the booking.
      */
-    public Booking(int id, int num, Timestamp start, Timestamp end) {
+    public Booking(String id, int num, Timestamp start, Timestamp end) {
         this.id = id;
         this.num = num;
         this.start = start;
