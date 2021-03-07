@@ -2,6 +2,18 @@ package csc1035.project2;
 
 import javax.persistence.*;
 
+/**
+ * A persistent class made to handle the Take table, which
+ * links the Students table with the Modules table. It represents which
+ * modules are taken by which students.
+ *
+ * The table contains a module ID and a student ID.
+ *
+ * This Class connects the attributes to their respective columns in the
+ * table, makes the necessary relationships with other tables and
+ * contains the relevant getter and setter methods.
+ * @author Stefanos Larkou
+ */
 @Entity
 @Table(name = "Take")
 public class Take {
@@ -19,11 +31,21 @@ public class Take {
     @OneToOne(mappedBy = "take")
     private Modules module;
 
-    public Take(String sid, String mid) {
+    /**
+     * The constructor that connects the parameter values with the field
+     * variables.
+     *
+     * @param sid The student ID.
+     * @param mid The module ID.
+     */
+    public Take(int sid, String mid) {
         this.sid = sid;
         this.mid = mid;
     }
 
+    /**
+     * The default constructor for Hibernate.
+     */
     public Take() {
     }
 
