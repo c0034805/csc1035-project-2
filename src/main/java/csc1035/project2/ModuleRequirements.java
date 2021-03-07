@@ -12,6 +12,7 @@ import javax.persistence.*;
  * This class connects the attributes to their respective columns in the
  * table, makes the necessary relationships with other tables and
  * contains the relevant getter and setter methods.
+ * @author Stefanos Larkou
  */
 @Entity
 @Table(name = "Module_Requirements")
