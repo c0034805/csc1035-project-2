@@ -19,7 +19,7 @@ import javax.persistence.*;
 public class StaffBooking {
     @Id
     @Column(name = "Booking_ID", nullable = false)
-    private int bid;
+    private String bid;
 
     @Column(name = "Staff_ID",nullable = false)
     private String sid;
@@ -48,11 +48,11 @@ public class StaffBooking {
     public StaffBooking() {
     }
 
-    public int getBid() {
+    public String getBid() {
         return bid;
     }
 
-    public void setBid(int bid) {
+    public void setBid(String bid) {
         this.bid = bid;
     }
 

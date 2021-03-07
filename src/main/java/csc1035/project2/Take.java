@@ -22,7 +22,7 @@ public class Take {
     private String mid;
 
     @Column(name = "Student_ID", nullable = false)
-    private int sid;
+    private String sid;
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -49,11 +49,11 @@ public class Take {
     public Take() {
     }
 
-    public int getSid() {
+    public String getSid() {
         return sid;
     }
 
-    public void setSid(int sid) {
+    public void setSid(String sid) {
         this.sid = sid;
     }
 
