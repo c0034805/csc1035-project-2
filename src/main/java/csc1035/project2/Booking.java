@@ -10,7 +10,8 @@ import java.sql.Timestamp;
  * which the booking is made, as well as when the booking starts and ends.
  *
  * This Class connects the attributes to their respective columns in the
- * table and contains the relevant getter and setter methods.
+ * table, makes the necessary relationships with other tables and
+ * contains the relevant getter and setter methods.
  * @author Stefanos Larkou
  */
 @Entity
