@@ -7,7 +7,7 @@ import java.util.List;
  * A persistent class made to handle the Staff table.
  *
  * The table contains the staff ID, as well as the first and last name
- * of a staff member.
+ * of that staff member.
  *
  * This class connects the attributes to their respective columns in the
  * table, makes the necessary relationships with other tables and
