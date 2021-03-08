@@ -47,18 +47,15 @@ public class Booking {
     @JoinColumn(name = "Booking_ID", referencedColumnName = "Booking_ID")
     private ModuleBooking moduleBooking;
 
-    public Booking(String num, Timestamp start, Timestamp end) {
     /**
      * The constructor that connects the parameter values with the field
      * variables.
      *
-     * @param id The identification number of the booking.
      * @param num The room number.
      * @param start The beginning of the booking.
      * @param end The end of the booking.
      */
-    public Booking(String id, int num, Timestamp start, Timestamp end) {
-        this.id = id;
+    public Booking(String num, Timestamp start, Timestamp end) {
         this.num = num;
         this.start = start;
         this.end = end;
