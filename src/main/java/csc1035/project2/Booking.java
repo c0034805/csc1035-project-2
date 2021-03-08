@@ -3,6 +3,17 @@ package csc1035.project2;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+/**
+ * A persistent class made to handle the Booking table.
+ *
+ * The table contains a booking ID, the room number of the room in
+ * which the booking is made, as well as when the booking starts and ends.
+ *
+ * This Class connects the attributes to their respective columns in the
+ * table, makes the necessary relationships with other tables and
+ * contains the relevant getter and setter methods.
+ * @author Stefanos Larkou
+ */
 @Entity
 @Table(name = "Booking")
 public class Booking {
@@ -37,11 +48,25 @@ public class Booking {
     private ModuleBooking moduleBooking;
 
     public Booking(String num, Timestamp start, Timestamp end) {
+    /**
+     * The constructor that connects the parameter values with the field
+     * variables.
+     *
+     * @param id The identification number of the booking.
+     * @param num The room number.
+     * @param start The beginning of the booking.
+     * @param end The end of the booking.
+     */
+    public Booking(String id, int num, Timestamp start, Timestamp end) {
+        this.id = id;
         this.num = num;
         this.start = start;
         this.end = end;
     }
 
+    /**
+     * The default constructor for Hibernate.
+     */
     public Booking() {
     }
 
