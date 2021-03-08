@@ -99,7 +99,7 @@ public class RoomHandler {
      * @param et Reservation ending time.
      * @return Booking ID if booking successful, blank if not.
      */
-    public String reserveRoomStaff ( Modules m, Room r, Timestamp st, Timestamp et ) {
+    public String reserveRoomModule ( Modules m, Room r, Timestamp st, Timestamp et ) {
         if ( checkRoomTimeAvailable( r, st, et) ) {
             Booking b = new Booking(r.getNum(), st, et);
             IController ic = new Controller();

@@ -17,7 +17,7 @@
 * (ERICK) Created `bookingConfirmation()` method.
 * (ERICK) Created `reserveRoomStaff()` method.
 * (ERICK) Methods now accommodate string IDs.
-* (ERICK) Created `reserveRoomStaff()` method.
+* (ERICK) Created `reserveRoomModule()` method.
 * (ERICK) Created `isInteger()` method.
 * (ERICK) Created `updateRoomDetails()` method.
 * `cancelReservation()` takes string instead of int.
