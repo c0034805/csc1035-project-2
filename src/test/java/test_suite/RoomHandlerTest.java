@@ -11,17 +11,54 @@ import java.util.List;
 
 
 public class RoomHandlerTest {
-    //these tests rely on the database containing the sample data
     RoomHandler handler;
     IController controller;
+    Modules[] modules = {new Modules("RSI3393","Nunc nisl.",20,12),
+    new Modules("BBU5808","Integer pede justo lacinia eget tincidunt eget tempus vel pede.",10,12),
+    new Modules("SAM0176","Cras in purus eu magna vulputate luctus.",10,6)};
+
+    Room[] rooms = {new Room("0.379","PC Cluster",157,36),
+    new Room("0.365","PC Cluster",59,9),
+    new Room("1.846","Lecture Lecture",274,50)};
+
+    Staff[] staff = {new Staff("NUC3292317","Jacenta","Khomich"),
+    new Staff("NUC9674902","Carmita","Cogzell"),
+    new Staff("NUC7362101","Swen","Geard")};
+
+    Students[] students = {new Students("216906208","Doralynn","Bordman"),
+    new Students("218577635","Farra","Pietroni"),
+    new Students("216365117","Clareta","Osmint")};
+
+    ModuleRequirements[] requirements = {new ModuleRequirements("RSI3393",1,2,1,2),
+    new ModuleRequirements("BBU5808",1,2,2,2),
+    new ModuleRequirements("SAM0176",3,1,4,1)};
 
     @BeforeEach
     void setUp() {
         handler = new RoomHandler();
-        handler.clearBookings();
         controller = new Controller();
+        fillDBSample();
     }
 
+    void deleteAll(){
+        controller.deleteAll(Modules.class);
+        controller.deleteAll(Room.class);
+        controller.deleteAll(Staff.class);
+        controller.deleteAll(Students.class);
+        controller.deleteAll(ModuleRequirements.class);
+    }
+
+    /**
+     * Fills the DB with sample data
+     */
+    void fillDBSample(){
+        deleteAll();
+        controller.bulkListSave(Arrays.asList(modules));
+        controller.bulkListSave(Arrays.asList(rooms));
+        controller.bulkListSave(Arrays.asList(staff));
+        controller.bulkListSave(Arrays.asList(students));
+        controller.bulkListSave(Arrays.asList(requirements));
+    }
     @Test
     public void getRoomsReturnsAll() {
         boolean checker = true;
@@ -210,6 +247,7 @@ public class RoomHandlerTest {
         Assertions.assertEquals(1,difference);
 
     }
+
 
 
 
