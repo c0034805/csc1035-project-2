@@ -40,6 +40,11 @@ public class RoomHandlerTest {
         Assertions.assertTrue(checker);
     }
 
+    /**
+     * Method that makes a student reservation on the 22 June 2021
+     * @param startHr The hour to start the reservation
+     * @param endHr The hour to end the reservation
+     */
     public void studentReservation(int startHr, int endHr){
         Students s = (Students) controller.getById(Students.class,216906208);
         Room r = (Room) controller.getById(Room.class,"0.379");
@@ -51,6 +56,12 @@ public class RoomHandlerTest {
 
         handler.reserveRoomStudent(s,r,start,end);
     }
+
+    /**
+     * Method that makes a staff reservation on the 22 June 2021
+     * @param startHr The hour to start the reservation
+     * @param endHr The hour to end the reservation
+     */
     public void staffReservation(int startHr, int endHr){
         Staff s = (Staff) controller.getById(Staff.class,"NUC3292317");
         Room r = (Room) controller.getById(Room.class,"0.379");
@@ -62,6 +73,12 @@ public class RoomHandlerTest {
 
         handler.reserveRoomStaff(s,r,start,end);
     }
+
+    /**
+     * Method that makes a module reservation on the 22 June 2021
+     * @param startHr The hour to start the reservation
+     * @param endHr The hour to end the reservation
+     */
     public void moduleReservation(int startHr, int endHr){
         Module m = (Module) controller.getById(Module.class,"RSI3393");
         Room r = (Room) controller.getById(Room.class,"0.379");
@@ -74,6 +91,9 @@ public class RoomHandlerTest {
         handler.reserveRoomModule(m,r,start,end);
     }
 
+    /**
+     * Method that checks if reserveRoomStudent() reserves a room
+     */
     @Test
     public void reserveRoomStudentReservesRoom(){
 
@@ -86,6 +106,10 @@ public class RoomHandlerTest {
         Assertions.assertEquals(2,controller.getAll(StudentBooking.class).size());
 
     }
+
+    /**
+     * Method that checks if reserveRoomStaff() reserves a room
+     */
     @Test
     public void reserveRoomStaffReservesRoom(){
 
@@ -98,6 +122,10 @@ public class RoomHandlerTest {
         Assertions.assertEquals(2,controller.getAll(StaffBooking.class).size());
 
     }
+
+    /**
+     * Method that checks if reserveRoomModule() reserves a room
+     */
     @Test
     public void reserveRoomModuleReservesRoom(){
 
@@ -111,6 +139,10 @@ public class RoomHandlerTest {
 
     }
 
+
+    /**
+     * Method that checks if cancel reservation deletes that reservation from all relevant booking tables
+     */
     @Test
     public void cancelReservationCancelsAllTypes(){
         studentReservation(11,12);
@@ -130,6 +162,9 @@ public class RoomHandlerTest {
         Assertions.assertEquals(0,controller.getAll(StaffBooking.class).size());
     }
 
+    /**
+     * Method that checks that there is no change when a non-existent reservation gets deleted
+     */
     @Test
     public void cancelReservationIDCheck(){
         studentReservation(11,12);
@@ -139,6 +174,9 @@ public class RoomHandlerTest {
         Assertions.assertEquals(1,controller.getAll(StudentBooking.class).size());
     }
 
+    /**
+     * Method that checks if getReservedRooms return the correct number of Reservations
+     */
     @Test
     public void getReservedRoomsReturnsCorrectSize(){
         studentReservation(11,12);
@@ -154,6 +192,9 @@ public class RoomHandlerTest {
 
     }
 
+    /**
+     * Method that checks if getAvailableRooms return the correct number of Reservations
+     */
     @Test
     public void getAvailableRoomsReturnsCorrectSize(){
         studentReservation(11,12);
