@@ -77,4 +77,14 @@ public class Controller<E> implements IController<E> {
         }
         s.getTransaction().commit();
     }
+
+    public void deleteAll(Class<E> c){
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        s.beginTransaction();
+        List<E> entries = getAll(c);
+        for (E o:entries) {
+            s.delete(o);
+        }
+        s.getTransaction().commit();
+    }
 }
