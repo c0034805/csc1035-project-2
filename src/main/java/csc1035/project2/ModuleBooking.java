@@ -2,12 +2,24 @@ package csc1035.project2;
 
 import javax.persistence.*;
 
+/**
+ * A persistent class made to handle the Module_Booking table, which
+ * links the Modules table with the Booking table. It represents the
+ * bookings made for the different modules.
+ *
+ * The table contains a booking ID and a module ID.
+ *
+ * This Class connects the attributes to their respective columns in the
+ * table, makes the necessary relationships with other tables and
+ * contains the relevant getter and setter methods.
+ * @author Stefanos Larkou
+ */
 @Entity
 @Table(name = "Module_Booking")
 public class ModuleBooking {
     @Id
     @Column(name = "Booking_ID", nullable = false)
-    private int bid;
+    private String bid;
 
     @Column(name = "Module_ID", nullable = false)
     private String id;
@@ -19,11 +31,21 @@ public class ModuleBooking {
     @OneToOne(mappedBy = "moduleBooking")
     private Booking booking;
 
-    public ModuleBooking(String id, int bid) {
+    /**
+     * The constructor that connects the parameter values with the field
+     * variables.
+     *
+     * @param id The module ID.
+     * @param bid The Booking ID.
+     */
+    public ModuleBooking(String id, String bid) {
         this.id = id;
         this.bid = bid;
     }
 
+    /**
+     * The default constructor for Hibernate.
+     */
     public ModuleBooking() {
     }
 
@@ -35,11 +57,11 @@ public class ModuleBooking {
         this.id = id;
     }
 
-    public int getBid() {
+    public String getBid() {
         return bid;
     }
 
-    public void setBid(int bid) {
+    public void setBid(String bid) {
         this.bid = bid;
     }
 }
