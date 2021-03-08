@@ -133,7 +133,7 @@ public class RoomHandlerTest {
     @Test
     public void cancelReservationIDCheck(){
         studentReservation(11,12);
-        handler.cancelReservation(Integer.MAX_VALUE);
+        handler.cancelReservation("fakeID");
 
         Assertions.assertEquals(1,controller.getAll(Booking.class).size());
         Assertions.assertEquals(1,controller.getAll(StudentBooking.class).size());
