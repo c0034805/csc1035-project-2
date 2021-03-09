@@ -111,7 +111,7 @@ public class RoomHandlerTest {
         Timestamp end = new Timestamp(2021, 6, 22,
                 endHr, 0,0,0);
 
-        handler.reserveRoomModule(m,r,start,end);
+        handler.reserveRoomModule(module[0],rooms[0],start,end);
     }
 
     /**
