@@ -55,6 +55,18 @@ public class Room {
         this.sd_cap = sd_cap;
     }
 
+    /**
+     * @param o The object for comparison
+     * @return returns true if all attributes in both objects are the same
+     */
+    @Override
+    public boolean equals(Object o){
+        if (this==o) return true;
+        if (o == null || o.getClass() != Room.class) return false;
+        Room r = (Room) o;
+        return this.num.equals(r.getNum()) && this.type.equals(r.getType()) && this.cap == r.getCap() && this.sd_cap == r.getSd_cap();
+    }
+
     public String getNum() {
         return num;
     }
