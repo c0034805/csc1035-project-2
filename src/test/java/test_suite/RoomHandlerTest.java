@@ -94,7 +94,7 @@ public class RoomHandlerTest {
         Timestamp end = new Timestamp(2021, 6, 22,
                 endHr, 0,0,0);
 
-        handler.reserveRoomStaff(s,r,start,end);
+        handler.reserveRoomStaff(staff[0],rooms[0],start,end);
     }
 
     /**
