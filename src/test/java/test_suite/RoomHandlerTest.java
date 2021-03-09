@@ -193,6 +193,26 @@ public class RoomHandlerTest {
 
     }
 
+    /**
+     * Method that checks if all db entries from ReserveRoomModule are as expected
+     */
+    @Test
+    public void reserveRoomModuleDetailsCorrect(){
+
+        studentReservation(11,12);
+
+        Booking b = (Booking)controller.getAll(Booking.class).get(0);
+        ModuleBooking mb = (ModuleBooking) controller.getAll(ModuleBooking.class).get(0);
+
+        Assertions.assertEquals(b.getNum(),rooms[0].getNum());
+        Assertions.assertEquals(mb.getId(),modules[0].getId());
+        Assertions.assertEquals(b.getId(),mb.getBid());
+        Assertions.assertEquals(b.getStart(),timestampAddHr(day,11));
+        Assertions.assertEquals(b.getEnd(),timestampAddHr(day,12));
+
+
+    }
+
 
     /**
      * Method that checks if cancel reservation deletes that reservation from all relevant booking tables
