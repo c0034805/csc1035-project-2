@@ -33,6 +33,9 @@ public class RoomHandlerTest {
     new ModuleRequirements("BBU5808",1,2,2,2),
     new ModuleRequirements("SAM0176",3,1,4,1)};
 
+    Timestamp day = new Timestamp(2021, 6, 22,
+            0, 0,0,0);
+
     @BeforeEach
     void setUp() {
         handler = new RoomHandler();
@@ -59,6 +62,13 @@ public class RoomHandlerTest {
         controller.bulkListSave(Arrays.asList(students));
         controller.bulkListSave(Arrays.asList(requirements));
     }
+
+    public Timestamp timestampAddHr(Timestamp stmp, long hr){
+
+        hr *= 3600000;
+        return new Timestamp(stmp.getTime()+hr);
+    }
+
     @Test
     public void getRoomsReturnsAll() {
         Object[] rooms = handler.getRooms().toArray();
@@ -70,14 +80,9 @@ public class RoomHandlerTest {
      * @param startHr The hour to start the reservation
      * @param endHr The hour to end the reservation
      */
-    public void studentReservation(int startHr, int endHr){
+    public void studentReservation(long startHr, long endHr){
 
-        Timestamp start = new Timestamp(2021, 6, 22,
-                startHr, 0,0,0);
-        Timestamp end = new Timestamp(2021, 6, 22,
-                endHr, 0,0,0);
-
-        handler.reserveRoomStudent(students[0],rooms[0],start,end);
+        handler.reserveRoomStudent(students[0],rooms[0],timestampAddHr(day,startHr),timestampAddHr(day,endHr));
     }
 
     /**
@@ -85,16 +90,9 @@ public class RoomHandlerTest {
      * @param startHr The hour to start the reservation
      * @param endHr The hour to end the reservation
      */
-    public void staffReservation(int startHr, int endHr){
-        Staff s = (Staff) controller.getById(Staff.class,"NUC3292317");
-        Room r = (Room) controller.getById(Room.class,"0.379");
+    public void staffReservation(long startHr, long endHr){
 
-        Timestamp start = new Timestamp(2021, 6, 22,
-                startHr, 0,0,0);
-        Timestamp end = new Timestamp(2021, 6, 22,
-                endHr, 0,0,0);
-
-        handler.reserveRoomStaff(staff[0],rooms[0],start,end);
+        handler.reserveRoomStaff(staff[0],rooms[0],timestampAddHr(day,startHr),timestampAddHr(day,endHr));
     }
 
     /**
@@ -102,16 +100,9 @@ public class RoomHandlerTest {
      * @param startHr The hour to start the reservation
      * @param endHr The hour to end the reservation
      */
-    public void moduleReservation(int startHr, int endHr){
-        Modules m = (Modules) controller.getById(Modules.class,"RSI3393");
-        Room r = (Room) controller.getById(Room.class,"0.379");
+    public void moduleReservation(long startHr, long endHr){
 
-        Timestamp start = new Timestamp(2021, 6, 22,
-                startHr, 0,0,0);
-        Timestamp end = new Timestamp(2021, 6, 22,
-                endHr, 0,0,0);
-
-        handler.reserveRoomModule(modules[0],rooms[0],start,end);
+        handler.reserveRoomModule(modules[0],rooms[0],timestampAddHr(day,startHr),timestampAddHr(day,endHr));
     }
 
     /**
@@ -129,6 +120,8 @@ public class RoomHandlerTest {
         Assertions.assertEquals(2,controller.getAll(StudentBooking.class).size());
 
     }
+
+
 
     /**
      * Method that checks if reserveRoomStaff() reserves a room
