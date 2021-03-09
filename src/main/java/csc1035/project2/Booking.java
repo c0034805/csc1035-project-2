@@ -67,6 +67,17 @@ public class Booking {
     public Booking() {
     }
 
+    @Override
+    public boolean equals(Object o){
+        if (this==o) return true;
+        if (o == null || o.getClass() != Booking.class) return false;
+        Booking b = (Booking) o;
+        return this.id.equals(b.id) &&
+                this.num.equals(b.num) &&
+                this.start == b.start &&
+                this.end == b.end;
+    }
+
     public String getId() {
         return id;
     }
