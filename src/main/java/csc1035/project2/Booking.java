@@ -67,15 +67,19 @@ public class Booking {
     public Booking() {
     }
 
+    /**
+     * @param o The object for comparison
+     * @return returns true if all attributes in both objects are the same
+     */
     @Override
     public boolean equals(Object o){
         if (this==o) return true;
         if (o == null || o.getClass() != Booking.class) return false;
         Booking b = (Booking) o;
-        return this.id.equals(b.id) &&
-                this.num.equals(b.num) &&
-                this.start == b.start &&
-                this.end == b.end;
+        return this.id.equals(b.getId()) &&
+                this.num.equals(b.getNum()) &&
+                this.start == b.getStart() &&
+                this.end == b.getEnd();
     }
 
     public String getId() {
