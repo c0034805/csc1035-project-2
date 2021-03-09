@@ -68,6 +68,21 @@ public class Modules {
     public Modules() {
     }
 
+    /**
+     * @param o The object for comparison
+     * @return returns true if all attributes in both objects are the same
+     */
+    @Override
+    public boolean equals(Object o){
+        if (this==o) return true;
+        if (o == null || o.getClass() != Modules.class) return false;
+        Modules m = (Modules) o;
+        return this.id.equals(m.getId()) &&
+                this.name.equals(m.getName()) &&
+                this.credits == m.getCredits() &&
+                this.weeks == m.getWeeks();
+    }
+
     public String getId() {
         return id;
     }
