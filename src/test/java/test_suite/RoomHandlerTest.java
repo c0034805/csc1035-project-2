@@ -61,20 +61,8 @@ public class RoomHandlerTest {
     }
     @Test
     public void getRoomsReturnsAll() {
-        boolean checker = true;
-
-        String[] idsArr = {"0.379","0.365","1.846","1.862","2.484","2.019","3.473","3.940","4.178","4.550"};
-        List<String> ids = Arrays.asList(idsArr);
-
-        List<Room> rooms = handler.getRooms();
-        for (Room room: rooms){
-            if (!ids.contains(room.getNum())) {
-                checker = false;
-                break;
-            }
-        }
-        checker =  checker && ids.size() == rooms.size();
-        Assertions.assertTrue(checker);
+        Object[] rooms = handler.getRooms().toArray();
+        Assertions.assertArrayEquals(rooms,this.rooms);
     }
 
     /**
@@ -117,7 +105,7 @@ public class RoomHandlerTest {
      * @param endHr The hour to end the reservation
      */
     public void moduleReservation(int startHr, int endHr){
-        Module m = (Module) controller.getById(Module.class,"RSI3393");
+        Modules m = (Modules) controller.getById(Modules.class,"RSI3393");
         Room r = (Room) controller.getById(Room.class,"0.379");
 
         Timestamp start = new Timestamp(2021, 6, 22,
