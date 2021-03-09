@@ -49,6 +49,7 @@ public class RoomHandlerTest {
         controller.deleteAll(Staff.class);
         controller.deleteAll(Students.class);
         controller.deleteAll(ModuleRequirements.class);
+        //all the booking classes should get deleted by the db, (ON DELETE CASCADE)
     }
 
     /**
@@ -63,12 +64,21 @@ public class RoomHandlerTest {
         controller.bulkListSave(Arrays.asList(requirements));
     }
 
+    /**
+     * Adds an hour value to a timestamp
+     * @param stmp the timestamp to edit
+     * @param hr the number of hours to add (long)
+     * @return returns the timestamp + the specific number of hours
+     */
     public Timestamp timestampAddHr(Timestamp stmp, long hr){
 
         hr *= 3600000;
         return new Timestamp(stmp.getTime()+hr);
     }
 
+    /**
+     * Method that checks whether getRooms() gets all rooms
+     */
     @Test
     public void getRoomsReturnsAll() {
         Object[] rooms = handler.getRooms().toArray();
