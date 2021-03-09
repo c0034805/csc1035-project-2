@@ -60,6 +60,22 @@ public class ModuleRequirements {
     public ModuleRequirements() {
     }
 
+    /**
+     * @param o The object for comparison
+     * @return returns true if all attributes in both objects are the same
+     */
+    @Override
+    public boolean equals(Object o){
+        if (this==o) return true;
+        if (o == null || o.getClass() != ModuleRequirements.class) return false;
+        ModuleRequirements m = (ModuleRequirements) o;
+        return this.id.equals(m.getId()) &&
+                this.lecturers == m.getLecturers() &&
+                this.llength == m.getLlength() &&
+                this.practicals == m.getPracticals() &&
+                this.plength == m.getPlength();
+    }
+
     public String getId() {
         return id;
     }
