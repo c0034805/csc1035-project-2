@@ -6,7 +6,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-// This might end up mapping to the Reservations table. See how we use it.
 public class RoomHandler {
 
     private List<Room> rooms;
