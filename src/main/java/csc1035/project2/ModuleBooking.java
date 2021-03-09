@@ -49,6 +49,14 @@ public class ModuleBooking {
     public ModuleBooking() {
     }
 
+    @Override
+    public boolean equals(Object o){
+        if (this==o) return true;
+        if (o == null || o.getClass() != ModuleBooking.class) return false;
+        ModuleBooking b = (ModuleBooking) o;
+        return this.id.equals(b.id) && this.bid.equals(b.bid);
+    }
+
     public String getId() {
         return id;
     }
