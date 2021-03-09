@@ -1,6 +1,7 @@
 package csc1035.project2;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -97,5 +98,17 @@ public class Modules {
 
     public void setWeeks(int weeks) {
         this.weeks = weeks;
+    }
+
+    public List<Students> getModuleStudents() {
+        List<Students> s = new ArrayList<>();
+        IController ic = new Controller();
+        for(Take t : (List<Take>)ic.getAll(Take.class)) {
+            if(t.getMid().equals(getId())) {
+                s.add((Students)ic.getById(Students.class, t.getSid()));
+            }
+        }
+
+        return s;
     }
 }
