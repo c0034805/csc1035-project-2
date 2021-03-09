@@ -49,6 +49,18 @@ public class StudentBooking {
     public StudentBooking() {
     }
 
+    /**
+     * @param o The object for comparison
+     * @return returns true if all attributes in both objects are the same, or if they have the same memory address
+     */
+    @Override
+    public boolean equals(Object o){
+        if (this==o) return true;
+        if (o == null || o.getClass() != StudentBooking.class) return false;
+        StudentBooking s = (StudentBooking) o;
+        return this.bid.equals(s.getBid()) && this.sid.equals(s.getSid());
+    }
+
     public String getBid() {
         return bid;
     }

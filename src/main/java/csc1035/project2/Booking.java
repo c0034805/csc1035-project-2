@@ -47,18 +47,15 @@ public class Booking {
     @JoinColumn(name = "Booking_ID", referencedColumnName = "Booking_ID")
     private ModuleBooking moduleBooking;
 
-    public Booking(String num, Timestamp start, Timestamp end) {
     /**
      * The constructor that connects the parameter values with the field
      * variables.
      *
-     * @param id The identification number of the booking.
      * @param num The room number.
      * @param start The beginning of the booking.
      * @param end The end of the booking.
      */
-    public Booking(String id, int num, Timestamp start, Timestamp end) {
-        this.id = id;
+    public Booking(String num, Timestamp start, Timestamp end) {
         this.num = num;
         this.start = start;
         this.end = end;
@@ -68,6 +65,21 @@ public class Booking {
      * The default constructor for Hibernate.
      */
     public Booking() {
+    }
+
+    /**
+     * @param o The object for comparison
+     * @return returns true if all attributes in both objects are the same, or if they have the same memory address
+     */
+    @Override
+    public boolean equals(Object o){
+        if (this==o) return true;
+        if (o == null || o.getClass() != Booking.class) return false;
+        Booking b = (Booking) o;
+        return this.id.equals(b.getId()) &&
+                this.num.equals(b.getNum()) &&
+                this.start == b.getStart() &&
+                this.end == b.getEnd();
     }
 
     public String getId() {
