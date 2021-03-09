@@ -158,6 +158,26 @@ public class RoomHandlerTest {
     }
 
     /**
+     * Method that checks if all db entries from ReserveRoomStaff are as expected
+     */
+    @Test
+    public void reserveRoomStaffDetailsCorrect(){
+
+        staffReservation(11,12);
+
+        Booking b = (Booking)controller.getAll(Booking.class).get(0);
+        StaffBooking sb = (StaffBooking) controller.getAll(StaffBooking.class).get(0);
+
+        Assertions.assertEquals(b.getNum(),rooms[0].getNum());
+        Assertions.assertEquals(sb.getSid(),students[0].getId());
+        Assertions.assertEquals(b.getId(),sb.getBid());
+        Assertions.assertEquals(b.getStart(),timestampAddHr(day,11));
+        Assertions.assertEquals(b.getEnd(),timestampAddHr(day,12));
+
+
+    }
+
+    /**
      * Method that checks if reserveRoomModule() reserves a room
      */
     @Test
