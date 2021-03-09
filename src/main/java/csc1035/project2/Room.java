@@ -57,7 +57,7 @@ public class Room {
 
     /**
      * @param o The object for comparison
-     * @return returns true if all attributes in both objects are the same
+     * @return returns true if all attributes in both objects are the same, or if they have the same memory address
      */
     @Override
     public boolean equals(Object o){
