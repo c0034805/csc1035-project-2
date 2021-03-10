@@ -353,6 +353,18 @@ public class RoomHandlerTest {
 
     }
 
+    /**
+     * Method that checks if CheckRoomTimeAvailable functions correctly
+     */
+    @Test
+    public void checkRoomTimeAvailableCorrect(){
+
+        Assertions.assertTrue(handler.checkRoomTimeAvailable(rooms[0],timestampAddHr(day,11.5F),timestampAddHr(day,12.5F) ));
+        studentReservation(11,12);
+        Assertions.assertFalse(handler.checkRoomTimeAvailable(rooms[0],timestampAddHr(day,11.5F),timestampAddHr(day,12.5F) ));
+        Assertions.assertFalse(handler.checkRoomTimeAvailable(rooms[0],timestampAddHr(day,11),timestampAddHr(day,12) ));
+        Assertions.assertFalse(handler.checkRoomTimeAvailable(rooms[0],timestampAddHr(day,10),timestampAddHr(day,13) ));
+    }
 
 
 
