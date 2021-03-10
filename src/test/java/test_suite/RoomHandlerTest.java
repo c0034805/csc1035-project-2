@@ -290,6 +290,33 @@ public class RoomHandlerTest {
 
     }
 
+    /**
+     *
+     */
+    @Test
+    public void getAvailableRoomsReturnsCorrectValues(){
+        studentReservation(11,12);
+        List<Room> results = handler.getAvailableRooms(timestampAddHr(day, 11.5F));
+
+        Assertions.assertEquals(2,results.size());
+        //checks if the results are the same as the two remaining rooms
+        boolean checker = ((results.get(0) == rooms[1] && results.get(1) == rooms[2])||(results.get(0) == rooms[2] && results.get(1) == rooms[1]));
+        Assertions.assertTrue(checker);
+
+        List<Room> futureResults = handler.getAvailableRooms(timestampAddHr(day, 800F));
+        Assertions.assertEquals(3,futureResults.size());
+
+        //checks if all results contain all rooms (already checked if expected size)
+        checker = true;
+        for (Room room:rooms) {
+            if(!futureResults.contains(room)){
+                checker = false;
+            }
+        }
+        Assertions.assertTrue(checker);
+    }
+
+
 
 
 
