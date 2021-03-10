@@ -262,7 +262,7 @@ public class RoomHandlerTest {
      * Method that checks if getReservedRooms return the correct number of Reservations
      */
     @Test
-   public void getReservedRoomsReturnsCorrectSize(){
+    public void getReservedRoomsReturnsCorrectSize(){
         studentReservation(11,12);
 
         Assertions.assertEquals(1,handler.getReservedRooms().size());
@@ -270,7 +270,22 @@ public class RoomHandlerTest {
         //both reservations use the same room, so the size of the output should not change
         staffReservation(12,13);
         Assertions.assertEquals(1,handler.getReservedRooms().size());
-   }
+    }
+
+    @Test
+    public void getReservedRoomsReturnsCorrectValues(){
+        studentReservation(11,12);
+        handler.reserveRoomStaff(staff[0],rooms[1],timestampAddHr(day,11),timestampAddHr(day,12));
+        // first makes 2 reservations, using room 0 and 1
+
+        List<Room> results = handler.getReservedRooms();
+        Assertions.assertEquals(2,results.size());
+
+        //checks if 0 =0 and 1=1 or if 1=0 and 0=1 (Room)
+        boolean checker = ((results.get(0) == rooms[0] && results.get(1) == rooms[1])||(results.get(0) == rooms[1] && results.get(1) == rooms[0]));
+        Assertions.assertTrue(checker);
+
+    }
 
 //   /**
 //    * Method that checks if getAvailableRooms return the correct number of Reservations
