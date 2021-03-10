@@ -261,20 +261,16 @@ public class RoomHandlerTest {
     /**
      * Method that checks if getReservedRooms return the correct number of Reservations
      */
-//    @Test
-//   public void getReservedRoomsReturnsCorrectSize(){
-//       studentReservation(11,12);
-//       Timestamp middle = new Timestamp(2021, 6, 22,
-//               11, 30,0,0);
-//       Timestamp after = new Timestamp(2999, 6, 22,
-//               11, 30,0,0);
+    @Test
+   public void getReservedRoomsReturnsCorrectSize(){
+        studentReservation(11,12);
 
-//       Assertions.assertEquals(1,handler.getReservedRooms(middle).size());
+        Assertions.assertEquals(1,handler.getReservedRooms().size());
 
-//       //just a couple years after that reservation
-//       Assertions.assertEquals(1,handler.getReservedRooms(after).size());
-
-//   }
+        //both reservations use the same room, so the size of the output should not change
+        staffReservation(12,13);
+        Assertions.assertEquals(1,handler.getReservedRooms().size());
+   }
 
 //   /**
 //    * Method that checks if getAvailableRooms return the correct number of Reservations
