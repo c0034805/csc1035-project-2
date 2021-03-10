@@ -70,10 +70,10 @@ public class RoomHandlerTest {
      * @param hr the number of hours to add (long)
      * @return returns the timestamp + the specific number of hours
      */
-    public Timestamp timestampAddHr(Timestamp stmp, long hr){
+    public Timestamp timestampAddHr(Timestamp stmp, float hr){
 
         hr *= 3600000;
-        return new Timestamp(stmp.getTime()+hr);
+        return new Timestamp((long) (stmp.getTime()+hr));
     }
 
     /**
@@ -272,6 +272,9 @@ public class RoomHandlerTest {
         Assertions.assertEquals(1,handler.getReservedRooms().size());
     }
 
+    /**
+     * Method that checks if getReservedRooms returns the correct rooms
+     */
     @Test
     public void getReservedRoomsReturnsCorrectValues(){
         studentReservation(11,12);
@@ -286,25 +289,6 @@ public class RoomHandlerTest {
         Assertions.assertTrue(checker);
 
     }
-
-//   /**
-//    * Method that checks if getAvailableRooms return the correct number of Reservations
-//    */
-//   @Test
-//   public void getAvailableRoomsReturnsCorrectSize(){
-//       studentReservation(11,12);
-//       Timestamp middle = new Timestamp(2021, 6, 22,
-//               11, 30,0,0);
-//       Timestamp after = new Timestamp(2999, 6, 22,
-//               11, 30,0,0);
-
-//       int difference = handler.getReservedRooms(middle).size() - handler.getReservedRooms(after).size();
-
-//       //checks that the available list size after the reservations is the same as the room list size
-//       Assertions.assertEquals(controller.getAll(Room.class).size(),handler.getAvailableRooms(after).size());
-//       Assertions.assertEquals(1,difference);
-
-//   }
 
 
 
