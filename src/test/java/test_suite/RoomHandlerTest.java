@@ -316,6 +316,23 @@ public class RoomHandlerTest {
         Assertions.assertTrue(checker);
     }
 
+    /**
+     * Method that checks if update room details updates the expected values
+     */
+    @Test
+    public void updateRoomDetailsCorrect(){
+        String num = "new";
+        String type = "newer";
+        int cap = Integer.MAX_VALUE;
+        int sd_cap = Integer.MIN_VALUE;
+
+        handler.updateRoomDetails(rooms[0],num,type,cap,sd_cap);
+
+        Room updated = (Room)controller.getById(Room.class,num);
+        Assertions.assertEquals(new Room(num,type,cap,sd_cap),updated);
+
+    }
+
 
 
 
