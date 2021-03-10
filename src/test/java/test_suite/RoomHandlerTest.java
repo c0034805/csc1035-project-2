@@ -342,6 +342,17 @@ public class RoomHandlerTest {
         Assertions.assertTrue(handler.checkTimeAvailable(timestampAddHr(day,5.5F),timestampAddHr(day,0),timestampAddHr(day,20)));
     }
 
+    /**
+     * Method that checks if checkTimeAvailable functions correctly with atypical values
+     */
+    @Test
+    public void checkTimeAvailableAtypicalValues(){
+        Assertions.assertFalse(handler.checkTimeAvailable(timestampAddHr(day,2F),timestampAddHr(day,5),timestampAddHr(day,6)));
+        Assertions.assertFalse(handler.checkTimeAvailable(timestampAddHr(day,99F),timestampAddHr(day,5),timestampAddHr(day,6)));
+        Assertions.assertFalse(handler.checkTimeAvailable(timestampAddHr(day,5),timestampAddHr(day,5),timestampAddHr(day,5)));
+
+    }
+
 
 
 
