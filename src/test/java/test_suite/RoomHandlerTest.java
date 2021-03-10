@@ -333,6 +333,15 @@ public class RoomHandlerTest {
 
     }
 
+    /**
+     * Method that checks if checkTimeAvailable functions correctly with typical values
+     */
+    @Test
+    public void checkTimeAvailableTypicalValues(){
+        Assertions.assertTrue(handler.checkTimeAvailable(timestampAddHr(day,5.5F),timestampAddHr(day,5),timestampAddHr(day,6)));
+        Assertions.assertTrue(handler.checkTimeAvailable(timestampAddHr(day,5.5F),timestampAddHr(day,0),timestampAddHr(day,20)));
+    }
+
 
 
 
