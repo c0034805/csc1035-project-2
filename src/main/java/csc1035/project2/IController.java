@@ -70,4 +70,12 @@ public interface IController<E> {
      * @param e List of objects to create records for.
      */
     void bulkListSave(List<E> e);
+
+
+    /**
+     * Delete all records of given class
+     *
+     * @param c Type representing the table to delete from
+     */
+    void deleteAll(Class<E> c);
 }
