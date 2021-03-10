@@ -291,7 +291,7 @@ public class RoomHandlerTest {
     }
 
     /**
-     *
+     * Method that checks if getAvailableRooms returns the correct rooms
      */
     @Test
     public void getAvailableRoomsReturnsCorrectValues(){
