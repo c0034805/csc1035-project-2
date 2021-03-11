@@ -126,4 +126,16 @@ public class Modules {
 
         return s;
     }
+
+    public List<Staff> getModuleStaff() {
+        List<Staff> s = new ArrayList<>();
+        IController ic = new Controller();
+        for(Teach t : (List<Teach>)ic.getAll(Teach.class)) {
+            if(t.getMid().equals(getId())) {
+                s.add((Staff)ic.getById(Staff.class, t.getSid()));
+            }
+        }
+
+        return s;
+    }
 }
