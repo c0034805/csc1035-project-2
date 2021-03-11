@@ -32,7 +32,7 @@ public class Room {
     private int sd_cap;
 
     @OneToMany(mappedBy = "room")
-    private List<Booking> bookings;
+    private List<Room> rooms;
 
     /**
      * The default constructor for Hibernate.
