@@ -33,7 +33,8 @@ public class RoomHandlerTest {
     new ModuleRequirements("BBU5808",1,2,2,2),
     new ModuleRequirements("SAM0176",3,1,4,1)};
 
-    Timestamp day = new Timestamp(2021, 6, 22,
+    //year 3921 because it adds 1900 from it for some reason
+    Timestamp day = new Timestamp(121, 6, 22,
             0, 0,0,0);
 
     @BeforeEach
@@ -347,6 +348,7 @@ public class RoomHandlerTest {
      */
     @Test
     public void checkTimeAvailableAtypicalValues(){
+        System.out.println((timestampAddHr(day,2F)));
         Assertions.assertFalse(handler.checkTimeAvailable(timestampAddHr(day,2F),timestampAddHr(day,5),timestampAddHr(day,6)));
         Assertions.assertFalse(handler.checkTimeAvailable(timestampAddHr(day,99F),timestampAddHr(day,5),timestampAddHr(day,6)));
         Assertions.assertFalse(handler.checkTimeAvailable(timestampAddHr(day,5),timestampAddHr(day,5),timestampAddHr(day,5)));
