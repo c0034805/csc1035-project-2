@@ -78,12 +78,12 @@ public class MainIO {
 
                 handler.reserveRoomStaff(staff, room, Timestamp.valueOf(begin), Timestamp.valueOf(end));
             }
-            catch(NullPointerException e){
-                System.out.println("There is no room with the given number.");
+            catch(NoResultException e){
+                System.out.println("There is no room with the given number.\n");
             }
         }
-        catch (NullPointerException e){
-            System.out.println("There is no staff member with the given ID.");
+        catch (NoResultException e){
+            System.out.println("There is no staff member with the given ID.\n");
         }
     }
 
