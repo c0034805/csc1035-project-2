@@ -15,6 +15,16 @@
         <property name="hbm2ddl.auto">update </property>
 
         <mapping class="csc1035.project2.Room" />
+        <mapping class="csc1035.project2.Booking" />
+        <mapping class="csc1035.project2.ModuleBooking" />
+        <mapping class="csc1035.project2.ModuleRequirements" />
+        <mapping class="csc1035.project2.Modules" />
+        <mapping class="csc1035.project2.Staff" />
+        <mapping class="csc1035.project2.StaffBooking" />
+        <mapping class="csc1035.project2.Students" />
+        <mapping class="csc1035.project2.StudentBooking" />
+        <mapping class="csc1035.project2.Take" />
+        <mapping class="csc1035.project2.Teach" />
 
     </session-factory>
 </hibernate-configuration>
