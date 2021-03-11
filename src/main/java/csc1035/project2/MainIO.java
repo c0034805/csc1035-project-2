@@ -77,7 +77,7 @@ public class MainIO {
                 }
 
                 String conf = handler.reserveRoomStaff(staff, room, Timestamp.valueOf(begin), Timestamp.valueOf(end));
-                System.out.println("Your Booking ID is: " + conf);
+                handler.bookingConfirmation("Staff", (Booking) ic.getById(Booking.class, conf));
             }
             catch(NoResultException e){
                 System.out.println("There is no room with the given number.\n");
@@ -126,7 +126,7 @@ public class MainIO {
                 }
 
                 String conf = handler.reserveRoomStudent(student, room, Timestamp.valueOf(begin), Timestamp.valueOf(end));
-                System.out.println("Your Booking ID is: " + conf);
+                handler.bookingConfirmation("Student", (Booking) ic.getById(Booking.class, conf));
             }
             catch(NoResultException e){
                 System.out.println("There is no room with the given number.");
