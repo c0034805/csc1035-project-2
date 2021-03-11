@@ -12,7 +12,6 @@ public class Controller<E> implements IController<E> {
         s.beginTransaction();
         s.save(e);
         s.getTransaction().commit();
-        s.close();
     }
 
     @Override
@@ -21,7 +20,6 @@ public class Controller<E> implements IController<E> {
         s.beginTransaction();
         s.saveOrUpdate(e);
         s.getTransaction().commit();
-        s.close();
     }
 
     @Override
@@ -31,7 +29,6 @@ public class Controller<E> implements IController<E> {
         Query q = s.createQuery("FROM " + c.getSimpleName() + " WHERE id = " + id);
         E o = (E) q.getSingleResult();
         s.getTransaction().commit();
-        s.close();
         return o;
     }
 
@@ -43,7 +40,6 @@ public class Controller<E> implements IController<E> {
         q.setParameter(1, id);
         E o = (E) q.getSingleResult();
         s.getTransaction().commit();
-        s.close();
         return o;
     }
 
@@ -53,9 +49,7 @@ public class Controller<E> implements IController<E> {
         s.beginTransaction();
         List<E> entries = s.createQuery("FROM " + c.getSimpleName()).list();
         s.getTransaction().commit();
-        s.close();
         return entries;
-
     }
 
     @Override
@@ -64,7 +58,6 @@ public class Controller<E> implements IController<E> {
         s.beginTransaction();
         s.delete(s.get(c, id));
         s.getTransaction().commit();
-        s.close();
     }
 
     @Override
@@ -73,7 +66,6 @@ public class Controller<E> implements IController<E> {
         s.beginTransaction();
         s.delete(s.get(c, id));
         s.getTransaction().commit();
-        s.close();
     }
 
     @Override
@@ -84,7 +76,6 @@ public class Controller<E> implements IController<E> {
             save(o);
         }
         s.getTransaction().commit();
-        s.close();
     }
 
     @Override
@@ -96,6 +87,5 @@ public class Controller<E> implements IController<E> {
             s.delete(o);
         }
         s.getTransaction().commit();
-        s.close();
     }
 }
