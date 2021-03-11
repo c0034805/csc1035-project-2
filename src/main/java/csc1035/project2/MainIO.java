@@ -76,7 +76,8 @@ public class MainIO {
                     matches =end.matches("\\d\\d\\d\\d\\-\\d\\d\\-\\d\\d\\ \\d\\d\\:\\d\\d\\:\\d\\d");
                 }
 
-                handler.reserveRoomStaff(staff, room, Timestamp.valueOf(begin), Timestamp.valueOf(end));
+                String conf = handler.reserveRoomStaff(staff, room, Timestamp.valueOf(begin), Timestamp.valueOf(end));
+                System.out.println("Your Booking ID is: " + conf);
             }
             catch(NoResultException e){
                 System.out.println("There is no room with the given number.\n");
@@ -124,7 +125,8 @@ public class MainIO {
                     matches =end.matches("\\d\\d\\d\\d\\-\\d\\d\\-\\d\\d\\ \\d\\d\\:\\d\\d\\:\\d\\d");
                 }
 
-                handler.reserveRoomStudent(student, room, Timestamp.valueOf(begin), Timestamp.valueOf(end));
+                String conf = handler.reserveRoomStudent(student, room, Timestamp.valueOf(begin), Timestamp.valueOf(end));
+                System.out.println("Your Booking ID is: " + conf);
             }
             catch(NoResultException e){
                 System.out.println("There is no room with the given number.");
