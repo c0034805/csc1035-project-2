@@ -48,11 +48,12 @@ public class Room {
      * @param cap The room's capacity.
      * @param sd_cap The room's capacity with social distancing rules in place.
      */
-    public Room(String num, String type, int cap, int sd_cap) {
+    public Room(String num, String type, int cap, int sd_cap, List<Booking> bookings) {
         this.num = num;
         this.type = type;
         this.cap = cap;
         this.sd_cap = sd_cap;
+        this.bookings = bookings;
     }
 
     /**
@@ -97,5 +98,13 @@ public class Room {
 
     public void setSd_cap(int sd_cap) {
         this.sd_cap = sd_cap;
+    }
+
+    public List<Booking> getItems() {
+        return bookings;
+    }
+
+    public void setItems(List<Booking> items) {
+        this.bookings = bookings;
     }
 }

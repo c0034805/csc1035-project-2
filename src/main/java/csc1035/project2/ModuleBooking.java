@@ -38,7 +38,7 @@ public class ModuleBooking {
      * @param id The module ID.
      * @param bid The Booking ID.
      */
-    public ModuleBooking(String id, String bid) {
+    public ModuleBooking(String bid, String id) {
         this.id = id;
         this.bid = bid;
     }

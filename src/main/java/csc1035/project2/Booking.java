@@ -113,4 +113,12 @@ public class Booking {
     public void setEnd(Timestamp end) {
         this.end = end;
     }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setMenu(Room room) {
+        this.room = room;
+    }
 }
