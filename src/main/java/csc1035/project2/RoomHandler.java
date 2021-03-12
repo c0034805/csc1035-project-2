@@ -50,8 +50,13 @@ public class RoomHandler {
      */
     public String reserveRoomStudent ( Students s, Room r, Timestamp st, Timestamp et ) {
         if ( checkRoomTimeAvailable( r, st, et) ) {
+
             Booking b = new Booking(r.getNum(), st, et);
             IController ic = new Controller();
+            List<Booking> prevBooking =r.getBookings();
+            prevBooking.add(b);
+            r.setBookings(prevBooking);
+            b.setRoom(r);
             ic.update(b);
             StudentBooking sb = new StudentBooking(b.getId(), s.getId());
             ic.update(sb);
