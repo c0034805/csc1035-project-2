@@ -118,7 +118,7 @@ public class Booking {
         return room;
     }
 
-    public void setMenu(Room room) {
+    public void setRoom(Room room) {
         this.room = room;
     }
 }
