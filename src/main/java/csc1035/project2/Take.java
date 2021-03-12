@@ -76,4 +76,12 @@ public class Take {
     public void setMid(String mid) {
         this.mid = mid;
     }
+
+    public Students getStudent() {
+        return student;
+    }
+
+    public void setStudent(Students student) {
+        this.student = student;
+    }
 }

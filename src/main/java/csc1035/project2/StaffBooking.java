@@ -75,4 +75,12 @@ public class StaffBooking {
     public void setSid(String sid) {
         this.sid = sid;
     }
+
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
 }

@@ -76,4 +76,12 @@ public class StudentBooking {
     public void setSid(String sid) {
         this.sid = sid;
     }
+
+    public Students getStudent() {
+        return student;
+    }
+
+    public void setStudent(Students student) {
+        this.student = student;
+    }
 }

@@ -55,11 +55,12 @@ public class Modules {
      * @param credits Credits for the module.
      * @param weeks Number of weeks the module runs for.
      */
-    public Modules(String id, String name, int credits, int weeks) {
+    public Modules(String id, String name, int credits, int weeks, List<ModuleBooking> moduleBookings) {
         this.id = id;
         this.name = name;
         this.credits = credits;
         this.weeks = weeks;
+        this.moduleBookings = moduleBookings;
     }
 
     /**
@@ -137,5 +138,13 @@ public class Modules {
         }
 
         return s;
+    }
+
+    public List<ModuleBooking> getModuleBookings() {
+        return moduleBookings;
+    }
+
+    public void setModuleBookings(List<ModuleBooking> moduleBookings) {
+        this.moduleBookings = moduleBookings;
     }
 }

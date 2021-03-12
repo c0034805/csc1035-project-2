@@ -76,4 +76,12 @@ public class ModuleBooking {
     public void setBid(String bid) {
         this.bid = bid;
     }
+
+    public Modules getModule(){
+        return module;
+    }
+
+    public void setModule(Modules module){
+        this.module = module;
+    }
 }
