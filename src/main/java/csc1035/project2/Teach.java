@@ -25,7 +25,7 @@ public class Teach {
     private String sid;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false,insertable = false, updatable = false)
     private Staff staff;
 
     @OneToOne(mappedBy = "teach")

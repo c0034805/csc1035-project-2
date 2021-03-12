@@ -25,7 +25,7 @@ public class ModuleBooking {
     private String id;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false, insertable = false, updatable = false)
     private Modules module;
 
     @OneToOne(mappedBy = "moduleBooking")

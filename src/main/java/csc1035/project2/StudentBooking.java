@@ -28,7 +28,7 @@ public class StudentBooking {
     private Booking booking;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false, insertable = false, updatable = false)
     private Students student;
 
     /**
