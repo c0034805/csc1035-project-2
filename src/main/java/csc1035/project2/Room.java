@@ -100,11 +100,11 @@ public class Room {
         this.sd_cap = sd_cap;
     }
 
-    public List<Booking> getItems() {
+    public List<Booking> getBookings() {
         return bookings;
     }
 
-    public void setItems(List<Booking> items) {
+    public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
     }
 }
