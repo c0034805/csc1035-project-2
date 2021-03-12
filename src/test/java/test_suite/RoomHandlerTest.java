@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,21 +14,21 @@ import java.util.List;
 public class RoomHandlerTest {
     RoomHandler handler;
     IController controller;
-    Modules[] modules = {new Modules("RSI3393","Nunc nisl.",20,12),
-    new Modules("BBU5808","Integer pede justo lacinia eget tincidunt eget tempus vel pede.",10,12),
-    new Modules("SAM0176","Cras in purus eu magna vulputate luctus.",10,6)};
+    Modules[] modules = {new Modules("RSI3393","Nunc nisl.",20,12,new ArrayList<>()),
+    new Modules("BBU5808","Integer pede justo lacinia eget tincidunt eget tempus vel pede.",10,12,new ArrayList<>()),
+    new Modules("SAM0176","Cras in purus eu magna vulputate luctus.",10,6,new ArrayList<>())};
 
-    Room[] rooms = {new Room("0.379","PC Cluster",157,36),
-    new Room("0.365","PC Cluster",59,9),
-    new Room("1.846","Lecture Lecture",274,50)};
+    Room[] rooms = {new Room("0.379","PC Cluster",157,36,new ArrayList<Booking>()),
+    new Room("0.365","PC Cluster",59,9,new ArrayList<Booking>()),
+    new Room("1.846","Lecture Lecture",274,50,new ArrayList<Booking>())};
 
-    Staff[] staff = {new Staff("NUC3292317","Jacenta","Khomich"),
-    new Staff("NUC9674902","Carmita","Cogzell"),
-    new Staff("NUC7362101","Swen","Geard")};
+    Staff[] staff = {new Staff("NUC3292317","Jacenta","Khomich",new ArrayList<>(),new ArrayList<>()),
+    new Staff("NUC9674902","Carmita","Cogzell",new ArrayList<>(),new ArrayList<>()),
+    new Staff("NUC7362101","Swen","Geard",new ArrayList<>(),new ArrayList<>())};
 
-    Students[] students = {new Students("216906208","Doralynn","Bordman"),
-    new Students("218577635","Farra","Pietroni"),
-    new Students("216365117","Clareta","Osmint")};
+    Students[] students = {new Students("216906208","Doralynn","Bordman",new ArrayList<>(),new ArrayList<>()),
+    new Students("218577635","Farra","Pietroni",new ArrayList<>(),new ArrayList<>()),
+    new Students("216365117","Clareta","Osmint",new ArrayList<>(),new ArrayList<>())};
 
     ModuleRequirements[] requirements = {new ModuleRequirements("RSI3393",1,2,1,2),
     new ModuleRequirements("BBU5808",1,2,2,2),
@@ -330,7 +331,7 @@ public class RoomHandlerTest {
         handler.updateRoomDetails(rooms[0],num,type,cap,sd_cap);
 
         Room updated = (Room)controller.getById(Room.class,num);
-        Assertions.assertEquals(new Room(num,type,cap,sd_cap),updated);
+        Assertions.assertEquals(new Room(num,type,cap,sd_cap,new ArrayList<Booking>()),updated);
 
     }
 
@@ -348,7 +349,6 @@ public class RoomHandlerTest {
      */
     @Test
     public void checkTimeAvailableAtypicalValues(){
-        System.out.println((timestampAddHr(day,2F)));
         Assertions.assertFalse(handler.checkTimeAvailable(timestampAddHr(day,2F),timestampAddHr(day,5),timestampAddHr(day,6)));
         Assertions.assertFalse(handler.checkTimeAvailable(timestampAddHr(day,99F),timestampAddHr(day,5),timestampAddHr(day,6)));
         Assertions.assertFalse(handler.checkTimeAvailable(timestampAddHr(day,5),timestampAddHr(day,5),timestampAddHr(day,5)));
