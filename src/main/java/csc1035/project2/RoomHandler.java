@@ -53,12 +53,23 @@ public class RoomHandler {
 
             Booking b = new Booking(r.getNum(), st, et);
             IController ic = new Controller();
+
             List<Booking> prevBooking =r.getBookings();
             prevBooking.add(b);
             r.setBookings(prevBooking);
             b.setRoom(r);
+
             ic.update(b);
+
             StudentBooking sb = new StudentBooking(b.getId(), s.getId());
+            sb.setStudent(s);
+
+            List<StudentBooking> prevSBooking =s.getStudentBookings();
+            prevSBooking.add(sb);
+            s.setStudentBookings(prevSBooking);
+
+
+
             ic.update(sb);
             refreshRoomHandler();
             return b.getId();
