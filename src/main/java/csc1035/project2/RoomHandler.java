@@ -54,21 +54,15 @@ public class RoomHandler {
             Booking b = new Booking(r.getNum(), st, et);
             IController ic = new Controller();
 
-            List<Booking> prevBooking =r.getBookings();
-            prevBooking.add(b);
-            r.setBookings(prevBooking);
+            r.getBookings().add(b);
             b.setRoom(r);
 
             ic.update(b);
 
             StudentBooking sb = new StudentBooking(b.getId(), s.getId());
+
+            s.getStudentBookings().add(sb);
             sb.setStudent(s);
-
-            List<StudentBooking> prevSBooking =s.getStudentBookings();
-            prevSBooking.add(sb);
-            s.setStudentBookings(prevSBooking);
-
-
 
             ic.update(sb);
             refreshRoomHandler();
@@ -92,8 +86,17 @@ public class RoomHandler {
         if ( checkRoomTimeAvailable( r, st, et) ) {
             Booking b = new Booking(r.getNum(), st, et);
             IController ic = new Controller();
+
+            r.getBookings().add(b);
+            b.setRoom(r);
+
             ic.update(b);
+
             StaffBooking sb = new StaffBooking(b.getId(), s.getId());
+
+            s.getStaffBookings().add(sb);
+            sb.setStaff(s);
+
             ic.update(sb);
             refreshRoomHandler();
             return b.getId();
@@ -116,9 +119,17 @@ public class RoomHandler {
         if ( checkRoomTimeAvailable( r, st, et) ) {
             Booking b = new Booking(r.getNum(), st, et);
             IController ic = new Controller();
+
+            r.getBookings().add(b);
+            b.setRoom(r);
+
             ic.update(b);
+
             ModuleBooking mb = new ModuleBooking(b.getId(), m.getId());
-            ic.update(mb);
+
+            m.getModuleBookings().add(mb);
+            mb.setModule(m);
+
             refreshRoomHandler();
             return b.getId();
         }
