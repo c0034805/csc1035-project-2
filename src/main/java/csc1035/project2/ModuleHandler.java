@@ -12,6 +12,8 @@ public class ModuleHandler {
     private List<Modules> modules;
     private List<Students> students;
     private List<Staff> staff;
+    private List<Take> takes;
+    private List<Teach> teaches;
 
     /**
      * ModuleHandler constructor method.
@@ -21,6 +23,8 @@ public class ModuleHandler {
         modules = new ArrayList<Modules>(ic.getAll(Modules.class));
         students = new ArrayList<Students>(ic.getAll(Students.class));
         staff = new ArrayList<Staff>(ic.getAll(Staff.class));
+        takes = new ArrayList<Take>(ic.getAll(Take.class));
+        teaches = new ArrayList<Teach>(ic.getAll(Teach.class));
     }
 
     /**
@@ -31,6 +35,12 @@ public class ModuleHandler {
         this.setModules( new ArrayList<Modules>(ic.getAll(Modules.class)) );
         this.setStudents( new ArrayList<Students>(ic.getAll(Students.class)) );
         this.setStaff( new ArrayList<Staff>(ic.getAll(Staff.class)) );
+        this.setTakes( new ArrayList<Take>(ic.getAll(Take.class)) );
+        this.setTeaches( new ArrayList<Teach>(ic.getAll(Teach.class)) );
+    }
+
+    public void addStudentToModule ( Students s, Modules m ) {
+
     }
 
     /**
@@ -61,6 +71,24 @@ public class ModuleHandler {
     }
 
     /**
+     * <code>takes</code> getter method.
+     *
+     * @return All student-module relationships in database.
+     */
+    public List<Take> getTakes() {
+        return takes;
+    }
+
+    /**
+     * <code>teaches</code> getter method.
+     *
+     * @return All staff-module relationships in database.
+     */
+    public List<Teach> getTeaches() {
+        return teaches;
+    }
+
+    /**
      * <code>modules</code> getter method.
      *
      * @param modules New module list.
@@ -85,5 +113,23 @@ public class ModuleHandler {
      */
     public void setStaff(List<Staff> staff) {
         this.staff = staff;
+    }
+
+    /**
+     * <code>takes</code> getter method.
+     *
+     * @param takes New student-module relationship list.
+     */
+    public void setTakes(List<Take> takes) {
+        this.takes = takes;
+    }
+
+    /**
+     * <code>teaches</code> getter method.
+     *
+     * @param teaches New staff-module relationship list.
+     */
+    public void setTeaches(List<Teach> teaches) {
+        this.teaches = teaches;
     }
 }

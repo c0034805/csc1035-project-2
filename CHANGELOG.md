@@ -22,7 +22,8 @@
 * (ERICK) Created `updateRoomDetails()` method.
 * `cancelReservation()` takes string instead of int.
 
-##### v0.4 [14.03.2021]: 
+##### v0.4 [14.03.2021]: Module Handling Methods
 * (ERICK) Added javadoc documentation to RoomHandler.
 * (ERICK) Created `ModuleHandler` class.
 * (ERICK) Created `refreshModuleHandler()` method.
+* (ERICK) Added lists for Take and Teach.
