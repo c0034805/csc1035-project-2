@@ -6,6 +6,10 @@ import java.util.List;
 
 /**
  * ModuleHandler class to manage student and staff relationships with modules.
+ *
+ * <p>This class contains a list of all staff, students and the modules they are teaching/taking
+ * within the database. The methods are to be used by the IO to add or remove people from teaching
+ * or taking a specific module.</p>
  */
 public class ModuleHandler {
 
@@ -81,6 +85,18 @@ public class ModuleHandler {
     public void removeStudentFromModule ( Students s, Modules m ) {
         IController ic = new Controller();
         s.getTake().remove( ic.getById( Take.class, m.getId() ) );
+        refreshModuleHandler();
+    }
+
+    /**
+     * Method to remove staff from module.
+     *
+     * @param s Staf to stop teaching module.
+     * @param m Module for staff to stop teaching.
+     */
+    public void removeStaffFromModule ( Staff s, Modules m ) {
+        IController ic = new Controller();
+        s.getTeach().remove( ic.getById( Teach.class, m.getId() ) );
         refreshModuleHandler();
     }
 

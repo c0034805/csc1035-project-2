@@ -30,3 +30,4 @@
 * (ERICK) Created `addStudentToModule()` method.
 * (ERICK) Created `addStaffToModule()` method.
 * (ERICK) Created `removeStudentFromModule()` method.
+* (ERICK) Created `removeStaffFromModule()` method.
