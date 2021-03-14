@@ -68,17 +68,22 @@ public class ModuleHandler {
     /**
      * Method to add staff to a module.
      *
+     * <p>If the staff is teaching taking the module specified, method
+     * does not add to the staff's taught module list.</p>
+     *
      * @param s Staff to teach to a module.
      * @param m Module for staff to teach.
      */
     public void addStaffToModule ( Staff s, Modules m ) {
-        Teach t = new Teach( s.getId(), m.getId() );
         IController ic = new Controller();
+        if( s.getTeach().contains( ic.getById( Teach.class, m.getId()) ) ) {
+            Teach t = new Teach(s.getId(), m.getId());
 
-        s.getTeach().add( t );
-        t.setStaff( s );
-        ic.update( t );
-        refreshModuleHandler();
+            s.getTeach().add(t);
+            t.setStaff(s);
+            ic.update(t);
+            refreshModuleHandler();
+        }
     }
 
     /**

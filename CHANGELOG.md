@@ -32,3 +32,4 @@
 * (ERICK) Created `removeStudentFromModule()` method.
 * (ERICK) Created `removeStaffFromModule()` method.
 * (ERICK) Student-take not created if already exists.
+* (ERICK) Staff-teach not created if already exists.
