@@ -52,6 +52,7 @@ public class ModuleHandler {
         s.getTake().add( t );
         t.setStudent( s );
         ic.update( t );
+
         refreshModuleHandler();
     }
 
@@ -68,6 +69,18 @@ public class ModuleHandler {
         s.getTeach().add( t );
         t.setStaff( s );
         ic.update( t );
+        refreshModuleHandler();
+    }
+
+    /**
+     * Method to remove student from module.
+     *
+     * @param s Student to stop taking module.
+     * @param m Module for student to stop taking.
+     */
+    public void removeStudentFromModule ( Students s, Modules m ) {
+        IController ic = new Controller();
+        s.getTake().remove( ic.getById( Take.class, m.getId() ) );
         refreshModuleHandler();
     }
 
