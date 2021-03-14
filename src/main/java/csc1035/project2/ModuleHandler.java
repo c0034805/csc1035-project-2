@@ -24,6 +24,16 @@ public class ModuleHandler {
     }
 
     /**
+     * Method to update ModuleHandler after a change to database is made.
+     */
+    public void refreshModuleHandler() {
+        IController ic = new Controller();
+        this.setModules( new ArrayList<Modules>(ic.getAll(Modules.class)) );
+        this.setStudents( new ArrayList<Students>(ic.getAll(Students.class)) );
+        this.setStaff( new ArrayList<Staff>(ic.getAll(Staff.class)) );
+    }
+
+    /**
      * <code>modules</code> getter method.
      *
      * @return All modules in database.
