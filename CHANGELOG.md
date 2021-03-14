@@ -28,3 +28,4 @@
 * (ERICK) Created `refreshModuleHandler()` method.
 * (ERICK) Added lists for Take and Teach.
 * (ERICK) Created `addStudentToModule()` method.
+* (ERICK) Created `addStaffToModule()` method.
