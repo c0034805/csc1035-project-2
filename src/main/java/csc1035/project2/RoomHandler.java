@@ -6,6 +6,11 @@ import java.util.List;
 
 /**
  * RoomHandler class to be used by the UI in order to perform tasks related room booking.
+ *
+ * <p>This class contains a list of all the rooms, bookings and entity-specific bookings
+ * that are within the database. These lists update whenever a method that makes a change
+ * to the database is called. This class also contains methods to retrieve booking and
+ * room information that is to be used in the main UI.</p>
  */
 public class RoomHandler {
 
