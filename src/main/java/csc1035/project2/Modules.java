@@ -147,4 +147,8 @@ public class Modules {
     public void setModuleBookings(List<ModuleBooking> moduleBookings) {
         this.moduleBookings = moduleBookings;
     }
+
+    public ModuleRequirements getModuleRequirements() {
+        return moduleRequirements;
+    }
 }
