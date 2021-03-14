@@ -46,18 +46,23 @@ public class ModuleHandler {
     /**
      * Method to add student to a module.
      *
+     * <p>If the student is already taking the module specified, method
+     * does not add to the student's taken module list.</p>
+     *
      * @param s Student to take to a module.
      * @param m Module for a student to take.
      */
     public void addStudentToModule ( Students s, Modules m ) {
-        Take t = new Take( s.getId(), m.getId() );
         IController ic = new Controller();
+        if( s.getTake().contains( ic.getById( Take.class, m.getId()) ) ) {
+            Take t = new Take(s.getId(), m.getId());
 
-        s.getTake().add( t );
-        t.setStudent( s );
-        ic.update( t );
+            s.getTake().add(t);
+            t.setStudent(s);
+            ic.update(t);
 
-        refreshModuleHandler();
+            refreshModuleHandler();
+        }
     }
 
     /**
