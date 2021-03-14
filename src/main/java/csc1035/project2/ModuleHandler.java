@@ -39,8 +39,20 @@ public class ModuleHandler {
         this.setTeaches( new ArrayList<Teach>(ic.getAll(Teach.class)) );
     }
 
+    /**
+     * Method to add student to a module.
+     *
+     * @param s Student to take to a module.
+     * @param m Module for a student to take.
+     */
     public void addStudentToModule ( Students s, Modules m ) {
+        Take t = new Take( s.getId(), m.getId() );
+        IController ic = new Controller();
 
+        s.getTake().add( t );
+        t.setStudent( s );
+        ic.update( t );
+        refreshModuleHandler();
     }
 
     /**
