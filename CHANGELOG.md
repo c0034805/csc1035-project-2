@@ -24,3 +24,4 @@
 
 ##### v0.4 [14.03.2021]: 
 * (ERICK) Added javadoc documentation to RoomHandler.
+* (ERICK) Created `ModuleHandler` class.
