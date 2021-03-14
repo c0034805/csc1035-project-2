@@ -4,6 +4,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * RoomHandler class to be used by the UI in order to perform tasks related room booking.
+ */
 public class RoomHandler {
 
     private List<Room> rooms;
