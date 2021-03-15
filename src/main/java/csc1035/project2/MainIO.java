@@ -326,8 +326,13 @@ public class MainIO {
             String mid = sc.nextLine();
             try {
                 Modules modules = (Modules) ic.getById( Modules.class, mid );
-                handler.removeStaffFromModule( staff, modules );
-                System.out.println("Removal successful.");
+                boolean removed = handler.removeStaffFromModule( staff, modules );
+                if ( removed ) {
+                    System.out.println("Removal successful.");
+                }
+                else {
+                    System.out.println("Staff does not teach that module.");
+                }
             }
             catch(NoResultException e){
                 System.out.println("There is no module with the given ID.");
