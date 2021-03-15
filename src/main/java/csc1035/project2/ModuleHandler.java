@@ -55,7 +55,7 @@ public class ModuleHandler {
      */
     public boolean addStudentToModule ( Students s, Modules m ) {
         IController ic = new Controller();
-        if( s.getTake().contains( ic.getById( Take.class, m.getId()) ) ) {
+        if( !s.getTake().contains( ic.getById( Take.class, m.getId()) ) ) {
             Take t = new Take(s.getId(), m.getId());
 
             s.getTake().add(t);
@@ -80,7 +80,7 @@ public class ModuleHandler {
      */
     public boolean addStaffToModule ( Staff s, Modules m ) {
         IController ic = new Controller();
-        if( s.getTeach().contains( ic.getById( Teach.class, m.getId()) ) ) {
+        if( !s.getTeach().contains( ic.getById( Teach.class, m.getId()) ) ) {
             Teach t = new Teach(s.getId(), m.getId());
 
             s.getTeach().add(t);
