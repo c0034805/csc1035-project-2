@@ -51,8 +51,9 @@ public class ModuleHandler {
      *
      * @param s Student to take to a module.
      * @param m Module for a student to take.
+     * @return If addition was successful.
      */
-    public void addStudentToModule ( Students s, Modules m ) {
+    public boolean addStudentToModule ( Students s, Modules m ) {
         IController ic = new Controller();
         if( s.getTake().contains( ic.getById( Take.class, m.getId()) ) ) {
             Take t = new Take(s.getId(), m.getId());
@@ -62,7 +63,9 @@ public class ModuleHandler {
             ic.update(t);
 
             refreshModuleHandler();
+            return true;
         }
+        return false;
     }
 
     /**
@@ -73,8 +76,9 @@ public class ModuleHandler {
      *
      * @param s Staff to teach to a module.
      * @param m Module for staff to teach.
+     * @return If addition was successful.
      */
-    public void addStaffToModule ( Staff s, Modules m ) {
+    public boolean addStaffToModule ( Staff s, Modules m ) {
         IController ic = new Controller();
         if( s.getTeach().contains( ic.getById( Teach.class, m.getId()) ) ) {
             Teach t = new Teach(s.getId(), m.getId());
@@ -83,7 +87,9 @@ public class ModuleHandler {
             t.setStaff(s);
             ic.update(t);
             refreshModuleHandler();
+            return true;
         }
+        return false;
     }
 
     /**
