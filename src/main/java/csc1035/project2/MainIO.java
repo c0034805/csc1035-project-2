@@ -186,6 +186,7 @@ public class MainIO {
             int choice = sc.nextInt();
             switch(choice){
                 case 1 -> studentAddModule();
+                case 2 -> staffAddModule();
                 case 5 -> {
                     System.out.println("Returning to main menu.");
                     quit = true;
@@ -206,20 +207,20 @@ public class MainIO {
         try {
             Students student =  (Students) ic.getById( Students.class, sid );
 
-            System.out.print("Which module would you like the student to take?\n" + "Please enter Module ID");
+            System.out.print("Which module would you like the student to take?\n" + "Please enter Module ID:");
             String mid = sc.nextLine();
             try {
                 Modules modules = (Modules) ic.getById( Modules.class, mid );
                 boolean added = handler.addStudentToModule( student, modules );
                 if ( added ) {
                     System.out.println("Addition successful.\n" +
-                                       "Student " + student.getId() + " " +
-                                       "is now taking module " + modules.getId() + "." );
+                            "Student " + student.getId() + " " +
+                            "is now taking module " + modules.getId() + "." );
                 }
                 else {
                     System.out.println("Addition unsuccessful.\n" +
-                                       "Student " + student.getId() + " " +
-                                       "is already taking module " + modules.getId() + "." );
+                            "Student " + student.getId() + " " +
+                            "is already taking module " + modules.getId() + "." );
                 }
             }
             catch(NoResultException e){
@@ -229,6 +230,42 @@ public class MainIO {
         }
         catch (NoResultException e){
             System.out.println("There is no student with the given ID.");
+        }
+    }
+
+    private void staffAddModule() {
+        Scanner sc = new Scanner(System.in);
+        IController ic = new Controller<>();
+        ModuleHandler handler = new ModuleHandler();
+
+        System.out.print("Please enter Staff ID: ");
+        String sid = sc.nextLine();
+        try {
+            Staff staff =  (Staff) ic.getById( Staff.class, sid );
+
+            System.out.print("Which module would you like the student to take?\n" + "Please enter Module ID:");
+            String mid = sc.nextLine();
+            try {
+                Modules modules = (Modules) ic.getById( Modules.class, mid );
+                boolean added = handler.addStaffToModule( staff, modules );
+                if ( added ) {
+                    System.out.println("Addition successful.\n" +
+                            "Staff " + staff.getId() + " " +
+                            "is now teaching module " + modules.getId() + "." );
+                }
+                else {
+                    System.out.println("Addition unsuccessful.\n" +
+                            "Staff " + staff.getId() + " " +
+                            "is already teaching module " + modules.getId() + "." );
+                }
+            }
+            catch(NoResultException e){
+                System.out.println("There is no module with the given ID.");
+            }
+
+        }
+        catch (NoResultException e){
+            System.out.println("There is no staff with the given ID.");
         }
     }
 }
