@@ -33,3 +33,6 @@
 * (ERICK) Created `removeStaffFromModule()` method.
 * (ERICK) Student-take not created if already exists.
 * (ERICK) Staff-teach not created if already exists.
+
+##### v0.5 [15.03.2021]: Module Handling UI
+* (ERICK) Created `moduleOptions()` method.

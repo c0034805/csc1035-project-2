@@ -171,4 +171,26 @@ public class MainIO {
             System.out.println("There is no room with the given number.");
         }
     }
+
+    private void moduleOptions() {
+        boolean quit = false;
+        Scanner sc = new Scanner(System.in);
+
+        while(!quit){
+            System.out.println(
+                    "1: Add student to module.\n" +
+                    "2: Remove student from module.\n" +
+                    "3: Add teacher to module.\n" +
+                    "4: Remove teacher from module.\n" +
+                    "5: Return to main menu.\n");
+            int choice = sc.nextInt();
+            switch(choice){
+                case 5 -> {
+                    System.out.println("Returning to main menu.");
+                    quit = true;
+                }
+            }
+            default -> System.out.println("Not a valid option.");
+        }
+    }
 }
