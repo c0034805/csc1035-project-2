@@ -186,13 +186,15 @@ public class MainIO {
             int choice = sc.nextInt();
             switch(choice){
                 case 1 -> studentAddModule();
-                case 2 -> staffAddModule();
+                case 2 -> studentRemoveModule();
+                case 3 -> staffAddModule();
                 case 5 -> {
                     System.out.println("Returning to main menu.");
                     quit = true;
                 }
+                default -> System.out.println("Not a valid option.");
             }
-            default -> System.out.println("Not a valid option.");
+
         }
     }
 
@@ -266,6 +268,35 @@ public class MainIO {
         }
         catch (NoResultException e){
             System.out.println("There is no staff with the given ID.");
+        }
+    }
+
+    private void studentRemoveModule() {
+        Scanner sc = new Scanner(System.in);
+        IController ic = new Controller<>();
+        ModuleHandler handler = new ModuleHandler();
+
+        System.out.print("Please enter Student ID: ");
+        String sid = sc.nextLine();
+        try {
+            Students student = (Students) ic.getById(Students.class, sid);
+
+            System.out.print("Which of the following modules would you like to quit?\nPlease enter module ID:");
+            for ( Take t : student.getTake() ) {
+                Modules tmpModule = (Modules) ic.getById(Modules.class, t.getMid());
+                System.out.println( tmpModule.getId() + " - " + tmpModule.getName() );
+            }
+            String mid = sc.nextLine();
+            try {
+                Modules modules = (Modules) ic.getById( Modules.class, mid );
+                handler.removeStudentFromModule( student, modules );
+            }
+            catch(NoResultException e){
+                System.out.println("There is no module with the given ID.");
+            }
+        }
+        catch (NoResultException e){
+            System.out.println("There is no student with the given ID.");
         }
     }
 }

@@ -38,4 +38,5 @@
 * (ERICK) Created `moduleOptions()` method.
 * (ERICK) `addStudent/StaffToModule()` now return booleans.
 * (ERICK) Created `studentAddModule()` method.
-* (ERICK) Created `staffAddModule` method.
+* (ERICK) Created `staffAddModule()` method.
+* (ERICK) Created `studentRemoveModule()` method.
