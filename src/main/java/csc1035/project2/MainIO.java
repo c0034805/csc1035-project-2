@@ -25,7 +25,8 @@ public class MainIO {
                 case 1 -> reserveStaff();
                 case 2 -> reserveStudent();
                 case 3 -> updateRoom();
-                case 4 -> {
+                case 4 -> moduleOptions();
+                case 5 -> {
                     System.out.println("Quitting...");
                     quit = true;
                 }
@@ -38,7 +39,8 @@ public class MainIO {
         System.out.println( "1: Create a staff booking.\n" +
                             "2: Create a student booking.\n" +
                             "3: Update a room's details.\n" +
-                            "4: Quit."
+                            "4: Module options.\n" +
+                            "5: Quit."
                           );
     }
 

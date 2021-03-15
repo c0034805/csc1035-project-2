@@ -46,3 +46,4 @@
 * (ERICK) `studentRemoveModule()` makes use of removal check.
 * (ERICK) `staffRemoveModule()` makes use of removal check.
 * (ERICK)  `menu()` no longer makes use of source 15.
+* (ERICK) Added `moduleOptions()` as selectable option.
