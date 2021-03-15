@@ -22,11 +22,10 @@ public class MainIO {
             System.out.println("Please select an option: ");
             int choice = sc.nextInt();
             switch(choice){
-                case 1 -> reserveStaff();
-                case 2 -> reserveStudent();
+                case 1 -> reserveOptions();
+                case 2 -> moduleOptions();
                 case 3 -> updateRoom();
-                case 4 -> moduleOptions();
-                case 5 -> {
+                case 4 -> {
                     System.out.println("Quitting...");
                     quit = true;
                 }
@@ -36,12 +35,33 @@ public class MainIO {
     }
 
     private void menu(){
-        System.out.println( "1: Create a staff booking.\n" +
-                            "2: Create a student booking.\n" +
+        System.out.println( "1: Reservation options.\n" +
+                            "2: Module options.\n" +
                             "3: Update a room's details.\n" +
-                            "4: Module options.\n" +
-                            "5: Quit."
+                            "4: Quit."
                           );
+    }
+
+    private void reserveOptions(){
+        boolean quit = false;
+        Scanner sc = new Scanner(System.in);
+
+        while(!quit) {
+            System.out.println("1: Staff reservation.\n" +
+                               "2: Student reservation.\n" +
+                               "3: Return to main menu.");
+
+            int choice = sc.nextInt();
+            switch (choice) {
+                case 1 -> reserveStaff();
+                case 2 -> reserveStudent();
+                case 3 -> {
+                    System.out.println("Returning to main menu.");
+                    quit = true;
+                }
+                default -> System.out.println("Not a valid option.");
+            }
+        }
     }
 
     private void reserveStaff(){
