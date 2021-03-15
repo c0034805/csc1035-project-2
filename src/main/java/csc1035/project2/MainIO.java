@@ -188,6 +188,7 @@ public class MainIO {
                 case 1 -> studentAddModule();
                 case 2 -> studentRemoveModule();
                 case 3 -> staffAddModule();
+                case 4 -> staffRemoveModule();
                 case 5 -> {
                     System.out.println("Returning to main menu.");
                     quit = true;
@@ -198,7 +199,7 @@ public class MainIO {
         }
     }
 
-    // TODO: Confirm if we want an updating Room/Module Handler or create a new one each option pick.
+    // TODO: Check if updating handler is faster than creating new instances each option select.
     private void studentAddModule() {
         Scanner sc = new Scanner(System.in);
         IController ic = new Controller<>();
@@ -290,6 +291,7 @@ public class MainIO {
             try {
                 Modules modules = (Modules) ic.getById( Modules.class, mid );
                 handler.removeStudentFromModule( student, modules );
+                System.out.println("Removal successful.");
             }
             catch(NoResultException e){
                 System.out.println("There is no module with the given ID.");
@@ -297,6 +299,37 @@ public class MainIO {
         }
         catch (NoResultException e){
             System.out.println("There is no student with the given ID.");
+        }
+    }
+
+    private void staffRemoveModule() {
+        Scanner sc = new Scanner(System.in);
+        IController ic = new Controller<>();
+        ModuleHandler handler = new ModuleHandler();
+
+        System.out.print("Please enter Staff ID: ");
+        String sid = sc.nextLine();
+        try {
+            Staff staff = (Staff) ic.getById(Staff.class, sid);
+
+            System.out.print("Which of the following modules would you like to stop teaching?\n" +
+                             "Please enter module ID:");
+            for ( Teach t : staff.getTeach() ) {
+                Modules tmpModule = (Modules) ic.getById(Modules.class, t.getMid());
+                System.out.println( tmpModule.getId() + " - " + tmpModule.getName() );
+            }
+            String mid = sc.nextLine();
+            try {
+                Modules modules = (Modules) ic.getById( Modules.class, mid );
+                handler.removeStaffFromModule( staff, modules );
+                System.out.println("Removal successful.");
+            }
+            catch(NoResultException e){
+                System.out.println("There is no module with the given ID.");
+            }
+        }
+        catch (NoResultException e){
+            System.out.println("There is no staff with the given ID.");
         }
     }
 }
