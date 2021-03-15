@@ -21,3 +21,15 @@
 * (ERICK) Created `isInteger()` method.
 * (ERICK) Created `updateRoomDetails()` method.
 * `cancelReservation()` takes string instead of int.
+
+##### v0.4 [14.03.2021]: Module Handling Methods
+* (ERICK) Added javadoc documentation to RoomHandler.
+* (ERICK) Created `ModuleHandler` class.
+* (ERICK) Created `refreshModuleHandler()` method.
+* (ERICK) Added lists for Take and Teach.
+* (ERICK) Created `addStudentToModule()` method.
+* (ERICK) Created `addStaffToModule()` method.
+* (ERICK) Created `removeStudentFromModule()` method.
+* (ERICK) Created `removeStaffFromModule()` method.
+* (ERICK) Student-take not created if already exists.
+* (ERICK) Staff-teach not created if already exists.

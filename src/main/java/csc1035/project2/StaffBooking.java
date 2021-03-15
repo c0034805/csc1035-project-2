@@ -28,7 +28,7 @@ public class StaffBooking {
     private Booking booking;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false, insertable = false, updatable = false)
     private Staff staff;
 
     /**
@@ -74,5 +74,13 @@ public class StaffBooking {
 
     public void setSid(String sid) {
         this.sid = sid;
+    }
+
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
     }
 }

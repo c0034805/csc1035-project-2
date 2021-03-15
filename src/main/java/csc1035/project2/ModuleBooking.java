@@ -25,7 +25,7 @@ public class ModuleBooking {
     private String id;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false, insertable = false, updatable = false)
     private Modules module;
 
     @OneToOne(mappedBy = "moduleBooking")
@@ -75,5 +75,13 @@ public class ModuleBooking {
 
     public void setBid(String bid) {
         this.bid = bid;
+    }
+
+    public Modules getModule(){
+        return module;
+    }
+
+    public void setModule(Modules module){
+        this.module = module;
     }
 }

@@ -41,10 +41,13 @@ public class Students {
      * @param firstname The student's first name.
      * @param lastname The student's ast name.
      */
-    public Students(String id, String firstname, String lastname) {
+    public Students(String id, String firstname, String lastname,
+                    List<StudentBooking> studentBookings, List<Take> take) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.studentBookings = studentBookings;
+        this.take = take;
     }
 
     /**
@@ -87,5 +90,21 @@ public class Students {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public List<StudentBooking> getStudentBookings() {
+        return studentBookings;
+    }
+
+    public void setStudentBookings(List<StudentBooking> studentBookings) {
+        this.studentBookings = studentBookings;
+    }
+
+    public List<Take> getTake() {
+        return take;
+    }
+
+    public void setTake(List<Take> take) {
+        this.take = take;
     }
 }

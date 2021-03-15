@@ -28,7 +28,7 @@ public class StudentBooking {
     private Booking booking;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false, insertable = false, updatable = false)
     private Students student;
 
     /**
@@ -75,5 +75,13 @@ public class StudentBooking {
 
     public void setSid(String sid) {
         this.sid = sid;
+    }
+
+    public Students getStudent() {
+        return student;
+    }
+
+    public void setStudent(Students student) {
+        this.student = student;
     }
 }

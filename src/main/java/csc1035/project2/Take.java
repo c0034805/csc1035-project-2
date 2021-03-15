@@ -25,7 +25,7 @@ public class Take {
     private String sid;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false,insertable = false, updatable = false)
     private Students student;
 
     @OneToOne(mappedBy = "take")
@@ -75,5 +75,13 @@ public class Take {
 
     public void setMid(String mid) {
         this.mid = mid;
+    }
+
+    public Students getStudent() {
+        return student;
+    }
+
+    public void setStudent(Students student) {
+        this.student = student;
     }
 }

@@ -25,7 +25,7 @@ public class Teach {
     private String sid;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false,insertable = false, updatable = false)
     private Staff staff;
 
     @OneToOne(mappedBy = "teach")
@@ -75,5 +75,13 @@ public class Teach {
 
     public void setMid(String mid) {
         this.mid = mid;
+    }
+
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
     }
 }

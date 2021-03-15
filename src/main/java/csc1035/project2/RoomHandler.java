@@ -4,6 +4,14 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * RoomHandler class to be used by the UI in order to perform tasks related room booking.
+ *
+ * <p>This class contains a list of all the rooms, bookings and entity-specific bookings
+ * that are within the database. These lists update whenever a method that makes a change
+ * to the database is called. This class also contains methods to retrieve booking and
+ * room information that is to be used in the main UI.</p>
+ */
 public class RoomHandler {
 
     private List<Room> rooms;
@@ -50,10 +58,20 @@ public class RoomHandler {
      */
     public String reserveRoomStudent ( Students s, Room r, Timestamp st, Timestamp et ) {
         if ( checkRoomTimeAvailable( r, st, et) ) {
+
             Booking b = new Booking(r.getNum(), st, et);
             IController ic = new Controller();
+
+            r.getBookings().add(b);
+            b.setRoom(r);
+
             ic.update(b);
+
             StudentBooking sb = new StudentBooking(b.getId(), s.getId());
+
+            s.getStudentBookings().add(sb);
+            sb.setStudent(s);
+
             ic.update(sb);
             refreshRoomHandler();
             return b.getId();
@@ -76,8 +94,17 @@ public class RoomHandler {
         if ( checkRoomTimeAvailable( r, st, et) ) {
             Booking b = new Booking(r.getNum(), st, et);
             IController ic = new Controller();
+
+            r.getBookings().add(b);
+            b.setRoom(r);
+
             ic.update(b);
+
             StaffBooking sb = new StaffBooking(b.getId(), s.getId());
+
+            s.getStaffBookings().add(sb);
+            sb.setStaff(s);
+
             ic.update(sb);
             refreshRoomHandler();
             return b.getId();
@@ -100,9 +127,17 @@ public class RoomHandler {
         if ( checkRoomTimeAvailable( r, st, et) ) {
             Booking b = new Booking(r.getNum(), st, et);
             IController ic = new Controller();
+
+            r.getBookings().add(b);
+            b.setRoom(r);
+
             ic.update(b);
+
             ModuleBooking mb = new ModuleBooking(b.getId(), m.getId());
-            ic.update(mb);
+
+            m.getModuleBookings().add(mb);
+            mb.setModule(m);
+
             refreshRoomHandler();
             return b.getId();
         }
