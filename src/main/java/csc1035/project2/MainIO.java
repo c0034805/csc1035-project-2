@@ -35,12 +35,11 @@ public class MainIO {
     }
 
     private void menu(){
-        System.out.println("""
-              1: Create a staff booking.
-              2: Create a student booking.
-              3: Update a room's details.
-              4: Quit.
-              """);
+        System.out.println( "1: Create a staff booking.\n" +
+                            "2: Create a student booking.\n" +
+                            "3: Update a room's details.\n" +
+                            "4: Quit."
+                          );
     }
 
     private void reserveStaff(){
