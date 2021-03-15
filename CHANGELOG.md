@@ -43,3 +43,4 @@
 * (ERICK) Created `staffRemoveModule()` method.
 * (ERICK) Take/teach removal checks if valid removal.
 * (ERICK) Take/teach addition checks correctly.
+* (ERICK) `studentRemoveModule()` makes use of removal check.
