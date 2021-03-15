@@ -41,3 +41,4 @@
 * (ERICK) Created `staffAddModule()` method.
 * (ERICK) Created `studentRemoveModule()` method.
 * (ERICK) Created `staffRemoveModule()` method.
+* (ERICK) Take/teach removal checks if valid removal.

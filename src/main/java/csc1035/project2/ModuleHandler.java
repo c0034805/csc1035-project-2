@@ -97,11 +97,16 @@ public class ModuleHandler {
      *
      * @param s Student to stop taking module.
      * @param m Module for student to stop taking.
+     * @return If removal was successful.
      */
-    public void removeStudentFromModule ( Students s, Modules m ) {
+    public boolean removeStudentFromModule ( Students s, Modules m ) {
         IController ic = new Controller();
-        s.getTake().remove( ic.getById( Take.class, m.getId() ) );
-        refreshModuleHandler();
+        if( s.getTake().contains( ic.getById( Take.class, m.getId()) ) ) {
+            s.getTake().remove(ic.getById(Take.class, m.getId()));
+            refreshModuleHandler();
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -109,11 +114,16 @@ public class ModuleHandler {
      *
      * @param s Staf to stop teaching module.
      * @param m Module for staff to stop teaching.
+     * @return If removal was successful.
      */
-    public void removeStaffFromModule ( Staff s, Modules m ) {
+    public boolean removeStaffFromModule ( Staff s, Modules m ) {
         IController ic = new Controller();
-        s.getTeach().remove( ic.getById( Teach.class, m.getId() ) );
-        refreshModuleHandler();
+        if( s.getTeach().contains( ic.getById( Teach.class, m.getId()) ) ) {
+            s.getTeach().remove(ic.getById(Teach.class, m.getId()));
+            refreshModuleHandler();
+            return true;
+        }
+        return false;
     }
 
     /**
