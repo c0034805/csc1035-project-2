@@ -37,3 +37,4 @@
 ##### v0.5 [15.03.2021]: Module Handling UI
 * (ERICK) Created `moduleOptions()` method.
 * (ERICK) `addStudent/StaffToModule()` now return booleans.
+* (ERICK) Created `studentAddModule()` method.
