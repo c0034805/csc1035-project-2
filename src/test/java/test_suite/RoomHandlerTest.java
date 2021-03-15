@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 
@@ -30,9 +31,9 @@ public class RoomHandlerTest {
     new Students("218577635","Farra","Pietroni",new ArrayList<>(),new ArrayList<>()),
     new Students("216365117","Clareta","Osmint",new ArrayList<>(),new ArrayList<>())};
 
-    ModuleRequirements[] requirements = {new ModuleRequirements("RSI3393",1,2,1,2),
-    new ModuleRequirements("BBU5808",1,2,2,2),
-    new ModuleRequirements("SAM0176",3,1,4,1)};
+    ModuleRequirements[] requirements = {new ModuleRequirements("RSI3393",1,2,1,2,new Date()),
+    new ModuleRequirements("BBU5808",1,2,2,2,new Date()),
+    new ModuleRequirements("SAM0176",3,1,4,1,new Date())};
 
     //year 3921 because it adds 1900 from it for some reason
     Timestamp day = new Timestamp(121, 6, 22,
