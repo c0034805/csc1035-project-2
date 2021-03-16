@@ -324,6 +324,23 @@ public class RoomHandlerTest {
      */
     @Test
     public void updateRoomDetailsCorrect(){
+        String type = "newer";
+        int cap = Integer.MAX_VALUE;
+        int sd_cap = Integer.MIN_VALUE;
+
+        handler.updateRoomDetails(rooms[0],rooms[0].getNum(),type,cap,sd_cap);
+
+        Room updated = (Room)controller.getById(Room.class,rooms[0].getNum());
+        Assertions.assertEquals(new Room(rooms[0].getNum(),type,cap,sd_cap,new ArrayList<Booking>()),updated);
+        Assertions.assertEquals(handler.getRooms().size(),3);
+
+    }
+
+    /**
+     * Method that checks if update room details updates the expected values, when ID is also updated
+     */
+    @Test
+    public void updateRoomDetailsCorrectID(){
         String num = "new";
         String type = "newer";
         int cap = Integer.MAX_VALUE;
@@ -333,6 +350,7 @@ public class RoomHandlerTest {
 
         Room updated = (Room)controller.getById(Room.class,num);
         Assertions.assertEquals(new Room(num,type,cap,sd_cap,new ArrayList<Booking>()),updated);
+        Assertions.assertEquals(handler.getRooms().size(),3);
 
     }
 
