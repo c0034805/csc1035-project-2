@@ -31,7 +31,7 @@ public class Room {
     @Column(name = "Social_Distancing_Capacity")
     private int sd_cap;
 
-    @OneToMany(mappedBy = "room")
+    @OneToMany(mappedBy = "room", fetch = FetchType.EAGER)
     private List<Booking> bookings;
 
     /**
