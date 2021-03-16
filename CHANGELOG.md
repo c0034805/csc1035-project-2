@@ -50,3 +50,6 @@
 
 ##### v0.6 [16.03.2021]: Test Feedback 
 * (ERICK) Module handler methods use`getModuleStudent/Staff()`.
+
+##### v0.61 [16.03.2021]: Room Booking Fixing
+* (ERICK) Booking class stops creating new row.

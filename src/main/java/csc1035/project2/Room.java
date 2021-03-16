@@ -22,7 +22,6 @@ public class Room {
     private String num;
 
     @Column(name = "Type")
-    // TODO: Stop using string IDs for things like this. This should be an enum or a class.
     private String type;
 
     @Column(name = "Max_Capacity")

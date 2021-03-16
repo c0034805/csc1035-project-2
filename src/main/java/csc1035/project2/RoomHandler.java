@@ -58,21 +58,16 @@ public class RoomHandler {
      */
     public String reserveRoomStudent ( Students s, Room r, Timestamp st, Timestamp et ) {
         if ( checkRoomTimeAvailable( r, st, et) ) {
-
-            Booking b = new Booking(r.getNum(), st, et);
             IController ic = new Controller();
 
-            r.getBookings().add(b);
-            b.setRoom(r);
-
-            ic.update(b);
+            Booking b = new Booking(st, et);
+            b.setRoom( r );
 
             StudentBooking sb = new StudentBooking(b.getId(), s.getId());
-
-            s.getStudentBookings().add(sb);
             sb.setStudent(s);
-
             ic.update(sb);
+
+            ic.update(b);
             refreshRoomHandler();
             return b.getId();
         }
@@ -92,7 +87,7 @@ public class RoomHandler {
      */
     public String reserveRoomStaff ( Staff s, Room r, Timestamp st, Timestamp et ) {
         if ( checkRoomTimeAvailable( r, st, et) ) {
-            Booking b = new Booking(r.getNum(), st, et);
+            Booking b = new Booking(st, et);
             IController ic = new Controller();
 
             r.getBookings().add(b);
@@ -125,7 +120,7 @@ public class RoomHandler {
      */
     public String reserveRoomModule ( Modules m, Room r, Timestamp st, Timestamp et ) {
         if ( checkRoomTimeAvailable( r, st, et) ) {
-            Booking b = new Booking(r.getNum(), st, et);
+            Booking b = new Booking(st, et);
             IController ic = new Controller();
 
             r.getBookings().add(b);
@@ -156,7 +151,7 @@ public class RoomHandler {
     public void bookingConfirmation ( String bt, Booking b ) {
         System.out.println( "Booking Confirmation: \n\n" +
                             "Booking Type: " + bt + "\n" +
-                            "Room: " + b.getNum() + "\n" +
+                            "Room: " + b.getRoom().getNum() + "\n" +
                             "Start Time: " + b.getStart() + "\n" +
                             "Finish Time: " + b.getEnd() + "\n" +
                             "Booking ID: " + b.getId() + "\n");
@@ -183,7 +178,7 @@ public class RoomHandler {
         List<Room> tmp = new ArrayList<>();
         for ( Room r : this.getRooms() ) {
             for ( Booking b : this.getBookings() ) {
-                if ( r.getNum() == b.getNum() ) {
+                if ( r.getNum() == b.getRoom().getNum() ) {
                     tmp.add( r );
                 }
             }
@@ -204,7 +199,7 @@ public class RoomHandler {
         List<Room> tmp = new ArrayList<>( this.getRooms() );
         for ( Room r : tmp ) {
             for ( Booking b : this.getBookings() ) {
-                if ( r.getNum() == b.getNum() && checkTimeAvailable( t, b.getStart(), b.getEnd() ) ) {
+                if ( r.getNum() == b.getRoom().getNum() && checkTimeAvailable( t, b.getStart(), b.getEnd() ) ) {
                     tmp.remove( r );
                 }
             }
@@ -257,7 +252,7 @@ public class RoomHandler {
      */
     public boolean checkRoomTimeAvailable ( Room r, Timestamp st, Timestamp et ) {
         for ( Booking b : this.getBookings() ) {
-            if ( b.getNum() == r.getNum() ) {
+            if ( b.getRoom().getNum() == r.getNum() ) {
                 if ( !checkTimeAvailable(st, b.getStart(), b.getEnd()) ) {
                     System.out.println( "Starting time " + st + " conflicts with booking with time " +
                                         b.getStart() + "-" + b.getEnd() );
