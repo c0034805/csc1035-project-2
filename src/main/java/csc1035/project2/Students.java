@@ -27,7 +27,7 @@ public class Students {
     @Column(name = "Last_Name", nullable = false)
     private String lastname;
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student", cascade=CascadeType.ALL)
     private List<StudentBooking> studentBookings;
 
     @OneToMany(mappedBy = "student")

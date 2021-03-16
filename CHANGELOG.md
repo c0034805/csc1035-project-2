@@ -53,3 +53,4 @@
 
 ##### v0.61 [16.03.2021]: Room Booking Fixing
 * (ERICK) Booking class stops creating new row.
+* (ERICK) Staff, students and modules cascade bookings when deleted.

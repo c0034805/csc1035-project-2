@@ -43,7 +43,7 @@ public class Modules {
     @JoinColumn(name = "ID", referencedColumnName = "Module_ID")
     private Teach teach;
 
-    @OneToMany(mappedBy = "module")
+    @OneToMany(mappedBy = "module", cascade=CascadeType.ALL)
     private List<ModuleBooking> moduleBookings;
 
     /**

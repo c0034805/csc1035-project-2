@@ -27,7 +27,7 @@ public class Staff{
     @Column(name = "Last_Name", nullable = false)
     private String lastname;
 
-    @OneToMany(mappedBy = "staff")
+    @OneToMany(mappedBy = "staff", cascade=CascadeType.ALL)
     private List<StaffBooking> staffBookings;
 
     @OneToMany(mappedBy = "staff")
