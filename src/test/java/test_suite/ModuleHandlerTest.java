@@ -27,9 +27,9 @@ public class ModuleHandlerTest extends MasterTest{
         List<Take> take = controller.getAll(Take.class);
 
         //checks that there is only 1 entry in that table
-        Assertions.assertEquals(take.size(),1);
-        Assertions.assertEquals(take.get(0).getSid(),students[0].getId());
-        Assertions.assertEquals(take.get(0).getMid(),modules[0].getId());
+        Assertions.assertEquals(1,take.size());
+        Assertions.assertEquals(students[0].getId(),take.get(0).getSid());
+        Assertions.assertEquals(modules[0].getId(),take.get(0).getMid());
     }
 
     /**
@@ -42,9 +42,9 @@ public class ModuleHandlerTest extends MasterTest{
         List<Take> take = controller.getAll(Take.class);
 
         //checks that there is only 1 entry in that table
-        Assertions.assertEquals(take.size(),1);
-        Assertions.assertEquals(take.get(0).getSid(),students[0].getId());
-        Assertions.assertEquals(take.get(0).getMid(),modules[0].getId());
+        Assertions.assertEquals(1,take.size());
+        Assertions.assertEquals(students[0].getId(),take.get(0).getSid());
+        Assertions.assertEquals(modules[0].getId(),take.get(0).getMid());
     }
 
     /**
@@ -60,7 +60,7 @@ public class ModuleHandlerTest extends MasterTest{
         List<Take> take = controller.getAll(Take.class);
 
         //checks that there is 4 entries
-        Assertions.assertEquals(take.size(),4);
+        Assertions.assertEquals(4, take.size());
 
 
         //checks that all entries present in the collection
@@ -83,9 +83,9 @@ public class ModuleHandlerTest extends MasterTest{
         List<Teach> teach = controller.getAll(Teach.class);
 
         //checks that there is only 1 entry in that table
-        Assertions.assertEquals(teach.size(),1);
-        Assertions.assertEquals(teach.get(0).getSid(),staff[0].getId());
-        Assertions.assertEquals(teach.get(0).getMid(),modules[0].getId());
+        Assertions.assertEquals(1,teach.size());
+        Assertions.assertEquals(staff[0].getId(),teach.get(0).getSid());
+        Assertions.assertEquals(modules[0].getId(),teach.get(0).getMid());
     }
 
     /**
@@ -98,9 +98,9 @@ public class ModuleHandlerTest extends MasterTest{
         List<Teach> teach = controller.getAll(Teach.class);
 
         //checks that there is only 1 entry in that table
-        Assertions.assertEquals(teach.size(),1);
-        Assertions.assertEquals(teach.get(0).getSid(),staff[0].getId());
-        Assertions.assertEquals(teach.get(0).getMid(),modules[0].getId());
+        Assertions.assertEquals(1,teach.size());
+        Assertions.assertEquals(staff[0].getId(),teach.get(0).getSid());
+        Assertions.assertEquals(modules[0].getId(),teach.get(0).getMid());
     }
 
     /**
@@ -116,7 +116,7 @@ public class ModuleHandlerTest extends MasterTest{
         List<Teach> teach = controller.getAll(Teach.class);
 
         //checks that there is 4 entries
-        Assertions.assertEquals(teach.size(),4);
+        Assertions.assertEquals(4,teach.size());
 
 
         //checks that all entries present in the collection
@@ -138,7 +138,7 @@ public class ModuleHandlerTest extends MasterTest{
         handler.removeStudentFromModule(students[0],modules[0]);
         List<Take> take = controller.getAll(Take.class);
 
-        Assertions.assertEquals(take.size(),0);
+        Assertions.assertEquals(0,take.size());
     }
 
     /**
@@ -153,9 +153,9 @@ public class ModuleHandlerTest extends MasterTest{
 
         List<Take> take = controller.getAll(Take.class);
 
-        Assertions.assertEquals(take.size(),1);
-        Assertions.assertEquals(take.get(0).getSid(),students[0].getId());
-        Assertions.assertEquals(take.get(0).getMid(),modules[0].getId());
+        Assertions.assertEquals(1,take.size());
+        Assertions.assertEquals(students[0].getId(),take.get(0).getSid());
+        Assertions.assertEquals(modules[0].getId(),take.get(0).getMid());
     }
 
     /**
@@ -167,7 +167,7 @@ public class ModuleHandlerTest extends MasterTest{
         handler.removeStaffFromModule(staff[0],modules[0]);
         List<Teach> teach = controller.getAll(Teach.class);
 
-        Assertions.assertEquals(teach.size(),0);
+        Assertions.assertEquals(0,teach.size());
     }
 
     /**
@@ -182,8 +182,8 @@ public class ModuleHandlerTest extends MasterTest{
 
         List<Teach> teach = controller.getAll(Teach.class);
 
-        Assertions.assertEquals(teach.size(),1);
-        Assertions.assertEquals(teach.get(0).getSid(),students[0].getId());
-        Assertions.assertEquals(teach.get(0).getMid(),modules[0].getId());
+        Assertions.assertEquals(1,teach.size());
+        Assertions.assertEquals(students[0].getId(),teach.get(0).getSid());
+        Assertions.assertEquals(modules[0].getId(),teach.get(0).getMid());
     }
 }
