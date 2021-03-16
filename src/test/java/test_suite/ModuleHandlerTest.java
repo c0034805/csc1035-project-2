@@ -73,4 +73,60 @@ public class ModuleHandlerTest extends MasterTest{
         Assertions.assertTrue(checker);
 
     }
+
+    /**
+     * Method that checks whether a correct entry in the Teach table is added
+     */
+    @Test
+    public void addStaffToModuleCorrect(){
+        handler.addStaffToModule(staff[0],modules[0] );
+        List<Teach> teach = controller.getAll(Teach.class);
+
+        //checks that there is only 1 entry in that table
+        Assertions.assertEquals(teach.size(),1);
+        Assertions.assertEquals(teach.get(0).getSid(),staff[0].getId());
+        Assertions.assertEquals(teach.get(0).getMid(),modules[0].getId());
+    }
+
+    /**
+     * Method that checks that duplicate entries to the Teach table are ignored
+     */
+    @Test
+    public void addStaffToModuleDuplicate(){
+        handler.addStaffToModule(staff[0],modules[0] );
+        handler.addStaffToModule(staff[0],modules[0] );
+        List<Teach> teach = controller.getAll(Teach.class);
+
+        //checks that there is only 1 entry in that table
+        Assertions.assertEquals(teach.size(),1);
+        Assertions.assertEquals(teach.get(0).getSid(),staff[0].getId());
+        Assertions.assertEquals(teach.get(0).getMid(),modules[0].getId());
+    }
+
+    /**
+     * Method that checks if the Teach table allows a multitude of values
+     */
+    @Test
+    public void addStaffToModuleMultipleEntries(){
+        handler.addStaffToModule(staff[0],modules[0] );
+        handler.addStaffToModule(staff[1],modules[0] );
+
+        handler.addStaffToModule(staff[0],modules[1] );
+        handler.addStaffToModule(staff[1],modules[1] );
+        List<Teach> teach = controller.getAll(Teach.class);
+
+        //checks that there is 4 entries
+        Assertions.assertEquals(teach.size(),4);
+
+
+        //checks that all entries present in the collection
+        //collection.contains uses equals(), so this should work
+        boolean checker = (teach.contains(new Teach(staff[0].getId(),modules[0].getId()))&&
+                teach.contains(new Teach(staff[0].getId(),modules[1].getId()))&&
+                teach.contains(new Teach(staff[1].getId(),modules[0].getId()))&&
+                teach.contains(new Teach(staff[1].getId(),modules[1].getId())));
+
+        Assertions.assertTrue(checker);
+
+    }
 }
