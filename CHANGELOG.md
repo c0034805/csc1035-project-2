@@ -47,3 +47,6 @@
 * (ERICK) `staffRemoveModule()` makes use of removal check.
 * (ERICK)  `menu()` no longer makes use of source 15.
 * (ERICK) Added `moduleOptions()` as selectable option.
+
+##### v0.6 [16.03.2021]: Test Feedback 
+* (ERICK) Module handler methods use`getModuleStudent/Staff()`.
