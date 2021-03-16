@@ -128,4 +128,26 @@ public class ModuleHandlerTest extends MasterTest{
 
         Assertions.assertTrue(checker);
     }
+
+    @Test
+    public void removeStudentFromModuleCorrect(){
+        handler.addStudentToModule(students[0],modules[0] );
+        handler.removeStudentFromModule(students[0],modules[0]);
+        List<Take> take = controller.getAll(Take.class);
+
+        Assertions.assertEquals(take.size(),0);
+    }
+
+    @Test
+    public void removeStudentFromModuleInvalid(){
+        handler.addStudentToModule(students[0],modules[0] );
+        handler.removeStudentFromModule(students[1],modules[0]);
+        handler.removeStudentFromModule(students[0],modules[1]);
+
+        List<Take> take = controller.getAll(Take.class);
+
+        Assertions.assertEquals(take.size(),1);
+        Assertions.assertEquals(take.get(0).getSid(),students[0].getId());
+        Assertions.assertEquals(take.get(0).getMid(),modules[0].getId());
+    }
 }
