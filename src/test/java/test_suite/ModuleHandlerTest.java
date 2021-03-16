@@ -127,6 +127,5 @@ public class ModuleHandlerTest extends MasterTest{
                 teach.contains(new Teach(staff[1].getId(),modules[1].getId())));
 
         Assertions.assertTrue(checker);
-
     }
 }
