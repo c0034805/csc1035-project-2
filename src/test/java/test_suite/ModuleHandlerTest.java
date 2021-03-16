@@ -129,6 +129,9 @@ public class ModuleHandlerTest extends MasterTest{
         Assertions.assertTrue(checker);
     }
 
+    /**
+     * Method to check if Remove student from module removes a student
+     */
     @Test
     public void removeStudentFromModuleCorrect(){
         handler.addStudentToModule(students[0],modules[0] );
@@ -138,11 +141,15 @@ public class ModuleHandlerTest extends MasterTest{
         Assertions.assertEquals(take.size(),0);
     }
 
+    /**
+     * Method to check that no change is made if removeStudentFromModule is called with invalid values
+     */
     @Test
     public void removeStudentFromModuleInvalid(){
         handler.addStudentToModule(students[0],modules[0] );
         handler.removeStudentFromModule(students[1],modules[0]);
         handler.removeStudentFromModule(students[0],modules[1]);
+        handler.removeStudentFromModule(students[1],modules[1]);
 
         List<Take> take = controller.getAll(Take.class);
 
