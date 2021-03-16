@@ -157,4 +157,33 @@ public class ModuleHandlerTest extends MasterTest{
         Assertions.assertEquals(take.get(0).getSid(),students[0].getId());
         Assertions.assertEquals(take.get(0).getMid(),modules[0].getId());
     }
+
+    /**
+     * Method to check if removeStaffFromModule removes staff
+     */
+    @Test
+    public void removeStaffFromModuleCorrect(){
+        handler.addStaffToModule(staff[0],modules[0] );
+        handler.removeStaffFromModule(staff[0],modules[0]);
+        List<Teach> teach = controller.getAll(Teach.class);
+
+        Assertions.assertEquals(teach.size(),0);
+    }
+
+    /**
+     * Method to check that no change is made if removeStaffFromModule is called with invalid values
+     */
+    @Test
+    public void removeStaffFromModuleInvalid(){
+        handler.addStaffToModule(staff[0],modules[0] );
+        handler.removeStaffFromModule(staff[1],modules[0]);
+        handler.removeStaffFromModule(staff[0],modules[1]);
+        handler.removeStaffFromModule(staff[1],modules[1]);
+
+        List<Teach> teach = controller.getAll(Teach.class);
+
+        Assertions.assertEquals(teach.size(),1);
+        Assertions.assertEquals(teach.get(0).getSid(),students[0].getId());
+        Assertions.assertEquals(teach.get(0).getMid(),modules[0].getId());
+    }
 }
