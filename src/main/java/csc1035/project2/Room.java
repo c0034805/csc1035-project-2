@@ -30,7 +30,7 @@ public class Room {
     @Column(name = "Social_Distancing_Capacity")
     private int sd_cap;
 
-    @OneToMany(mappedBy = "room")
+    @OneToMany(mappedBy = "room", cascade=CascadeType.ALL)
     private List<Booking> bookings;
 
     /**
