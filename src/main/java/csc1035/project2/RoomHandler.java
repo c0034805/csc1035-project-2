@@ -222,12 +222,16 @@ public class RoomHandler {
      * @param sd_cap Social distanced person cap to update to.
      */
     public void updateRoomDetails ( Room r, String num, String type, int cap, int sd_cap ) {
+        String oldNum = r.getNum();
         r.setNum( num );
         r.setType( type );
         r.setCap( cap );
         r.setSd_cap( sd_cap );
         IController ic = new Controller();
         ic.update( r );
+        if(!oldNum.equals(num)){
+            ic.delete(Room.class, oldNum);
+        }
         refreshRoomHandler();
     }
 
