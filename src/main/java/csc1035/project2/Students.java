@@ -29,7 +29,7 @@ public class Students {
     @Column(name = "Last_Name", nullable = false)
     private String lastname;
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
     private List<StudentBooking> studentBookings;
 
     @ManyToMany
