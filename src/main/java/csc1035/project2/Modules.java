@@ -41,7 +41,7 @@ public class Modules {
     private Set<Take> takes = new HashSet<>();
 
     @OneToMany(mappedBy = "modules")
-    private Set<Teach> staff = new HashSet<>();
+    private Set<Teach> teaches = new HashSet<>();
 
     @OneToMany(mappedBy = "module", fetch = FetchType.EAGER)
     private List<ModuleBooking> moduleBookings;
@@ -152,4 +152,19 @@ public class Modules {
         return moduleRequirements;
     }
 
+    public Set<Take> getTakes() {
+        return takes;
+    }
+
+    public void setTakes(Set<Take> takes) {
+        this.takes = takes;
+    }
+
+    public Set<Teach> getTeaches() {
+        return teaches;
+    }
+
+    public void setTeaches(Set<Teach> teaches) {
+        this.teaches = teaches;
+    }
 }
