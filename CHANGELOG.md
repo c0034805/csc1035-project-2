@@ -47,3 +47,27 @@
 * (ERICK) `staffRemoveModule()` makes use of removal check.
 * (ERICK)  `menu()` no longer makes use of source 15.
 * (ERICK) Added `moduleOptions()` as selectable option.
+
+##### v0.6 [16.03.2021]: Test Feedback 
+* (ERICK) Module handler methods use`getModuleStudent/Staff()`.
+
+##### v0.61 [16.03.2021]: Room Booking Fixing
+* (ERICK) Booking class stops creating new row.
+* (ERICK) Staff, students and modules cascade bookings when deleted.
+* (ERICK) Rooms cascade bookings when deleted.
+
+##### v0.62 [17.03.2021]: 
+* (ERICK) Created `entityBooking()` method.
+* (ERICK) Updated reservation methods according to master branch. 
+* (ERICK) Fixed ManyToMany relationships with module association.
+* (ERICK) Fixed `addStudent/StaffToModule` according to class change.
+* (ERICK) Fixed `addStudent/StaffFromModule` according to class change.
+* (ERICK) Take/Teach make use of embedded ID.
+* (ERICK) Added constructor methods to Take and Teach. 
+* (ERICK) Added getter/setter methods for Teach/Take in module class.
+* (ERICK) Fixed `addStudent/StaffToModule` according to embedded Teach/Take.
+* (ERICK) Changed List to Set to avoid `MultipleBagFetchException`.
+* (ERICK) Teach/Take fetching set to EAGER.
+* (ERICK) Take/Teach creation finally fixed.
+* (ERICK) `student/staffRemoveModule` display repositioned.
+* (ERICK) Take/Teach removal finally fixed.

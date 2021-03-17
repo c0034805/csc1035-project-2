@@ -1,8 +1,13 @@
 package csc1035.project2;
 
+import org.hibernate.Session;
+
+import javax.persistence.Query;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * ModuleHandler class to manage student and staff relationships with modules.
@@ -41,6 +46,7 @@ public class ModuleHandler {
         this.setStaff( new ArrayList<Staff>(ic.getAll(Staff.class)) );
         this.setTakes( new ArrayList<Take>(ic.getAll(Take.class)) );
         this.setTeaches( new ArrayList<Teach>(ic.getAll(Teach.class)) );
+
     }
 
     /**
@@ -55,11 +61,9 @@ public class ModuleHandler {
      */
     public boolean addStudentToModule ( Students s, Modules m ) {
         IController ic = new Controller();
-        if( !s.getTake().contains( ic.getById( Take.class, m.getId()) ) ) {
-            Take t = new Take(s.getId(), m.getId());
+        if( !m.getModuleStudents().contains( s ) ) {
 
-            s.getTake().add(t);
-            t.setStudent(s);
+            Take t = new Take( s, m );
             ic.update(t);
 
             refreshModuleHandler();
@@ -80,12 +84,11 @@ public class ModuleHandler {
      */
     public boolean addStaffToModule ( Staff s, Modules m ) {
         IController ic = new Controller();
-        if( !s.getTeach().contains( ic.getById( Teach.class, m.getId()) ) ) {
-            Teach t = new Teach(s.getId(), m.getId());
+        if( !m.getModuleStaff().contains( s ) ) {
 
-            s.getTeach().add(t);
-            t.setStaff(s);
+            Teach t = new Teach( s, m );
             ic.update(t);
+
             refreshModuleHandler();
             return true;
         }
@@ -100,13 +103,19 @@ public class ModuleHandler {
      * @return If removal was successful.
      */
     public boolean removeStudentFromModule ( Students s, Modules m ) {
+        int checker = takes.size();
         IController ic = new Controller();
-        if( s.getTake().contains( ic.getById( Take.class, m.getId()) ) ) {
-            s.getTake().remove(ic.getById(Take.class, m.getId()));
-            refreshModuleHandler();
-            return true;
-        }
-        return false;
+
+        Session ses = HibernateUtil.getSessionFactory().openSession();
+        ses.beginTransaction();
+        Query q = ses.createQuery("DELETE FROM Take WHERE modules_ID = ?1 AND students_ID = ?2");
+        q.setParameter(1, m.getId());
+        q.setParameter(2, s.getId());
+        q.executeUpdate();
+        ses.getTransaction().commit();
+        ses.close();
+        refreshModuleHandler();
+        return (takes.size() < checker);
     }
 
     /**
@@ -117,15 +126,20 @@ public class ModuleHandler {
      * @return If removal was successful.
      */
     public boolean removeStaffFromModule ( Staff s, Modules m ) {
+        int checker = teaches.size();
         IController ic = new Controller();
-        if( s.getTeach().contains( ic.getById( Teach.class, m.getId()) ) ) {
-            s.getTeach().remove(ic.getById(Teach.class, m.getId()));
-            refreshModuleHandler();
-            return true;
-        }
-        return false;
-    }
 
+        Session ses = HibernateUtil.getSessionFactory().openSession();
+        ses.beginTransaction();
+        Query q = ses.createQuery("DELETE FROM Teach WHERE modules_ID = ?1 AND staff_ID = ?2");
+        q.setParameter(1, m.getId());
+        q.setParameter(2, s.getId());
+        q.executeUpdate();
+        ses.getTransaction().commit();
+        ses.close();
+        refreshModuleHandler();
+        return (teaches.size() < checker);
+    }
     /**
      * <code>modules</code> getter method.
      *
@@ -215,4 +229,5 @@ public class ModuleHandler {
     public void setTeaches(List<Teach> teaches) {
         this.teaches = teaches;
     }
+
 }

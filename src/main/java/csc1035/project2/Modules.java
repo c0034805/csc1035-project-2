@@ -1,8 +1,7 @@
 package csc1035.project2;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * A persistent class made to handle the Modules table.
@@ -35,16 +34,14 @@ public class Modules {
     @JoinColumn(name = "ID", referencedColumnName = "ID")
     private ModuleRequirements moduleRequirements;
 
-    @OneToOne
-    @JoinColumn(name = "ID", referencedColumnName = "Module_ID")
-    private Take take;
+    @OneToMany( mappedBy = "modules" , fetch = FetchType.EAGER)
+    private Set<Take> takes = new HashSet<>();
 
-    @OneToOne
-    @JoinColumn(name = "ID", referencedColumnName = "Module_ID")
-    private Teach teach;
+    @OneToMany(mappedBy = "modules", fetch = FetchType.EAGER)
+    private Set<Teach> teaches = new HashSet<>();
 
     @OneToMany(mappedBy = "module", fetch = FetchType.EAGER)
-    private List<ModuleBooking> moduleBookings;
+    private Set<ModuleBooking> moduleBookings = new HashSet<>();
 
     /**
      * The constructor that connects the parameter values with the field
@@ -55,7 +52,7 @@ public class Modules {
      * @param credits Credits for the module.
      * @param weeks Number of weeks the module runs for.
      */
-    public Modules(String id, String name, int credits, int weeks, List<ModuleBooking> moduleBookings) {
+    public Modules(String id, String name, int credits, int weeks, Set<ModuleBooking> moduleBookings) {
         this.id = id;
         this.name = name;
         this.credits = credits;
@@ -74,15 +71,25 @@ public class Modules {
      * @return returns true if all attributes in both objects are the same, or if they have the same memory address
      */
     @Override
-    public boolean equals(Object o){
-        if (this==o) return true;
-        if (o == null || o.getClass() != Modules.class) return false;
-        Modules m = (Modules) o;
-        return this.id.equals(m.getId()) &&
-                this.name.equals(m.getName()) &&
-                this.credits == m.getCredits() &&
-                this.weeks == m.getWeeks();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Modules modules = (Modules) o;
+        return credits == modules.credits &&
+                weeks == modules.weeks &&
+                Objects.equals(id, modules.id) &&
+                Objects.equals(name, modules.name) &&
+                Objects.equals(moduleRequirements, modules.moduleRequirements) &&
+                Objects.equals(takes, modules.takes) &&
+                Objects.equals(teaches, modules.teaches) &&
+                Objects.equals(moduleBookings, modules.moduleBookings);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, credits, weeks, moduleRequirements, takes, teaches, moduleBookings);
+    }
+
 
     public String getId() {
         return id;
@@ -120,8 +127,8 @@ public class Modules {
         List<Students> s = new ArrayList<>();
         IController ic = new Controller();
         for(Take t : (List<Take>)ic.getAll(Take.class)) {
-            if(t.getMid().equals(getId())) {
-                s.add((Students)ic.getById(Students.class, t.getSid()));
+            if(t.getId().getMid().equals(getId())) {
+                s.add((Students)ic.getById(Students.class, t.getId().getSid()));
             }
         }
 
@@ -132,23 +139,39 @@ public class Modules {
         List<Staff> s = new ArrayList<>();
         IController ic = new Controller();
         for(Teach t : (List<Teach>)ic.getAll(Teach.class)) {
-            if(t.getMid().equals(getId())) {
-                s.add((Staff)ic.getById(Staff.class, t.getSid()));
+            if(t.getId().getMid().equals(getId())) {
+                s.add((Staff)ic.getById(Staff.class, t.getId().getSid()));
             }
         }
 
         return s;
     }
 
-    public List<ModuleBooking> getModuleBookings() {
+    public Set<ModuleBooking> getModuleBookings() {
         return moduleBookings;
     }
 
-    public void setModuleBookings(List<ModuleBooking> moduleBookings) {
+    public void setModuleBookings(Set<ModuleBooking> moduleBookings) {
         this.moduleBookings = moduleBookings;
     }
 
     public ModuleRequirements getModuleRequirements() {
         return moduleRequirements;
+    }
+
+    public Set<Take> getTakes() {
+        return takes;
+    }
+
+    public void setTakes(Set<Take> takes) {
+        this.takes = takes;
+    }
+
+    public Set<Teach> getTeaches() {
+        return teaches;
+    }
+
+    public void setTeaches(Set<Teach> teaches) {
+        this.teaches = teaches;
     }
 }
