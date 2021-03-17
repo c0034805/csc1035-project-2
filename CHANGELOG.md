@@ -71,3 +71,4 @@
 * (ERICK) Take/Teach creation finally fixed.
 * (ERICK) `student/staffRemoveModule` display repositioned.
 * (ERICK) Take/Teach removal finally fixed.
+* (ERICK) Module handler test updated to match embedded classes.
