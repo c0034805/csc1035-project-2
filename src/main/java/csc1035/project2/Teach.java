@@ -27,7 +27,6 @@ public class Teach {
     private String sid;
 
     @ManyToMany(mappedBy = "modules")
-    @JoinColumn(nullable = false,insertable = false, updatable = false)
     private Set<Staff> staff = new HashSet<>();
 
     @OneToOne(mappedBy = "teach")
