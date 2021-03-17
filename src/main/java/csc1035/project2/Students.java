@@ -3,6 +3,7 @@ package csc1035.project2;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -61,12 +62,22 @@ public class Students {
      * @param o The object for comparison
      * @return returns true if all attributes in both objects are the same, or if they have the same memory address
      */
+
     @Override
-    public boolean equals(Object o){
-        if (this==o) return true;
-        if (o == null || o.getClass() != Staff.class) return false;
-        Students s = (Students) o;
-        return this.id.equals(s.getId()) && this.firstname.equals(s.getFirstname()) && this.lastname.equals(s.getLastname());
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Students students = (Students) o;
+        return Objects.equals(id, students.id) &&
+                Objects.equals(firstname, students.firstname) &&
+                Objects.equals(lastname, students.lastname) &&
+                Objects.equals(studentBookings, students.studentBookings) &&
+                Objects.equals(takes, students.takes);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstname, lastname, studentBookings, takes);
     }
 
     public String getId() {

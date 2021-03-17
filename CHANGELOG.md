@@ -68,3 +68,4 @@
 * (ERICK) Fixed `addStudent/StaffToModule` according to embedded Teach/Take.
 * (ERICK) Changed List to Set to avoid `MultipleBagFetchException`.
 * (ERICK) Teach/Take fetching set to EAGER.
+* (ERICK) Take/Teach creation finally fixed.

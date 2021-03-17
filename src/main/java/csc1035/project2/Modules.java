@@ -1,10 +1,7 @@
 package csc1035.project2;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * A persistent class made to handle the Modules table.
@@ -74,15 +71,25 @@ public class Modules {
      * @return returns true if all attributes in both objects are the same, or if they have the same memory address
      */
     @Override
-    public boolean equals(Object o){
-        if (this==o) return true;
-        if (o == null || o.getClass() != Modules.class) return false;
-        Modules m = (Modules) o;
-        return this.id.equals(m.getId()) &&
-                this.name.equals(m.getName()) &&
-                this.credits == m.getCredits() &&
-                this.weeks == m.getWeeks();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Modules modules = (Modules) o;
+        return credits == modules.credits &&
+                weeks == modules.weeks &&
+                Objects.equals(id, modules.id) &&
+                Objects.equals(name, modules.name) &&
+                Objects.equals(moduleRequirements, modules.moduleRequirements) &&
+                Objects.equals(takes, modules.takes) &&
+                Objects.equals(teaches, modules.teaches) &&
+                Objects.equals(moduleBookings, modules.moduleBookings);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, credits, weeks, moduleRequirements, takes, teaches, moduleBookings);
+    }
+
 
     public String getId() {
         return id;

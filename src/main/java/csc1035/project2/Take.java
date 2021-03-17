@@ -96,18 +96,18 @@ public class Take {
            this.mid = mid;
        }
 
-       @Override
-       public boolean equals(Object o) {
-           if (this == o) return true;
-           if (o == null || getClass() != o.getClass()) return false;
-           TakeID takeID = (TakeID) o;
-           return Objects.equals(sid, takeID.sid) &&
-                   Objects.equals(mid, takeID.mid);
-       }
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            TakeID takeID = (TakeID) o;
+            return Objects.equals(sid, takeID.sid) &&
+                    Objects.equals(mid, takeID.mid);
+        }
 
-       @Override
-       public int hashCode() {
-           return Objects.hash(sid, mid);
-       }
-   }
+        @Override
+        public int hashCode() {
+            return Objects.hash(sid, mid);
+        }
+    }
 }
