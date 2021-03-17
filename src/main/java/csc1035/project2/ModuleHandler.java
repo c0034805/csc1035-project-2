@@ -1,8 +1,11 @@
 package csc1035.project2;
 
+import org.hibernate.Session;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * ModuleHandler class to manage student and staff relationships with modules.
@@ -58,9 +61,17 @@ public class ModuleHandler {
         if( !m.getModuleStudents().contains( s ) ) {
             Take t = new Take(s.getId(), m.getId());
 
-            s.getTake().add(t);
-            t.setStudent(s);
-            ic.update(t);
+            Session ses = HibernateUtil.getSessionFactory().openSession();
+            ses.beginTransaction();
+            ses.persist( s );
+            ses.persist( t );
+
+            Set<Modules> tmp = s.getModules();
+            tmp.add( m );
+            s.setModules( tmp );
+            ses.persist( s );
+            ses.getTransaction().commit();
+            ses.close();
 
             refreshModuleHandler();
             return true;
@@ -83,9 +94,18 @@ public class ModuleHandler {
         if( !m.getModuleStaff().contains( s ) ) {
             Teach t = new Teach(s.getId(), m.getId());
 
-            s.getTeach().add(t);
-            t.setStaff(s);
-            ic.update(t);
+            Session ses = HibernateUtil.getSessionFactory().openSession();
+            ses.beginTransaction();
+            ses.persist( s );
+            ses.persist( t );
+
+            Set<Modules> tmp = s.getModules();
+            tmp.add( m );
+            s.setModules( tmp );
+            ses.persist( s );
+            ses.getTransaction().commit();
+            ses.close();
+
             refreshModuleHandler();
             return true;
         }
