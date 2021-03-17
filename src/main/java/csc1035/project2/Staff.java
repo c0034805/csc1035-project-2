@@ -1,7 +1,9 @@
 package csc1035.project2;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * A persistent class made to handle the Staff table.
@@ -30,8 +32,13 @@ public class Staff{
     @OneToMany(mappedBy = "staff")
     private List<StaffBooking> staffBookings;
 
-    @OneToMany(mappedBy = "staff")
-    private List<Teach> teach;
+    @ManyToMany
+    @JoinTable(
+            name = "Teach",
+            joinColumns = {@JoinColumn(name = "Staff_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "Module_ID")}
+    )
+    private Set<Modules> modules = new HashSet<>();
 
     /**
      * The constructor that connects the parameter values with the field
@@ -42,12 +49,11 @@ public class Staff{
      * @param lastname The staff member's last name.
      */
     public Staff(String id, String firstname, String lastname,
-                 List<StaffBooking> staffBookings, List<Teach> teach) {
+                 List<StaffBooking> staffBookings) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.staffBookings = staffBookings;
-        this.teach = teach;
     }
 
     /**
@@ -100,11 +106,11 @@ public class Staff{
         this.staffBookings = staffBookings;
     }
 
-    public List<Teach> getTeach() {
-        return teach;
+    public Set<Modules> getModules() {
+        return modules;
     }
 
-    public void setTeach(List<Teach> teach) {
-        this.teach = teach;
+    public void setModules(Set<Modules> modules) {
+        this.modules = modules;
     }
 }
