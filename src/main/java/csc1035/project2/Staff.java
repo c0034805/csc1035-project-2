@@ -30,7 +30,7 @@ public class Staff{
     private String lastname;
 
     @OneToMany(mappedBy = "staff", fetch = FetchType.EAGER)
-    private List<StaffBooking> staffBookings;
+    private Set<StaffBooking> staffBookings;
 
     @OneToMany( mappedBy = "staff" )
     private Set<Teach> teaches = new HashSet<>();
@@ -44,7 +44,7 @@ public class Staff{
      * @param lastname The staff member's last name.
      */
     public Staff(String id, String firstname, String lastname,
-                 List<StaffBooking> staffBookings) {
+                 Set<StaffBooking> staffBookings) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -93,11 +93,11 @@ public class Staff{
         this.lastname = lastname;
     }
 
-    public List<StaffBooking> getStaffBookings() {
+    public Set<StaffBooking> getStaffBookings() {
         return staffBookings;
     }
 
-    public void setStaffBookings(List<StaffBooking> staffBookings) {
+    public void setStaffBookings(Set<StaffBooking> staffBookings) {
         this.staffBookings = staffBookings;
     }
 

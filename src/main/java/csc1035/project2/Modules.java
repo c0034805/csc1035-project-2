@@ -44,7 +44,7 @@ public class Modules {
     private Set<Teach> teaches = new HashSet<>();
 
     @OneToMany(mappedBy = "module", fetch = FetchType.EAGER)
-    private List<ModuleBooking> moduleBookings;
+    private Set<ModuleBooking> moduleBookings = new HashSet<>();
 
     /**
      * The constructor that connects the parameter values with the field
@@ -55,7 +55,7 @@ public class Modules {
      * @param credits Credits for the module.
      * @param weeks Number of weeks the module runs for.
      */
-    public Modules(String id, String name, int credits, int weeks, List<ModuleBooking> moduleBookings) {
+    public Modules(String id, String name, int credits, int weeks, Set<ModuleBooking> moduleBookings) {
         this.id = id;
         this.name = name;
         this.credits = credits;
@@ -140,11 +140,11 @@ public class Modules {
         return s;
     }
 
-    public List<ModuleBooking> getModuleBookings() {
+    public Set<ModuleBooking> getModuleBookings() {
         return moduleBookings;
     }
 
-    public void setModuleBookings(List<ModuleBooking> moduleBookings) {
+    public void setModuleBookings(Set<ModuleBooking> moduleBookings) {
         this.moduleBookings = moduleBookings;
     }
 
