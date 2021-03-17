@@ -55,3 +55,6 @@
 * (ERICK) Booking class stops creating new row.
 * (ERICK) Staff, students and modules cascade bookings when deleted.
 * (ERICK) Rooms cascade bookings when deleted.
+
+##### v0.62 [17.03.2021]: 
+* (ERICK) Created `entityBooking()` method.

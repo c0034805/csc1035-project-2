@@ -1,5 +1,7 @@
 package csc1035.project2;
 
+import org.hibernate.Session;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +46,7 @@ public class RoomHandler {
         this.setStudentBookings( new ArrayList<StudentBooking>(ic.getAll(StudentBooking.class)) );
 
     }
-
+    //TODO: Please someone sort the persistent classes out.
     /**
      * Method to reserve a room for a student.
      *
@@ -58,16 +60,14 @@ public class RoomHandler {
      */
     public String reserveRoomStudent ( Students s, Room r, Timestamp st, Timestamp et ) {
         if ( checkRoomTimeAvailable( r, st, et) ) {
-            IController ic = new Controller();
 
             Booking b = new Booking(st, et);
             b.setRoom( r );
 
             StudentBooking sb = new StudentBooking(b.getId(), s.getId());
             sb.setStudent(s);
-            ic.update(sb);
+            updateClasses( b, sb );
 
-            ic.update(b);
             refreshRoomHandler();
             return b.getId();
         }
@@ -88,19 +88,12 @@ public class RoomHandler {
     public String reserveRoomStaff ( Staff s, Room r, Timestamp st, Timestamp et ) {
         if ( checkRoomTimeAvailable( r, st, et) ) {
             Booking b = new Booking(st, et);
-            IController ic = new Controller();
-
-            r.getBookings().add(b);
-            b.setRoom(r);
-
-            ic.update(b);
+            b.setRoom( r );
 
             StaffBooking sb = new StaffBooking(b.getId(), s.getId());
-
-            s.getStaffBookings().add(sb);
             sb.setStaff(s);
+            updateClasses( b, sb );
 
-            ic.update(sb);
             refreshRoomHandler();
             return b.getId();
         }
@@ -121,22 +114,25 @@ public class RoomHandler {
     public String reserveRoomModule ( Modules m, Room r, Timestamp st, Timestamp et ) {
         if ( checkRoomTimeAvailable( r, st, et) ) {
             Booking b = new Booking(st, et);
-            IController ic = new Controller();
-
-            r.getBookings().add(b);
             b.setRoom(r);
 
-            ic.update(b);
-
             ModuleBooking mb = new ModuleBooking(b.getId(), m.getId());
-
-            m.getModuleBookings().add(mb);
             mb.setModule(m);
+            updateClasses( b, mb );
 
             refreshRoomHandler();
             return b.getId();
         }
         return "";
+    }
+    //Method specifically to persist bookings in correct order.
+    private <T> void updateClasses( Booking b, Object entityBooking ) {
+        Session ses = HibernateUtil.getSessionFactory().openSession();
+        ses.beginTransaction();
+        ses.persist( entityBooking );
+        ses.persist( b );
+        ses.getTransaction().commit();
+        ses.close();
     }
 
     /**
