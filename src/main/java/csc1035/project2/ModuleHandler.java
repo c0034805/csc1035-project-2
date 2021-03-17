@@ -4,6 +4,7 @@ import org.hibernate.Session;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -61,7 +62,9 @@ public class ModuleHandler {
         IController ic = new Controller();
         if( !m.getModuleStudents().contains( s ) ) {
 
-            Set<Modules> tmp = s.getModules();
+            Take t = new Take( s, m );
+            Set<Take> tmp = s.getTakes();
+
             tmp.add( m );
             s.setModules( tmp );
             ic.update( s );

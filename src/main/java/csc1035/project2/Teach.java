@@ -32,6 +32,15 @@ public class Teach {
     @MapsId( "mid" )
     private Modules modules;
 
+    public Teach() {
+
+    }
+
+    public Teach ( Staff s, Modules m ) {
+        this.staff = s;
+        this.modules = m;
+    }
+
     public TeachID getId() {
         return id;
     }

@@ -32,6 +32,14 @@ public class Take {
     @MapsId( "mid" )
     private Modules modules;
 
+    public Take() {
+
+    }
+
+    public Take ( Students s, Modules m ) {
+        this.students = s;
+        this.modules = m;
+    }
     public TakeID getId() {
         return id;
     }
