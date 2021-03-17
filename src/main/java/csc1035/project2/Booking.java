@@ -38,7 +38,7 @@ public class Booking {
     private Timestamp end;
 
     @ManyToOne
-    @JoinColumn(nullable = false, insertable = false, updatable = false)
+    @JoinColumn(nullable = false)
     private Room room;
 
     @OneToOne
