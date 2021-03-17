@@ -284,8 +284,8 @@ public class MainIO {
             Students student = (Students) ic.getById(Students.class, sid);
 
             System.out.print("Which of the following modules would you like to quit?\nPlease enter module ID:");
-            for ( Take t : student.getTake() ) {
-                Modules tmpModule = (Modules) ic.getById(Modules.class, t.getMid());
+            for ( Take t : student.getTakes() ) {
+                Modules tmpModule = (Modules) ic.getById(Modules.class, t.getId().getMid());
                 System.out.println( tmpModule.getId() + " - " + tmpModule.getName() );
             }
             String mid = sc.nextLine();
@@ -320,8 +320,8 @@ public class MainIO {
 
             System.out.print("Which of the following modules would you like to stop teaching?\n" +
                              "Please enter module ID:");
-            for ( Teach t : staff.getTeach() ) {
-                Modules tmpModule = (Modules) ic.getById(Modules.class, t.getMid());
+            for ( Teach t : staff.getTeaches() ) {
+                Modules tmpModule = (Modules) ic.getById(Modules.class, t.getId().getMid());
                 System.out.println( tmpModule.getId() + " - " + tmpModule.getName() );
             }
             String mid = sc.nextLine();

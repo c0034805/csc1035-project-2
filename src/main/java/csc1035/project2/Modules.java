@@ -37,11 +37,11 @@ public class Modules {
     @JoinColumn(name = "ID", referencedColumnName = "ID")
     private ModuleRequirements moduleRequirements;
 
-    @ManyToMany(mappedBy = "modules")
-    private Set<Students> students = new HashSet<>();
+    @OneToMany( mappedBy = "modules" )
+    private Set<Take> takes = new HashSet<>();
 
-    @ManyToMany(mappedBy = "modules")
-    private Set<Staff> staff = new HashSet<>();
+    @OneToMany(mappedBy = "modules")
+    private Set<Teach> staff = new HashSet<>();
 
     @OneToMany(mappedBy = "module", fetch = FetchType.EAGER)
     private List<ModuleBooking> moduleBookings;
@@ -120,8 +120,8 @@ public class Modules {
         List<Students> s = new ArrayList<>();
         IController ic = new Controller();
         for(Take t : (List<Take>)ic.getAll(Take.class)) {
-            if(t.getMid().equals(getId())) {
-                s.add((Students)ic.getById(Students.class, t.getSid()));
+            if(t.getId().getMid().equals(getId())) {
+                s.add((Students)ic.getById(Students.class, t.getId().getSid()));
             }
         }
 
@@ -132,8 +132,8 @@ public class Modules {
         List<Staff> s = new ArrayList<>();
         IController ic = new Controller();
         for(Teach t : (List<Teach>)ic.getAll(Teach.class)) {
-            if(t.getMid().equals(getId())) {
-                s.add((Staff)ic.getById(Staff.class, t.getSid()));
+            if(t.getId().getMid().equals(getId())) {
+                s.add((Staff)ic.getById(Staff.class, t.getId().getSid()));
             }
         }
 

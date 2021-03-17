@@ -44,6 +44,7 @@ public class ModuleHandler {
         this.setStaff( new ArrayList<Staff>(ic.getAll(Staff.class)) );
         this.setTakes( new ArrayList<Take>(ic.getAll(Take.class)) );
         this.setTeaches( new ArrayList<Teach>(ic.getAll(Teach.class)) );
+
     }
 
     /**
@@ -138,7 +139,6 @@ public class ModuleHandler {
         }
         return false;
     }
-
     /**
      * <code>modules</code> getter method.
      *
@@ -218,6 +218,15 @@ public class ModuleHandler {
      */
     public void setTakes(List<Take> takes) {
         this.takes = takes;
+    }
+
+    /**
+     * <code>teaches</code> getter method.
+     *
+     * @param teaches New staff-module relationship list.
+     */
+    public void setTeaches(List<Teach> teaches) {
+        this.teaches = teaches;
     }
 
     /**

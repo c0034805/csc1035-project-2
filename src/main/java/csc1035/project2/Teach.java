@@ -1,7 +1,9 @@
 package csc1035.project2;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -19,78 +21,85 @@ import java.util.Set;
 @Entity
 @Table(name = "Teach")
 public class Teach {
-    @Id
-    @Column(name = "Module_ID", nullable = false)
-    private String mid;
+    @EmbeddedId
+    private TeachID id = new TeachID();
 
-    @Column(name = "Staff_ID", nullable = false)
-    private String sid;
+    @ManyToOne
+    @MapsId( "sid" )
+    private Staff staff;
 
-    //@ManyToMany(mappedBy = "modules")
-    //private Set<Staff> staff = new HashSet<>();
+    @ManyToOne
+    @MapsId( "mid" )
+    private Modules modules;
 
-    //@OneToOne(mappedBy = "teach")
-    //private Modules module;
-
-    /**
-     * The constructor that connects the parameter values with the field
-     * variables.
-     *
-     * @param sid The staff ID.
-     * @param mid The module ID.
-     */
-    public Teach(String sid, String mid) {
-        this.sid = sid;
-        this.mid = mid;
+    public TeachID getId() {
+        return id;
     }
 
-    /**
-     * The default constructor for Hibernate.
-     */
-    public Teach() {
-    }
-
-    /**
-     * @param o The object for comparison
-     * @return returns true if all attributes in both objects are the same, or if they have the same memory address
-     */
-    @Override
-    public boolean equals(Object o){
-        if (this==o) return true;
-        if (o == null || o.getClass() != Teach.class) return false;
-        Teach t = (Teach) o;
-        return this.mid.equals(t.getMid()) && this.sid.equals(t.getSid());
-    }
-
-    public String getSid() {
-        return sid;
-    }
-
-    public void setSid(String sid) {
-        this.sid = sid;
-    }
-
-    public String getMid() {
-        return mid;
-    }
-
-    public void setMid(String mid) {
-        this.mid = mid;
-    }
-
-    public Set<Staff> getStaff() {
+    public Staff getStaff() {
         return staff;
     }
 
-    public void setStaff(Set<Staff> staff) {
+    public Modules getModules() {
+        return modules;
+    }
+
+    public void setId(TeachID id) {
+        this.id = id;
+    }
+
+    public void setStaff(Staff staff) {
         this.staff = staff;
     }
 
-    public Modules getModule() {
-        return module;
+    public void setModules(Modules modules) {
+        this.modules = modules;
     }
 
-    public void setModule(Modules module) {
-        this.module = module;
+    @Embeddable
+    public static class TeachID implements Serializable {
+
+        private String sid;
+        private String mid;
+
+        public TeachID() {
+
+        }
+
+        public TeachID ( String sid, String mid ) {
+            super();
+            this.sid = sid;
+            this.mid = mid;
+        }
+
+        public String getSid() {
+            return sid;
+        }
+
+        public String getMid() {
+            return mid;
+        }
+
+        public void setSid(String sid) {
+            this.sid = sid;
+        }
+
+        public void setMid(String mid) {
+            this.mid = mid;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            TeachID teachID = (TeachID) o;
+            return Objects.equals(sid, teachID.sid) &&
+                    Objects.equals(mid, teachID.mid);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(sid, mid);
+        }
     }
 }

@@ -32,13 +32,8 @@ public class Staff{
     @OneToMany(mappedBy = "staff", fetch = FetchType.EAGER)
     private List<StaffBooking> staffBookings;
 
-    @ManyToMany
-    @JoinTable(
-            name = "Teach",
-            joinColumns = {@JoinColumn(name = "Staff_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "Module_ID")}
-    )
-    private Set<Modules> modules = new HashSet<>();
+    @OneToMany( mappedBy = "staff" )
+    private Set<Teach> teaches = new HashSet<>();
 
     /**
      * The constructor that connects the parameter values with the field
@@ -106,11 +101,11 @@ public class Staff{
         this.staffBookings = staffBookings;
     }
 
-    public Set<Modules> getModules() {
-        return modules;
+    public void setTeaches(Set<Teach> teaches) {
+        this.teaches = teaches;
     }
 
-    public void setModules(Set<Modules> modules) {
-        this.modules = modules;
+    public Set<Teach> getTeaches() {
+        return teaches;
     }
 }

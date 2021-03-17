@@ -1,7 +1,9 @@
 package csc1035.project2;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -17,80 +19,87 @@ import java.util.Set;
  * @author Stefanos Larkou
  */
 @Entity
-@Table(name = "Take")
+@Table ( name = "Take" )
 public class Take {
-    @Id
-    @Column(name = "Module_ID", nullable = false)
-    private String mid;
+    @EmbeddedId
+    private TakeID id = new TakeID();
 
-    @Column(name = "Student_ID", nullable = false)
-    private String sid;
+    @ManyToOne
+    @MapsId( "sid" )
+    private Students students;
 
-    //@ManyToMany(mappedBy = "modules")
-    //private Set<Students> students = new HashSet<>();
+    @ManyToOne
+    @MapsId( "mid" )
+    private Modules modules;
 
-    //@OneToOne(mappedBy = "take")
-    //private Modules module;
-
-    /**
-     * The constructor that connects the parameter values with the field
-     * variables.
-     *
-     * @param sid The student ID.
-     * @param mid The module ID.
-     */
-    public Take(String sid, String mid) {
-        this.sid = sid;
-        this.mid = mid;
+    public TakeID getId() {
+        return id;
     }
 
-    /**
-     * The default constructor for Hibernate.
-     */
-    public Take() {
-    }
-
-    /**
-     * @param o The object for comparison
-     * @return returns true if all attributes in both objects are the same, or if they have the same memory address
-     */
-    @Override
-    public boolean equals(Object o){
-        if (this==o) return true;
-        if (o == null || o.getClass() != Take.class) return false;
-        Take t = (Take) o;
-        return this.mid.equals(t.getMid()) && this.sid.equals(t.getSid());
-    }
-
-    public String getSid() {
-        return sid;
-    }
-
-    public void setSid(String sid) {
-        this.sid = sid;
-    }
-
-    public String getMid() {
-        return mid;
-    }
-
-    public void setMid(String mid) {
-        this.mid = mid;
-    }
-
-    public Set<Students> getStudents() {
+    public Students getStudents() {
         return students;
     }
 
-    public void setStudents(Set<Students> students) {
+    public Modules getModules() {
+        return modules;
+    }
+
+    public void setId(TakeID id) {
+        this.id = id;
+    }
+
+    public void setStudents(Students students) {
         this.students = students;
     }
 
-    public Modules getModule() {
-        return module;
+    public void setModules(Modules modules) {
+        this.modules = modules;
     }
 
-    public void setModule(Modules module) {
-        this.module = module;
-    }
+    @Embeddable
+    public static class TakeID implements Serializable {
+
+       private String sid;
+       private String mid;
+
+       public TakeID() {
+
+       }
+
+       public TakeID ( String sid, String mid ) {
+           super();
+           this.sid = sid;
+           this.mid = mid;
+       }
+
+       public String getSid() {
+           return sid;
+       }
+
+       public String getMid() {
+           return mid;
+       }
+
+       public void setSid(String sid) {
+           this.sid = sid;
+       }
+
+       public void setMid(String mid) {
+           this.mid = mid;
+       }
+
+       @Override
+       public boolean equals(Object o) {
+           if (this == o) return true;
+           if (o == null || getClass() != o.getClass()) return false;
+           TakeID takeID = (TakeID) o;
+           return Objects.equals(sid, takeID.sid) &&
+                   Objects.equals(mid, takeID.mid);
+       }
+
+       @Override
+       public int hashCode() {
+           return Objects.hash(sid, mid);
+       }
+   }
 }
