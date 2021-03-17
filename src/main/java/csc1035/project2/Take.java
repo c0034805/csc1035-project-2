@@ -26,11 +26,11 @@ public class Take {
     @Column(name = "Student_ID", nullable = false)
     private String sid;
 
-    @ManyToMany(mappedBy = "modules")
-    private Set<Students> students = new HashSet<>();
+    //@ManyToMany(mappedBy = "modules")
+    //private Set<Students> students = new HashSet<>();
 
-    @OneToOne(mappedBy = "take")
-    private Modules module;
+    //@OneToOne(mappedBy = "take")
+    //private Modules module;
 
     /**
      * The constructor that connects the parameter values with the field

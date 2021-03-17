@@ -3,6 +3,8 @@ package csc1035.project2;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A persistent class made to handle the Modules table.
@@ -35,13 +37,11 @@ public class Modules {
     @JoinColumn(name = "ID", referencedColumnName = "ID")
     private ModuleRequirements moduleRequirements;
 
-    @OneToOne
-    @JoinColumn(name = "ID", referencedColumnName = "Module_ID")
-    private Take take;
+    @ManyToMany(mappedBy = "modules")
+    private Set<Students> students = new HashSet<>();
 
-    @OneToOne
-    @JoinColumn(name = "ID", referencedColumnName = "Module_ID")
-    private Teach teach;
+    @ManyToMany(mappedBy = "modules")
+    private Set<Staff> staff = new HashSet<>();
 
     @OneToMany(mappedBy = "module", fetch = FetchType.EAGER)
     private List<ModuleBooking> moduleBookings;
@@ -151,4 +151,5 @@ public class Modules {
     public ModuleRequirements getModuleRequirements() {
         return moduleRequirements;
     }
+
 }

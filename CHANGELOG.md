@@ -59,3 +59,4 @@
 ##### v0.62 [17.03.2021]: 
 * (ERICK) Created `entityBooking()` method.
 * (ERICK) Updated reservation methods according to master branch. 
+* (ERICK) Fixed ManyToMany relationships with module association.
