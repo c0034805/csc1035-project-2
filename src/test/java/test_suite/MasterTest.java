@@ -18,13 +18,13 @@ public class MasterTest {
             new Room("0.365","PC Cluster",59,9,new ArrayList<Booking>()),
             new Room("1.846","Lecture Lecture",274,50,new ArrayList<Booking>())};
 
-    Staff[] staff = {new Staff("NUC3292317","Jacenta","Khomich",new ArrayList<>(),new ArrayList<>()),
-            new Staff("NUC9674902","Carmita","Cogzell",new ArrayList<>(),new ArrayList<>()),
-            new Staff("NUC7362101","Swen","Geard",new ArrayList<>(),new ArrayList<>())};
+    Staff[] staff = {new Staff("NUC3292317","Jacenta","Khomich",new ArrayList<>()),
+            new Staff("NUC9674902","Carmita","Cogzell",new ArrayList<>()),
+            new Staff("NUC7362101","Swen","Geard",new ArrayList<>())};
 
-    Students[] students = {new Students("216906208","Doralynn","Bordman",new ArrayList<>(),new ArrayList<>()),
-            new Students("218577635","Farra","Pietroni",new ArrayList<>(),new ArrayList<>()),
-            new Students("216365117","Clareta","Osmint",new ArrayList<>(),new ArrayList<>())};
+    Students[] students = {new Students("216906208","Doralynn","Bordman",new ArrayList<>()),
+            new Students("218577635","Farra","Pietroni",new ArrayList<>()),
+            new Students("216365117","Clareta","Osmint",new ArrayList<>())};
 
     ModuleRequirements[] requirements = {new ModuleRequirements("RSI3393",1,2,1,2,new Date()),
             new ModuleRequirements("BBU5808",1,2,2,2,new Date()),
