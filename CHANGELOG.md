@@ -65,3 +65,4 @@
 * (ERICK) Take/Teach make use of embedded ID.
 * (ERICK) Added constructor methods to Take and Teach. 
 * (ERICK) Added getter/setter methods for Teach/Take in module class.
+* (ERICK) Fixed `addStudent/StaffToModule` according to embedded Teach/Take.

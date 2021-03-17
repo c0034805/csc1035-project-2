@@ -63,11 +63,22 @@ public class ModuleHandler {
         if( !m.getModuleStudents().contains( s ) ) {
 
             Take t = new Take( s, m );
-            Set<Take> tmp = s.getTakes();
+            Set<Take> takeS = s.getTakes();
+            takeS.add( t );
+            Set<Take> takeM = m.getTakes();
+            takeM.add( t );
 
-            tmp.add( m );
-            s.setModules( tmp );
-            ic.update( s );
+            Session ses = HibernateUtil.getSessionFactory().openSession();
+            ses.beginTransaction();
+            ses.persist( t );
+
+            s.setTakes( takeS );
+            m.setTakes( takeM );
+
+            ses.persist( s );
+            ses.persist( m );
+            ses.getTransaction().commit();
+            ses.close();
 
             refreshModuleHandler();
             return true;
@@ -89,10 +100,23 @@ public class ModuleHandler {
         IController ic = new Controller();
         if( !m.getModuleStaff().contains( s ) ) {
 
-            Set<Modules> tmp = s.getModules();
-            tmp.add( m );
-            s.setModules( tmp );
-            ic.update( s );
+            Teach t = new Teach( s, m );
+            Set<Teach> teachesS = s.getTeaches();
+            teachesS.add( t );
+            Set<Teach> teachesMM = m.getTeaches();
+            teachesMM.add( t );
+
+            Session ses = HibernateUtil.getSessionFactory().openSession();
+            ses.beginTransaction();
+            ses.persist( t );
+
+            s.setTeaches( teachesS );
+            m.setTeaches( teachesMM );
+
+            ses.persist( s );
+            ses.persist( m );
+            ses.getTransaction().commit();
+            ses.close();
 
             refreshModuleHandler();
             return true;
