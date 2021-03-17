@@ -1,7 +1,9 @@
 package csc1035.project2;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * A persistent class made to handle the Students table.
@@ -27,11 +29,16 @@ public class Students {
     @Column(name = "Last_Name", nullable = false)
     private String lastname;
 
-    @OneToMany(mappedBy = "student", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
     private List<StudentBooking> studentBookings;
 
-    @OneToMany(mappedBy = "student")
-    private List<Take> take;
+    @ManyToMany
+    @JoinTable(
+            name = "Take",
+            joinColumns = {@JoinColumn(name = "Student_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "Module_ID")}
+    )
+    private Set<Modules> modules = new HashSet<>();
 
     /**
      * The constructor that connects the parameter values with the field
@@ -42,12 +49,11 @@ public class Students {
      * @param lastname The student's ast name.
      */
     public Students(String id, String firstname, String lastname,
-                    List<StudentBooking> studentBookings, List<Take> take) {
+                    List<StudentBooking> studentBookings) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.studentBookings = studentBookings;
-        this.take = take;
     }
 
     /**
@@ -100,11 +106,11 @@ public class Students {
         this.studentBookings = studentBookings;
     }
 
-    public List<Take> getTake() {
-        return take;
+    public Set<Modules> getModules() {
+        return modules;
     }
 
-    public void setTake(List<Take> take) {
-        this.take = take;
+    public void setModules(Set<Modules> modules) {
+        this.modules = modules;
     }
 }
