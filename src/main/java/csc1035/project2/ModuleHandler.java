@@ -229,12 +229,4 @@ public class ModuleHandler {
         this.teaches = teaches;
     }
 
-    /**
-     * <code>teaches</code> getter method.
-     *
-     * @param teaches New staff-module relationship list.
-     */
-    public void setTeaches(List<Teach> teaches) {
-        this.teaches = teaches;
-    }
 }

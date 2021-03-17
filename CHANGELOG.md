@@ -62,3 +62,4 @@
 * (ERICK) Fixed ManyToMany relationships with module association.
 * (ERICK) Fixed `addStudent/StaffToModule` according to class change.
 * (ERICK) Fixed `addStudent/StaffFromModule` according to class change.
+* (ERICK) Take/Teach make use of embedded ID.
