@@ -70,3 +70,4 @@
 * (ERICK) Teach/Take fetching set to EAGER.
 * (ERICK) Take/Teach creation finally fixed.
 * (ERICK) `student/staffRemoveModule` display repositioned.
+* (ERICK) Take/Teach removal finally fixed.

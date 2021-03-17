@@ -2,6 +2,7 @@ package csc1035.project2;
 
 import org.hibernate.Session;
 
+import javax.persistence.Query;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -63,22 +64,7 @@ public class ModuleHandler {
         if( !m.getModuleStudents().contains( s ) ) {
 
             Take t = new Take( s, m );
-            Set<Take> takeS = s.getTakes();
-            takeS.add( t );
-            Set<Take> takeM = m.getTakes();
-            takeM.add( t );
-
-            Session ses = HibernateUtil.getSessionFactory().openSession();
-            ses.beginTransaction();
-            ses.persist( t );
-
-            s.setTakes( takeS );
-            m.setTakes( takeM );
-
-            ses.persist( s );
-            ses.persist( m );
-            ses.getTransaction().commit();
-            ses.close();
+            ic.update(t);
 
             refreshModuleHandler();
             return true;
@@ -101,22 +87,7 @@ public class ModuleHandler {
         if( !m.getModuleStaff().contains( s ) ) {
 
             Teach t = new Teach( s, m );
-            Set<Teach> teachesS = s.getTeaches();
-            teachesS.add( t );
-            Set<Teach> teachesMM = m.getTeaches();
-            teachesMM.add( t );
-
-            Session ses = HibernateUtil.getSessionFactory().openSession();
-            ses.beginTransaction();
-            ses.persist( t );
-
-            s.setTeaches( teachesS );
-            m.setTeaches( teachesMM );
-
-            ses.persist( s );
-            ses.persist( m );
-            ses.getTransaction().commit();
-            ses.close();
+            ic.update(t);
 
             refreshModuleHandler();
             return true;
@@ -132,18 +103,19 @@ public class ModuleHandler {
      * @return If removal was successful.
      */
     public boolean removeStudentFromModule ( Students s, Modules m ) {
+        int checker = takes.size();
         IController ic = new Controller();
-        if( m.getModuleStudents().contains( s ) ) {
 
-            Set<Modules> tmp = s.getModules();
-            tmp.remove( m );
-            s.setModules( tmp );
-            ic.update( s );
-
-            refreshModuleHandler();
-            return true;
-        }
-        return false;
+        Session ses = HibernateUtil.getSessionFactory().openSession();
+        ses.beginTransaction();
+        Query q = ses.createQuery("DELETE FROM Take WHERE modules_ID = ?1 AND students_ID = ?2");
+        q.setParameter(1, m.getId());
+        q.setParameter(2, s.getId());
+        q.executeUpdate();
+        ses.getTransaction().commit();
+        ses.close();
+        refreshModuleHandler();
+        return (takes.size() < checker);
     }
 
     /**
@@ -154,17 +126,19 @@ public class ModuleHandler {
      * @return If removal was successful.
      */
     public boolean removeStaffFromModule ( Staff s, Modules m ) {
+        int checker = teaches.size();
         IController ic = new Controller();
-        if( m.getModuleStaff().contains( s ) ) {
 
-            Set<Modules> tmp = s.getModules();
-            tmp.remove( m );
-            s.setModules( tmp );
-            ic.update( s );
-
-            return true;
-        }
-        return false;
+        Session ses = HibernateUtil.getSessionFactory().openSession();
+        ses.beginTransaction();
+        Query q = ses.createQuery("DELETE FROM Teach WHERE modules_ID = ?1 AND staff_ID = ?2");
+        q.setParameter(1, m.getId());
+        q.setParameter(2, s.getId());
+        q.executeUpdate();
+        ses.getTransaction().commit();
+        ses.close();
+        refreshModuleHandler();
+        return (teaches.size() < checker);
     }
     /**
      * <code>modules</code> getter method.
