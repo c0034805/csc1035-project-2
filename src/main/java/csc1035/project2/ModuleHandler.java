@@ -108,10 +108,10 @@ public class ModuleHandler {
         if( m.getModuleStudents().contains( s ) ) {
 
             Set<Modules> tmp = s.getModules();
-            tmp.add( m );
+            tmp.remove( m );
             s.setModules( tmp );
-
             ic.update( s );
+
             refreshModuleHandler();
             return true;
         }
@@ -128,8 +128,12 @@ public class ModuleHandler {
     public boolean removeStaffFromModule ( Staff s, Modules m ) {
         IController ic = new Controller();
         if( m.getModuleStaff().contains( s ) ) {
-            s.getTeach().remove(ic.getById(Teach.class, m.getId()));
-            refreshModuleHandler();
+
+            Set<Modules> tmp = s.getModules();
+            tmp.remove( m );
+            s.setModules( tmp );
+            ic.update( s );
+
             return true;
         }
         return false;
