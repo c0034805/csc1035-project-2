@@ -1,6 +1,5 @@
 package csc1035.project2;
 
-import com.sun.xml.bind.v2.runtime.output.SAXOutput;
 
 import javax.persistence.NoResultException;
 import java.sql.Timestamp;
@@ -51,21 +50,20 @@ public class MainIO {
         boolean quit = false;
         Scanner sc = new Scanner(System.in);
 
-        while (!quit) {
-            System.out.println("1: Staff reservation.\n" +
-                    "2: Student reservation.\n" +
-                    "3: Return to main menu.");
+        System.out.println("1: Staff reservation.\n" +
+                           "2: Student reservation.\n" +
+                           "3: Return to main menu.");
 
-            int choice = sc.nextInt();
-            switch (choice) {
-                case 1 -> reserveStaff();
-                case 2 -> reserveStudent();
-                case 3 -> {
-                    System.out.println("Returning to main menu.");
-                    quit = true;
-                }
-                default -> System.out.println("Not a valid option.");
+        System.out.println("Please select an option:");
+        int choice = sc.nextInt();
+
+        switch (choice) {
+            case 1 -> reserveStaff();
+            case 2 -> reserveStudent();
+            case 3 -> {
+                System.out.println("Returning to main menu.");
             }
+            default -> System.out.println("Not a valid option.");
         }
     }
 
@@ -345,7 +343,7 @@ public class MainIO {
 
             System.out.print("Which of the following modules would you like to stop teaching?\n" +
                     "Please enter module ID:");
-            for (Teach t : staff.getTeach()) {
+            for (Teach t : staff.getTeach()){
                 Modules tmpModule = (Modules) ic.getById(Modules.class, t.getMid());
                 System.out.println(tmpModule.getId() + " - " + tmpModule.getName());
             }
