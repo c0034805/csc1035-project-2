@@ -1,6 +1,8 @@
 package csc1035.project2;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A persistent class made to handle the Take table, which
@@ -24,9 +26,8 @@ public class Take {
     @Column(name = "Student_ID", nullable = false)
     private String sid;
 
-    @ManyToOne
-    @JoinColumn(nullable = false,insertable = false, updatable = false)
-    private Students student;
+    @ManyToMany(mappedBy = "modules")
+    private Set<Students> students = new HashSet<>();
 
     @OneToOne(mappedBy = "take")
     private Modules module;
@@ -77,11 +78,19 @@ public class Take {
         this.mid = mid;
     }
 
-    public Students getStudent() {
-        return student;
+    public Set<Students> getStudents() {
+        return students;
     }
 
-    public void setStudent(Students student) {
-        this.student = student;
+    public void setStudents(Set<Students> students) {
+        this.students = students;
+    }
+
+    public Modules getModule() {
+        return module;
+    }
+
+    public void setModule(Modules module) {
+        this.module = module;
     }
 }
