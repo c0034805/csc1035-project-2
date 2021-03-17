@@ -4,13 +4,54 @@ import com.sun.xml.bind.v2.runtime.output.SAXOutput;
 
 import javax.persistence.NoResultException;
 import java.sql.Timestamp;
-import java.util.Scanner;
+import java.util.*;
 
 public class MainIO {
     public static void main(String[] args) {
+        //addDummyData();
         new MainIO().run();
     }
 
+    public static void addDummyData() {
+        IController controller;
+        Modules[] modules = {new Modules("RSI3393","Nunc nisl.",20,12,new HashSet<>()),
+                new Modules("BBU5808","Integer pede justo lacinia eget tincidunt eget tempus vel pede.",10,12,new HashSet<>()),
+                new Modules("SAM0176","Cras in purus eu magna vulputate luctus.",10,6,new HashSet<>())};
+
+        Room[] rooms = {new Room("0.379","PC Cluster",157,36,new ArrayList<Booking>()),
+                new Room("0.365","PC Cluster",59,9,new ArrayList<Booking>()),
+                new Room("1.846","Lecture Lecture",274,50,new ArrayList<Booking>())};
+
+        Staff[] staff = {new Staff("NUC3292317","Jacenta","Khomich",new HashSet<>()),
+                new Staff("NUC9674902","Carmita","Cogzell",new HashSet<>()),
+                new Staff("NUC7362101","Swen","Geard",new HashSet<>())};
+
+        Students[] students = {new Students("216906208","Doralynn","Bordman",new HashSet<>()),
+                new Students("218577635","Farra","Pietroni", new HashSet<>()),
+                new Students("216365117","Clareta","Osmint",new HashSet<>())};
+
+        ModuleRequirements[] requirements = {new ModuleRequirements("RSI3393",1,2,1,2,new Date()),
+                new ModuleRequirements("BBU5808",1,2,2,2,new Date()),
+                new ModuleRequirements("SAM0176",3,1,4,1,new Date())};
+
+
+        controller = new Controller();
+
+        //controller.deleteAll(Take.class);
+        controller.deleteAll(Modules.class);
+        controller.deleteAll(Room.class);
+        controller.deleteAll(Staff.class);
+        controller.deleteAll(Students.class);
+        controller.deleteAll(ModuleRequirements.class);
+        controller.deleteAll(ModuleBooking.class);
+
+
+        controller.bulkListSave(Arrays.asList(modules));
+        controller.bulkListSave(Arrays.asList(rooms));
+        controller.bulkListSave(Arrays.asList(staff));
+        controller.bulkListSave(Arrays.asList(students));
+        controller.bulkListSave(Arrays.asList(requirements));
+    }
     public void run(){
 
         boolean quit = false;
@@ -283,11 +324,16 @@ public class MainIO {
         try {
             Students student = (Students) ic.getById(Students.class, sid);
 
-            System.out.print("Which of the following modules would you like to quit?\nPlease enter module ID:");
-            for ( Take t : student.getTakes() ) {
-                Modules tmpModule = (Modules) ic.getById(Modules.class, t.getId().getMid());
-                System.out.println( tmpModule.getId() + " - " + tmpModule.getName() );
+            Set<Take> tmp = student.getTakes();
+            Set<Modules> modTmp = new HashSet<>();
+            for ( Take t : tmp ) {
+                modTmp.add ( (Modules) ic.getById( Modules.class,  t.getId().getMid() ) );
             }
+            System.out.print("Which of the following modules would you like to quit?\nPlease enter module ID:\n");
+            for ( Modules m : modTmp ) {
+                System.out.println( m.getId() + " - " + m.getName() );
+            }
+
             String mid = sc.nextLine();
             try {
                 Modules modules = (Modules) ic.getById( Modules.class, mid );
@@ -318,11 +364,14 @@ public class MainIO {
         try {
             Staff staff = (Staff) ic.getById(Staff.class, sid);
 
-            System.out.print("Which of the following modules would you like to stop teaching?\n" +
-                             "Please enter module ID:");
-            for ( Teach t : staff.getTeaches() ) {
-                Modules tmpModule = (Modules) ic.getById(Modules.class, t.getId().getMid());
-                System.out.println( tmpModule.getId() + " - " + tmpModule.getName() );
+            Set<Teach> tmp = staff.getTeaches();
+            Set<Modules> modTmp = new HashSet<>();
+            for ( Teach t : tmp ) {
+                modTmp.add ( (Modules) ic.getById( Modules.class,  t.getId().getMid() ) );
+            }
+            System.out.print("Which of the following modules would you like to quit?\nPlease enter module ID:\n");
+            for ( Modules m : modTmp ) {
+                System.out.println( m.getId() + " - " + m.getName() );
             }
             String mid = sc.nextLine();
             try {
