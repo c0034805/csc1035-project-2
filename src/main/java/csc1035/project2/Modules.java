@@ -37,10 +37,10 @@ public class Modules {
     @JoinColumn(name = "ID", referencedColumnName = "ID")
     private ModuleRequirements moduleRequirements;
 
-    @OneToMany( mappedBy = "modules" )
+    @OneToMany( mappedBy = "modules" , fetch = FetchType.EAGER)
     private Set<Take> takes = new HashSet<>();
 
-    @OneToMany(mappedBy = "modules")
+    @OneToMany(mappedBy = "modules", fetch = FetchType.EAGER)
     private Set<Teach> teaches = new HashSet<>();
 
     @OneToMany(mappedBy = "module", fetch = FetchType.EAGER)

@@ -32,7 +32,7 @@ public class Students {
     @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
     private Set<StudentBooking> studentBookings;
 
-    @OneToMany( mappedBy = "students" )
+    @OneToMany( mappedBy = "students" , fetch = FetchType.EAGER)
     private Set<Take> takes = new HashSet<>();
 
     /**
