@@ -59,19 +59,11 @@ public class ModuleHandler {
     public boolean addStudentToModule ( Students s, Modules m ) {
         IController ic = new Controller();
         if( !m.getModuleStudents().contains( s ) ) {
-            Take t = new Take(s.getId(), m.getId());
-
-            Session ses = HibernateUtil.getSessionFactory().openSession();
-            ses.beginTransaction();
-            ses.persist( s );
-            ses.persist( t );
 
             Set<Modules> tmp = s.getModules();
             tmp.add( m );
             s.setModules( tmp );
-            ses.persist( s );
-            ses.getTransaction().commit();
-            ses.close();
+            ic.update( s );
 
             refreshModuleHandler();
             return true;
@@ -92,19 +84,11 @@ public class ModuleHandler {
     public boolean addStaffToModule ( Staff s, Modules m ) {
         IController ic = new Controller();
         if( !m.getModuleStaff().contains( s ) ) {
-            Teach t = new Teach(s.getId(), m.getId());
-
-            Session ses = HibernateUtil.getSessionFactory().openSession();
-            ses.beginTransaction();
-            ses.persist( s );
-            ses.persist( t );
 
             Set<Modules> tmp = s.getModules();
             tmp.add( m );
             s.setModules( tmp );
-            ses.persist( s );
-            ses.getTransaction().commit();
-            ses.close();
+            ic.update( s );
 
             refreshModuleHandler();
             return true;
@@ -122,7 +106,12 @@ public class ModuleHandler {
     public boolean removeStudentFromModule ( Students s, Modules m ) {
         IController ic = new Controller();
         if( m.getModuleStudents().contains( s ) ) {
-            s.getTake().remove(ic.getById(Take.class, m.getId()));
+
+            Set<Modules> tmp = s.getModules();
+            tmp.add( m );
+            s.setModules( tmp );
+
+            ic.update( s );
             refreshModuleHandler();
             return true;
         }

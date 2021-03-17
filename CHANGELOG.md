@@ -60,3 +60,4 @@
 * (ERICK) Created `entityBooking()` method.
 * (ERICK) Updated reservation methods according to master branch. 
 * (ERICK) Fixed ManyToMany relationships with module association.
+* (ERICK) Fixed `addStudent/StaffToModule` according to class change.
