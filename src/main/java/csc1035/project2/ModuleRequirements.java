@@ -22,8 +22,8 @@ public class ModuleRequirements {
     @Column(name = "ID",nullable = false)
     private String id;
 
-    @Column(name = "No_of_Lecturers",nullable = false)
-    private int lecturers;
+    @Column(name = "No_of_Lectures",nullable = false)
+    private int lectures;
 
     @Column(name = "Lecture_Length",nullable = false)
     private int llength;
@@ -50,10 +50,10 @@ public class ModuleRequirements {
      * @param practicals The number of practicals.
      * @param plength The practical length.
      */
-    public ModuleRequirements(String id, int lecturers, int llength,
+    public ModuleRequirements(String id, int lectures, int llength,
                               int practicals, int plength, Date commencing) {
         this.id = id;
-        this.lecturers = lecturers;
+        this.lectures = lectures;
         this.llength = llength;
         this.practicals = practicals;
         this.plength = plength;
@@ -76,7 +76,7 @@ public class ModuleRequirements {
         if (o == null || o.getClass() != ModuleRequirements.class) return false;
         ModuleRequirements m = (ModuleRequirements) o;
         return this.id.equals(m.getId()) &&
-                this.lecturers == m.getLecturers() &&
+                this.lectures == m.getLectures() &&
                 this.llength == m.getLlength() &&
                 this.practicals == m.getPracticals() &&
                 this.plength == m.getPlength();
@@ -90,12 +90,12 @@ public class ModuleRequirements {
         this.id = id;
     }
 
-    public int getLecturers() {
-        return lecturers;
+    public int getLectures() {
+        return lectures;
     }
 
-    public void setLecturers(int lecturers) {
-        this.lecturers = lecturers;
+    public void setLectures(int lecturer) {
+        this.lectures = lectures;
     }
 
     public int getLlength() {

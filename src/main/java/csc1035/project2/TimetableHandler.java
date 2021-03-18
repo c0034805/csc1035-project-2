@@ -35,7 +35,7 @@ public class TimetableHandler {
         List<Session> classes = new ArrayList<>();
         for (Modules m : modules) {
             List<Integer> blocks = new ArrayList<>();
-            for (int i = 0; i < m.getModuleRequirements().getLecturers(); ++i) {
+            for (int i = 0; i < m.getModuleRequirements().getLectures(); ++i) {
                 blocks.add(m.getModuleRequirements().getLlength());
             }
             for (int i = 0; i < m.getModuleRequirements().getPracticals(); ++i) {
