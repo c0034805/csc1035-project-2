@@ -64,8 +64,7 @@ public class RoomHandler {
             Booking b = new Booking(st, et);
             b.setRoom( r );
 
-            StudentBooking sb = new StudentBooking(b.getId(), s.getId());
-            sb.setStudent(s);
+            StudentBooking sb = new StudentBooking(b, s);
             updateClasses( b, sb );
 
             refreshRoomHandler();

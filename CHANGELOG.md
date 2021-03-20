@@ -75,3 +75,4 @@
 
 ##### v0.63 [20.03.2021]
 * (ERICK) Reinstated booking table change to get staff reservations to work.
+* (ERICK) Updated student class structure to match staff structure.

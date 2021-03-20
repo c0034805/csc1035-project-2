@@ -100,7 +100,7 @@ public class RoomHandlerTest extends MasterTest{
         StudentBooking sb = (StudentBooking) controller.getAll(StudentBooking.class).get(0);
 
         Assertions.assertEquals(b.getRoom().getNum(),rooms[0].getNum());
-        Assertions.assertEquals(sb.getSid(),students[0].getId());
+        Assertions.assertEquals(sb.getStudent().getId(),students[0].getId());
         Assertions.assertEquals(b.getId(),sb.getBid());
         Assertions.assertEquals(b.getStart(),timestampAddHr(day,11));
         Assertions.assertEquals(b.getEnd(),timestampAddHr(day,12));
