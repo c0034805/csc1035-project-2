@@ -95,7 +95,8 @@ public class MainIO {
         while(!quit) {
             System.out.println("1: Staff reservation.\n" +
                                "2: Student reservation.\n" +
-                               "3: Return to main menu.");
+                               "3: Cancel reservation.\n" +
+                               "4: Return to main menu.");
 
             System.out.println("Please select an option:");
             int choice = sc.nextInt();
@@ -103,7 +104,8 @@ public class MainIO {
             switch (choice) {
                 case 1 -> reserveStaff();
                 case 2 -> reserveStudent();
-                case 3 -> {
+                case 3 -> cancelBookingReservation();
+                case 4 -> {
                     System.out.println("Returning to main menu.");
                     quit = true;
                 }
@@ -210,6 +212,43 @@ public class MainIO {
         }
     }
 
+    private void cancelBookingReservation() {
+        IController ic = new Controller<>();
+        RoomHandler handler = new RoomHandler();
+        Scanner sc = new Scanner(System.in);
+
+        List<StaffBooking> staffBookings = ic.getAll( StaffBooking.class );
+        List<StudentBooking> studentBookings = ic.getAll( StudentBooking.class );
+
+        for( StaffBooking s : staffBookings ) {
+            System.out.println("Booking ID: " + s.getBooking().getId() + "\n" +
+                               "Booker (Staff): " + s.getStaff().getFirstname() + " " +
+                                s.getStaff().getLastname() + "\n" +
+                               "Room: " + s.getBooking().getRoom().getNum() + "\n" +
+                               "Start: " + s.getBooking().getStart() + "\n" +
+                               "End: " + s.getBooking().getEnd() + "\n\n");
+        }
+
+        for( StudentBooking s : studentBookings ) {
+            System.out.println("Booking ID: " + s.getBooking().getId() + "\n" +
+                               "Booker (Student): " + s.getStudent().getFirstname() + " " +
+                               s.getStudent().getLastname() + "\n" +
+                               "Room: " + s.getBooking().getRoom().getNum() + "\n" +
+                               "Start: " + s.getBooking().getStart() + "\n" +
+                               "End: " + s.getBooking().getEnd() + "\n\n");
+        }
+
+        System.out.println("Which booking would you like to cancel?");
+        String choice = sc.nextLine();
+        try {
+            handler.cancelReservation( choice );
+            System.out.println("Cancellation successful.\n");
+        }
+        catch (NoResultException e) {
+            System.out.println("There is no booking with the given ID.");
+        }
+    }
+
     private void updateRoom() {
         Scanner sc = new Scanner(System.in);
         IController ic = new Controller<>();
@@ -268,7 +307,6 @@ public class MainIO {
         }
     }
 
-    // TODO: Check if updating handler is faster than creating new instances each option select.
     private void studentAddModule() {
         Scanner sc = new Scanner(System.in);
         IController ic = new Controller<>();
