@@ -28,11 +28,11 @@ public class ModuleBooking {
 
     @ManyToOne
     @JoinColumn(name = "Module_ID")
-    private Modules modules;
+    private Modules module;
 
-    public ModuleBooking( Booking booking, Modules modules ) {
+    public ModuleBooking( Booking booking, Modules module ) {
         this.booking = booking;
-        this.modules = modules;
+        this.module = module;
     }
 
     /**
@@ -54,12 +54,12 @@ public class ModuleBooking {
         ModuleBooking that = (ModuleBooking) o;
         return Objects.equals(bid, that.bid) &&
                 Objects.equals(booking, that.booking) &&
-                Objects.equals(modules, that.modules);
+                Objects.equals(module, that.module);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bid, booking, modules);
+        return Objects.hash(bid, booking, module);
     }
 
     public Booking getBooking() {
@@ -67,7 +67,7 @@ public class ModuleBooking {
     }
 
     public Modules getModules() {
-        return modules;
+        return module;
     }
 
     public void setBooking(Booking booking) {
@@ -75,6 +75,6 @@ public class ModuleBooking {
     }
 
     public void setModules(Modules modules) {
-        this.modules = modules;
+        this.module = modules;
     }
 }
