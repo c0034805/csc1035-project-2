@@ -80,3 +80,4 @@
 * (ERICK) `reserveOptions()` now loops until choosing to exit.
 * (ERICK) Module booking is correctly mapped to module.
 * (ERICK) Added additional getter/setter methods to booking class.
+* (ERICK) `cancelReservation` now deletes staff/(ect) booking.
