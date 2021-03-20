@@ -436,8 +436,13 @@ public class MainIO {
             switch (selection) {
                 case 1 -> moduleToTimetable(modules);
                 case 2 -> {
-                    timetableGeneration(modules);
-                    quit = true;
+                    if(modules.isEmpty()){
+                        System.out.println("You haven't entered any modules yet.");
+                    }
+                    else {
+                        timetableGeneration(modules);
+                        quit = true;
+                    }
                 }
                 case 3 -> {
                     System.out.println("Returning to main menu.");
