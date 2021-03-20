@@ -30,7 +30,7 @@ public class Staff{
     private String lastname;
 
     @OneToMany(mappedBy = "staff", fetch = FetchType.EAGER)
-    private Set<StaffBooking> staffBookings;
+    private Set<StaffBooking> staffBookings = new HashSet<>();
 
     @OneToMany( mappedBy = "staff" , fetch = FetchType.EAGER)
     private Set<Teach> teaches = new HashSet<>();

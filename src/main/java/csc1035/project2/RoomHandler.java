@@ -61,7 +61,7 @@ public class RoomHandler {
     public String reserveRoomStudent ( Students s, Room r, Timestamp st, Timestamp et ) {
         if ( checkRoomTimeAvailable( r, st, et) ) {
 
-            Booking b = new Booking(r.getNum(), st, et);
+            Booking b = new Booking(st, et);
             b.setRoom( r );
 
             StudentBooking sb = new StudentBooking(b.getId(), s.getId());
@@ -87,11 +87,10 @@ public class RoomHandler {
      */
     public String reserveRoomStaff ( Staff s, Room r, Timestamp st, Timestamp et ) {
         if ( checkRoomTimeAvailable( r, st, et) ) {
-            Booking b = new Booking(r.getNum(), st, et);
+            Booking b = new Booking(st, et);
             b.setRoom( r );
 
-            StaffBooking sb = new StaffBooking(b.getId(), s.getId());
-            sb.setStaff(s);
+            StaffBooking sb = new StaffBooking( b, s );
             updateClasses( b, sb );
 
             refreshRoomHandler();
@@ -113,7 +112,7 @@ public class RoomHandler {
      */
     public String reserveRoomModule ( Modules m, Room r, Timestamp st, Timestamp et ) {
         if ( checkRoomTimeAvailable( r, st, et) ) {
-            Booking b = new Booking(r.getNum(), st, et);
+            Booking b = new Booking(st, et);
             b.setRoom(r);
 
             ModuleBooking mb = new ModuleBooking(b.getId(), m.getId());
@@ -129,8 +128,8 @@ public class RoomHandler {
     private <T> void updateClasses( Booking b, Object entityBooking ) {
         Session ses = HibernateUtil.getSessionFactory().openSession();
         ses.beginTransaction();
-        ses.persist( entityBooking );
         ses.persist( b );
+        ses.persist( entityBooking );
         ses.getTransaction().commit();
         ses.close();
     }

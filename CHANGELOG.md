@@ -61,7 +61,7 @@
 * (ERICK) Updated reservation methods according to master branch. 
 * (ERICK) Fixed ManyToMany relationships with module association.
 * (ERICK) Fixed `addStudent/StaffToModule` according to class change.
-* (ERICK) Fixed `addStudent/StaffFromModule` according to class change.
+* (ERICK) Fixed `removeStudent/StaffFromModule` according to class change.
 * (ERICK) Take/Teach make use of embedded ID.
 * (ERICK) Added constructor methods to Take and Teach. 
 * (ERICK) Added getter/setter methods for Teach/Take in module class.
@@ -72,3 +72,6 @@
 * (ERICK) `student/staffRemoveModule` display repositioned.
 * (ERICK) Take/Teach removal finally fixed.
 * (ERICK) Module handler test updated to match embedded classes.
+
+##### v0.63 [20.03.2021]
+* (ERICK) Reinstated booking table change to get staff reservations to work.
