@@ -41,12 +41,16 @@ public class MasterTest {
     }
 
     void deleteAll(){
+        controller.deleteAll(ModuleBooking.class);
+        controller.deleteAll(StudentBooking.class);
+        controller.deleteAll(StaffBooking.class);
+        controller.deleteAll(Take.class);
+        controller.deleteAll(Teach.class);
         controller.deleteAll(Modules.class);
         controller.deleteAll(Room.class);
         controller.deleteAll(Staff.class);
         controller.deleteAll(Students.class);
         controller.deleteAll(ModuleRequirements.class);
-        //all the booking classes should get deleted by the db, (ON DELETE CASCADE)
     }
 
     /**

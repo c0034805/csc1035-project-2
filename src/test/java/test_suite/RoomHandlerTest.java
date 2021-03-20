@@ -100,7 +100,7 @@ public class RoomHandlerTest extends MasterTest{
         StudentBooking sb = (StudentBooking) controller.getAll(StudentBooking.class).get(0);
 
         Assertions.assertEquals(b.getRoom().getNum(),rooms[0].getNum());
-        Assertions.assertEquals(sb.getSid(),students[0].getId());
+        Assertions.assertEquals(sb.getStudent().getId(),students[0].getId());
         Assertions.assertEquals(b.getId(),sb.getBid());
         Assertions.assertEquals(b.getStart(),timestampAddHr(day,11));
         Assertions.assertEquals(b.getEnd(),timestampAddHr(day,12));
@@ -136,8 +136,8 @@ public class RoomHandlerTest extends MasterTest{
         StaffBooking sb = (StaffBooking) controller.getAll(StaffBooking.class).get(0);
 
         Assertions.assertEquals(b.getRoom().getNum(),rooms[0].getNum());
-        Assertions.assertEquals(sb.getSid(),staff[0].getId());
-        Assertions.assertEquals(b.getId(),sb.getBid());
+        Assertions.assertEquals(sb.getStaff().getId(),staff[0].getId());
+        Assertions.assertEquals(b.getId(),sb.getBooking().getId());
         Assertions.assertEquals(b.getStart(),timestampAddHr(day,11));
         Assertions.assertEquals(b.getEnd(),timestampAddHr(day,12));
 
@@ -172,8 +172,8 @@ public class RoomHandlerTest extends MasterTest{
         ModuleBooking mb = (ModuleBooking) controller.getAll(ModuleBooking.class).get(0);
 
         Assertions.assertEquals(b.getRoom().getNum(),rooms[0].getNum());
-        Assertions.assertEquals(mb.getId(),modules[0].getId());
-        Assertions.assertEquals(b.getId(),mb.getBid());
+        Assertions.assertEquals(mb.getModules().getId(),modules[0].getId());
+        Assertions.assertEquals(b.getId(),mb.getBooking().getId());
         Assertions.assertEquals(b.getStart(),timestampAddHr(day,11));
         Assertions.assertEquals(b.getEnd(),timestampAddHr(day,12));
 

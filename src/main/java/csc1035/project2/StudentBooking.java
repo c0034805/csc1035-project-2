@@ -1,6 +1,8 @@
 package csc1035.project2;
 
 import javax.persistence.*;
+import java.awt.print.Book;
+import java.util.Objects;
 
 /**
  * A persistent class made to handle the Student_Booking table, which
@@ -18,29 +20,20 @@ import javax.persistence.*;
 @Table(name = "Student_Booking")
 public class StudentBooking {
     @Id
-    @Column(name = "Booking_ID", nullable = false)
     private String bid;
 
-    @Column(name = "Student_ID", nullable = false)
-    private String sid;
-
-    @OneToOne(mappedBy = "studentBooking")
+    @OneToOne
+    @JoinColumn(name = "Booking_ID")
+    @MapsId
     private Booking booking;
 
     @ManyToOne
-    @JoinColumn(nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "Student_ID")
     private Students student;
 
-    /**
-     * The constructor that connects the parameter values with the field
-     * variables.
-     *
-     * @param bid The booking ID.
-     * @param sid The student ID.
-     */
-    public StudentBooking(String bid, String sid) {
-        this.bid = bid;
-        this.sid = sid;
+    public StudentBooking(Booking booking, Students student) {
+        this.booking = booking;
+        this.student = student;
     }
 
     /**
@@ -53,12 +46,20 @@ public class StudentBooking {
      * @param o The object for comparison
      * @return returns true if all attributes in both objects are the same, or if they have the same memory address
      */
+
     @Override
-    public boolean equals(Object o){
-        if (this==o) return true;
-        if (o == null || o.getClass() != StudentBooking.class) return false;
-        StudentBooking s = (StudentBooking) o;
-        return this.bid.equals(s.getBid()) && this.sid.equals(s.getSid());
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StudentBooking that = (StudentBooking) o;
+        return Objects.equals(bid, that.bid) &&
+                Objects.equals(booking, that.booking) &&
+                Objects.equals(student, that.student);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(bid, booking, student);
     }
 
     public String getBid() {
@@ -69,12 +70,12 @@ public class StudentBooking {
         this.bid = bid;
     }
 
-    public String getSid() {
-        return sid;
+    public Booking getBooking() {
+        return booking;
     }
 
-    public void setSid(String sid) {
-        this.sid = sid;
+    public void setBooking(Booking booking) {
+        this.booking = booking;
     }
 
     public Students getStudent() {
