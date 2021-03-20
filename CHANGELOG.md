@@ -77,3 +77,4 @@
 * (ERICK) Reinstated booking table change to get staff reservations to work.
 * (ERICK) Updated student class structure to match staff structure.
 * (ERICK) Updated module class structure to match staff structure.
+* (ERICK) `reserveOptions()` now loops until choosing to exit.

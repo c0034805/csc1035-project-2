@@ -92,20 +92,23 @@ public class MainIO {
         boolean quit = false;
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("1: Staff reservation.\n" +
-                           "2: Student reservation.\n" +
-                           "3: Return to main menu.");
+        while(!quit) {
+            System.out.println("1: Staff reservation.\n" +
+                               "2: Student reservation.\n" +
+                               "3: Return to main menu.");
 
-        System.out.println("Please select an option:");
-        int choice = sc.nextInt();
+            System.out.println("Please select an option:");
+            int choice = sc.nextInt();
 
-        switch (choice) {
-            case 1 -> reserveStaff();
-            case 2 -> reserveStudent();
-            case 3 -> {
-                System.out.println("Returning to main menu.");
+            switch (choice) {
+                case 1 -> reserveStaff();
+                case 2 -> reserveStudent();
+                case 3 -> {
+                    System.out.println("Returning to main menu.");
+                    quit = true;
+                }
+                default -> System.out.println("Not a valid option.");
             }
-            default -> System.out.println("Not a valid option.");
         }
     }
 
