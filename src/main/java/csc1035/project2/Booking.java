@@ -112,4 +112,28 @@ public class Booking {
     public void setRoom(Room room) {
         this.room = room;
     }
+
+    public StaffBooking getStaffBooking() {
+        return staffBooking;
+    }
+
+    public StudentBooking getStudentBooking() {
+        return studentBooking;
+    }
+
+    public ModuleBooking getModuleBooking() {
+        return moduleBooking;
+    }
+
+    public void setStaffBooking(StaffBooking staffBooking) {
+        this.staffBooking = staffBooking;
+    }
+
+    public void setStudentBooking(StudentBooking studentBooking) {
+        this.studentBooking = studentBooking;
+    }
+
+    public void setModuleBooking(ModuleBooking moduleBooking) {
+        this.moduleBooking = moduleBooking;
+    }
 }
