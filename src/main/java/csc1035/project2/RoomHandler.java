@@ -114,8 +114,7 @@ public class RoomHandler {
             Booking b = new Booking(st, et);
             b.setRoom(r);
 
-            ModuleBooking mb = new ModuleBooking(b.getId(), m.getId());
-            mb.setModule(m);
+            ModuleBooking mb = new ModuleBooking(b, m);
             updateClasses( b, mb );
 
             refreshRoomHandler();
