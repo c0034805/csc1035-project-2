@@ -203,10 +203,10 @@ public class RoomHandler {
      * @return List of all available rooms at a specified time.
      */
     public List<Room> getAvailableRooms ( Timestamp t ) {
-        List<Room> tmp = new ArrayList<>( this.getRooms() );
+        List<Room> tmp = this.getRooms();
         for ( Room r : tmp ) {
             for ( Booking b : this.getBookings() ) {
-                if ( r.getNum() == b.getRoom().getNum() && checkTimeAvailable( t, b.getStart(), b.getEnd() ) ) {
+                if ( r.getNum().equals(b.getRoom().getNum()) && !checkTimeAvailable( t, b.getStart(), b.getEnd() ) ) {
                     tmp.remove( r );
                 }
             }

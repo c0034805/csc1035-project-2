@@ -99,3 +99,4 @@
 * (ERICK) Created `checkValidTimePeriod()` method.
 * (ERICK) `reserveStudent/Staff()` make use of `checkValidTimePeriod()`.
 * (ERICK) `checkRoomTimeAvailable()` correctly checks if rooms match.
+* (ERICK) `getAvailableRooms()` method fixed.
