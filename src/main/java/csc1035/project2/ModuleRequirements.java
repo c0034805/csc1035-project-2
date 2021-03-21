@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * A persistent class made to handle the Module_Requirements table.
  *
- * The table contains a module ID, the number of lecturers for that
+ * The table contains a module ID, the number of lectures for that
  * module, the number of practicals, as well as its lecture and
  * practical length.
  *
@@ -45,7 +45,7 @@ public class ModuleRequirements {
      * variables.
      *
      * @param id The module ID.
-     * @param lecturers The number of lecturers.
+     * @param lectures The number of lectures.
      * @param llength The lecture length.
      * @param practicals The number of practicals.
      * @param plength The practical length.
