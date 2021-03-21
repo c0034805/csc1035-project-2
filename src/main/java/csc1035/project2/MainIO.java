@@ -96,7 +96,8 @@ public class MainIO {
             System.out.println("1: Staff reservation.\n" +
                                "2: Student reservation.\n" +
                                "3: Cancel reservation.\n" +
-                               "4: Return to main menu.");
+                               "4: Find available rooms..\n" +
+                               "5: Return to main menu.");
 
             System.out.println("Please select an option:");
             int choice = sc.nextInt();
@@ -105,7 +106,8 @@ public class MainIO {
                 case 1 -> reserveStaff();
                 case 2 -> reserveStudent();
                 case 3 -> cancelBookingReservation();
-                case 4 -> {
+                case 4 -> displayAvailableRooms();
+                case 5 -> {
                     System.out.println("Returning to main menu.");
                     quit = true;
                 }
@@ -131,28 +133,36 @@ public class MainIO {
             try {
                 Room room = (Room) ic.getById(Room.class, roomNum);
 
-                System.out.println("Format: yyyy-mm-dd hh:mm:ss");
+                boolean validTime = false;
+                while (!validTime) {
+                    System.out.println("Format: yyyy-mm-dd hh:mm:ss");
 
-                System.out.print("I want my reservation to begin at: ");
-                String begin = sc.nextLine();
-                boolean matches = begin.matches("\\d\\d\\d\\d\\-\\d\\d\\-\\d\\d\\ \\d\\d\\:\\d\\d\\:\\d\\d");
-                while (!matches) {
-                    System.out.print("Invalid time format, please try again:");
-                    begin = sc.nextLine();
-                    matches = begin.matches("\\d\\d\\d\\d\\-\\d\\d\\-\\d\\d\\ \\d\\d\\:\\d\\d\\:\\d\\d");
-                }
+                    System.out.print("I want my reservation to begin at: ");
+                    String begin = sc.nextLine();
+                    boolean matches = begin.matches("\\d\\d\\d\\d\\-\\d\\d\\-\\d\\d\\ \\d\\d\\:\\d\\d\\:\\d\\d");
+                    while (!matches) {
+                        System.out.print("Invalid time format, please try again:");
+                        begin = sc.nextLine();
+                        matches = begin.matches("\\d\\d\\d\\d\\-\\d\\d\\-\\d\\d\\ \\d\\d\\:\\d\\d\\:\\d\\d");
+                    }
 
-                System.out.print("I want my reservation to end at: ");
-                String end = sc.nextLine();
-                matches = end.matches("\\d\\d\\d\\d\\-\\d\\d\\-\\d\\d\\ \\d\\d\\:\\d\\d\\:\\d\\d");
-                while (!matches) {
-                    System.out.print("Invalid time format, please try again:");
-                    end = sc.nextLine();
+                    System.out.print("I want my reservation to end at: ");
+                    String end = sc.nextLine();
                     matches = end.matches("\\d\\d\\d\\d\\-\\d\\d\\-\\d\\d\\ \\d\\d\\:\\d\\d\\:\\d\\d");
+                    while (!matches) {
+                        System.out.print("Invalid time format, please try again:");
+                        end = sc.nextLine();
+                        matches = end.matches("\\d\\d\\d\\d\\-\\d\\d\\-\\d\\d\\ \\d\\d\\:\\d\\d\\:\\d\\d");
+                    }
+                    validTime = handler.checkValidTimePeriod( Timestamp.valueOf(begin), Timestamp.valueOf(end) );
+                    if (validTime) {
+                        String conf = handler.reserveRoomStaff(staff, room, Timestamp.valueOf(begin), Timestamp.valueOf(end));
+                        handler.bookingConfirmation("Staff", (Booking) ic.getById(Booking.class, conf));
+                    }
+                    else {
+                        System.out.print("Invalid time period, please try again.\n");
+                    }
                 }
-
-                String conf = handler.reserveRoomStaff(staff, room, Timestamp.valueOf(begin), Timestamp.valueOf(end));
-                handler.bookingConfirmation("Staff", (Booking) ic.getById(Booking.class, conf));
             }
             catch (NoResultException e) {
                 System.out.println("There is no room with the given number.\n");
@@ -180,28 +190,35 @@ public class MainIO {
             try {
                 Room room = (Room) ic.getById(Room.class, roomNum);
 
-                System.out.println("Format: yyyy-mm-dd hh:mm:ss");
+                boolean validTime = false;
+                while (!validTime) {
+                    System.out.println("Format: yyyy-mm-dd hh:mm:ss");
 
-                System.out.print("I want my reservation to begin at: ");
-                String begin = sc.nextLine();
-                boolean matches = begin.matches("\\d\\d\\d\\d\\-\\d\\d\\-\\d\\d\\ \\d\\d\\:\\d\\d\\:\\d\\d");
-                while (!matches) {
-                    System.out.print("Invalid time format, please try again:");
-                    begin = sc.nextLine();
-                    matches = begin.matches("\\d\\d\\d\\d\\-\\d\\d\\-\\d\\d\\ \\d\\d\\:\\d\\d\\:\\d\\d");
-                }
+                    System.out.print("I want my reservation to begin at: ");
+                    String begin = sc.nextLine();
+                    boolean matches = begin.matches("\\d\\d\\d\\d\\-\\d\\d\\-\\d\\d\\ \\d\\d\\:\\d\\d\\:\\d\\d");
+                    while (!matches) {
+                        System.out.print("Invalid time format, please try again:");
+                        begin = sc.nextLine();
+                        matches = begin.matches("\\d\\d\\d\\d\\-\\d\\d\\-\\d\\d\\ \\d\\d\\:\\d\\d\\:\\d\\d");
+                    }
 
-                System.out.print("I want my reservation to end at: ");
-                String end = sc.nextLine();
-                matches = end.matches("\\d\\d\\d\\d\\-\\d\\d\\-\\d\\d\\ \\d\\d\\:\\d\\d\\:\\d\\d");
-                while (!matches) {
-                    System.out.print("Invalid time format, please try again:");
-                    end = sc.nextLine();
+                    System.out.print("I want my reservation to end at: ");
+                    String end = sc.nextLine();
                     matches = end.matches("\\d\\d\\d\\d\\-\\d\\d\\-\\d\\d\\ \\d\\d\\:\\d\\d\\:\\d\\d");
+                    while (!matches) {
+                        System.out.print("Invalid time format, please try again:");
+                        end = sc.nextLine();
+                        matches = end.matches("\\d\\d\\d\\d\\-\\d\\d\\-\\d\\d\\ \\d\\d\\:\\d\\d\\:\\d\\d");
+                    }
+                    validTime = handler.checkValidTimePeriod( Timestamp.valueOf(begin), Timestamp.valueOf(end) );
+                    if (validTime) {
+                        String conf = handler.reserveRoomStudent(student, room, Timestamp.valueOf(begin), Timestamp.valueOf(end));
+                        handler.bookingConfirmation("Student", (Booking) ic.getById(Booking.class, conf));
+                    } else {
+                        System.out.print("Invalid time period, please try again.\n");
+                    }
                 }
-
-                String conf = handler.reserveRoomStudent(student, room, Timestamp.valueOf(begin), Timestamp.valueOf(end));
-                handler.bookingConfirmation("Student", (Booking) ic.getById(Booking.class, conf));
             }
             catch (NoResultException e) {
                 System.out.println("There is no room with the given number.");
@@ -246,6 +263,29 @@ public class MainIO {
         }
         catch (NoResultException e) {
             System.out.println("There is no booking with the given ID.");
+        }
+    }
+
+    private void displayAvailableRooms() {
+        RoomHandler handler = new RoomHandler();
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Format: yyyy-mm-dd hh:mm:ss");
+        System.out.print("Find available times at: ");
+        String t = sc.nextLine();
+        boolean matches = t.matches("\\d\\d\\d\\d\\-\\d\\d\\-\\d\\d\\ \\d\\d\\:\\d\\d\\:\\d\\d");
+        while (!matches) {
+            System.out.print("Invalid time format, please try again:");
+            t = sc.nextLine();
+            matches = t.matches("\\d\\d\\d\\d\\-\\d\\d\\-\\d\\d\\ \\d\\d\\:\\d\\d\\:\\d\\d");
+        }
+        List<Room> roomList = handler.getAvailableRooms(Timestamp.valueOf(t));
+        System.out.print("Available Rooms: \n\n");
+        for ( Room r : roomList ) {
+            System.out.print("Room: " + r.getNum() + "\n" +
+                             "Room Type: " + r.getType() + "\n" +
+                             "Room Capacity: " + r.getCap() + "\n" +
+                             "Socially Distant Room Capacity: " + r.getSd_cap() + "\n\n");
         }
     }
 

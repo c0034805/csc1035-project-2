@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +31,9 @@ public class RoomHandlerTest extends MasterTest{
     public Timestamp timestampAddHr(Timestamp stmp, float hr){
 
         hr *= 3600000;
-        return new Timestamp((long) (stmp.getTime()+hr));
+        Timestamp t = new Timestamp((long) (stmp.getTime()+hr));
+        t.setNanos( 0 );
+        return t;
     }
 
     /**
@@ -38,8 +41,10 @@ public class RoomHandlerTest extends MasterTest{
      */
     @Test
     public void getRoomsReturnsAll() {
-        Object[] rooms = handler.getRooms().toArray();
-        Assertions.assertArrayEquals(rooms,this.rooms);
+        List<Room> rooms = handler.getRooms();
+        for( Room r : this.rooms ) {
+            Assertions.assertTrue( rooms.contains(r) );
+        }
     }
 
     /**
@@ -166,7 +171,7 @@ public class RoomHandlerTest extends MasterTest{
     @Test
     public void reserveRoomModuleDetailsCorrect(){
 
-        studentReservation(11,12);
+        moduleReservation(11,12);
 
         Booking b = (Booking)controller.getAll(Booking.class).get(0);
         ModuleBooking mb = (ModuleBooking) controller.getAll(ModuleBooking.class).get(0);
@@ -190,8 +195,10 @@ public class RoomHandlerTest extends MasterTest{
         staffReservation(12,13);
         moduleReservation(13,14);
         List<Booking> bookings = controller.getAll(Booking.class);
-        Assertions.assertEquals(1,bookings.size());
+        Assertions.assertEquals(3,bookings.size());
         Assertions.assertEquals(1,controller.getAll(StudentBooking.class).size());
+        Assertions.assertEquals(1,controller.getAll(ModuleBooking.class).size());
+        Assertions.assertEquals(1,controller.getAll(StaffBooking.class).size());
 
         handler.cancelReservation(bookings.get(0).getId());
         handler.cancelReservation(bookings.get(1).getId());
@@ -313,8 +320,10 @@ public class RoomHandlerTest extends MasterTest{
      */
     @Test
     public void checkTimeAvailableTypicalValues(){
-        Assertions.assertTrue(handler.checkTimeAvailable(timestampAddHr(day,5.5F),timestampAddHr(day,5),timestampAddHr(day,6)));
-        Assertions.assertTrue(handler.checkTimeAvailable(timestampAddHr(day,5.5F),timestampAddHr(day,0),timestampAddHr(day,20)));
+        Assertions.assertFalse(handler.checkTimeAvailable(timestampAddHr(day,5.5F),timestampAddHr(day,5),timestampAddHr(day,6)));
+        Assertions.assertFalse(handler.checkTimeAvailable(timestampAddHr(day,5.5F),timestampAddHr(day,0),timestampAddHr(day,20)));
+        Assertions.assertTrue(handler.checkTimeAvailable(timestampAddHr(day,5.5F),timestampAddHr(day,6),timestampAddHr(day,7)));
+        Assertions.assertTrue(handler.checkTimeAvailable(timestampAddHr(day,5.5F),timestampAddHr(day,5.6F),timestampAddHr(day,20)));
     }
 
     /**
@@ -322,9 +331,9 @@ public class RoomHandlerTest extends MasterTest{
      */
     @Test
     public void checkTimeAvailableAtypicalValues(){
-        Assertions.assertFalse(handler.checkTimeAvailable(timestampAddHr(day,2F),timestampAddHr(day,5),timestampAddHr(day,6)));
-        Assertions.assertFalse(handler.checkTimeAvailable(timestampAddHr(day,99F),timestampAddHr(day,5),timestampAddHr(day,6)));
-        Assertions.assertFalse(handler.checkTimeAvailable(timestampAddHr(day,5),timestampAddHr(day,5),timestampAddHr(day,5)));
+        Assertions.assertTrue(handler.checkTimeAvailable(timestampAddHr(day,2F),timestampAddHr(day,5),timestampAddHr(day,6)));
+        Assertions.assertTrue(handler.checkTimeAvailable(timestampAddHr(day,99F),timestampAddHr(day,5),timestampAddHr(day,6)));
+        Assertions.assertTrue(handler.checkTimeAvailable(timestampAddHr(day,5),timestampAddHr(day,5),timestampAddHr(day,5)));
 
     }
 
