@@ -110,4 +110,13 @@ public class Students {
     public void setTakes(Set<Take> takes) {
         this.takes = takes;
     }
+
+    @Override
+    public String toString() {
+        return "Student{\n" +
+                "ID: " + id + "\n" +
+                "First name: " + firstname + "\n" +
+                "Last name: " + lastname + "\n" +
+                "}";
+    }
 }

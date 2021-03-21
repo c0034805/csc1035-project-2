@@ -29,7 +29,8 @@ public class MainIO {
                 case 2 -> moduleOptions();
                 case 3 -> updateRoom();
                 case 4 -> timetableOptions();
-                case 5 -> {
+                case 5 -> displayOptions();
+                case 6 -> {
                     System.out.println("Quitting...");
                     quit = true;
                 }
@@ -43,7 +44,8 @@ public class MainIO {
                            "2: Module options.\n" +
                            "3: Update a room's details.\n" +
                            "4: Generate timetable for selected modules.\n" +
-                           "5: Quit."
+                           "5: Display options.\n" +
+                           "6: Quit."
         );
     }
 
@@ -541,6 +543,68 @@ public class MainIO {
                     quit = false;
                 }
             }
+        }
+    }
+
+    private void displayOptions(){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("1: Display all students.\n" +
+                           "2: Display all staff.\n" +
+                           "3: Display all rooms.\n" +
+                           "4: Return to main menu.\n");
+
+        System.out.println("Please select an option: ");
+        int choice = Integer.parseInt(sc.nextLine());
+
+        boolean quit = false;
+        while(!quit) {
+            switch (choice) {
+                case 1 -> {
+                    displayStudents();
+                    quit = true;
+                }
+                case 2 -> {
+                    displayStaff();
+                    quit = true;
+                }
+                case 3 -> {
+                    displayRooms();
+                    quit = true;
+                }
+                case 4 ->{
+                    System.out.println("Returning to main menu.");
+                    quit = true;
+                }
+                default -> System.out.println("Not a valid option.");
+            }
+        }
+    }
+
+    private void displayStudents(){
+        IController<Students> ic= new Controller<>();
+        List<Students> students =  new ArrayList<>(ic.getAll(Students.class));
+
+        for(Students student: students){
+            System.out.println(student);
+        }
+    }
+
+    private void displayStaff(){
+        IController<Staff> ic= new Controller<>();
+        List<Staff> staff =  new ArrayList<>(ic.getAll(Staff.class));
+
+        for(Staff tutor: staff){
+            System.out.println(tutor);
+        }
+    }
+
+    private void displayRooms(){
+        IController<Room> ic= new Controller<>();
+        List<Room> rooms =  new ArrayList<>(ic.getAll(Room.class));
+
+        for(Room room: rooms){
+            System.out.println(room);
         }
     }
 }

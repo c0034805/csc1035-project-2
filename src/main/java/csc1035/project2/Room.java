@@ -106,4 +106,14 @@ public class Room {
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
     }
+
+    @Override
+    public String toString() {
+        return "Room{\n" +
+                "Number: " + num + "\n" +
+                "Type: " + type + "\n" +
+                "Capacity: " + cap + "\n" +
+                "Social Distancing Capacity" + sd_cap + "\n" +
+                "}";
+    }
 }

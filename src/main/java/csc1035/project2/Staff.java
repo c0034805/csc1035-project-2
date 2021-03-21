@@ -108,4 +108,13 @@ public class Staff{
     public Set<Teach> getTeaches() {
         return teaches;
     }
+
+    @Override
+    public String toString() {
+        return "Staff{\n" +
+                "ID: "+ id + "\n" +
+                "First name: " + firstname + "\n" +
+                "Last name: " + lastname + "\n" +
+                "}";
+    }
 }
