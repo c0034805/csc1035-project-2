@@ -33,3 +33,72 @@
 * (ERICK) Created `removeStaffFromModule()` method.
 * (ERICK) Student-take not created if already exists.
 * (ERICK) Staff-teach not created if already exists.
+
+##### v0.5 [15.03.2021]: Module Handling UI
+* (ERICK) Created `moduleOptions()` method.
+* (ERICK) `addStudent/StaffToModule()` now return booleans.
+* (ERICK) Created `studentAddModule()` method.
+* (ERICK) Created `staffAddModule()` method.
+* (ERICK) Created `studentRemoveModule()` method.
+* (ERICK) Created `staffRemoveModule()` method.
+* (ERICK) Take/teach removal checks if valid removal.
+* (ERICK) Take/teach addition checks correctly.
+* (ERICK) `studentRemoveModule()` makes use of removal check.
+* (ERICK) `staffRemoveModule()` makes use of removal check.
+* (ERICK)  `menu()` no longer makes use of source 15.
+* (ERICK) Added `moduleOptions()` as selectable option.
+
+##### v0.6 [16.03.2021]: Test Feedback 
+* (ERICK) Module handler methods use`getModuleStudent/Staff()`.
+
+##### v0.61 [16.03.2021]: Room Booking Fixing
+* (ERICK) Booking class stops creating new row.
+* (ERICK) Staff, students and modules cascade bookings when deleted.
+* (ERICK) Rooms cascade bookings when deleted.
+
+##### v0.62 [17.03.2021]: 
+* (ERICK) Created `entityBooking()` method.
+* (ERICK) Updated reservation methods according to master branch. 
+* (ERICK) Fixed ManyToMany relationships with module association.
+* (ERICK) Fixed `addStudent/StaffToModule` according to class change.
+* (ERICK) Fixed `removeStudent/StaffFromModule` according to class change.
+* (ERICK) Take/Teach make use of embedded ID.
+* (ERICK) Added constructor methods to Take and Teach. 
+* (ERICK) Added getter/setter methods for Teach/Take in module class.
+* (ERICK) Fixed `addStudent/StaffToModule` according to embedded Teach/Take.
+* (ERICK) Changed List to Set to avoid `MultipleBagFetchException`.
+* (ERICK) Teach/Take fetching set to EAGER.
+* (ERICK) Take/Teach creation finally fixed.
+* (ERICK) `student/staffRemoveModule` display repositioned.
+* (ERICK) Take/Teach removal finally fixed.
+* (ERICK) Module handler test updated to match embedded classes.
+
+##### v0.63 [20.03.2021]:
+* (ERICK) Reinstated booking table change to get staff reservations to work.
+* (ERICK) Updated student class structure to match staff structure.
+* (ERICK) Updated module class structure to match staff structure.
+* (ERICK) `reserveOptions()` now loops until choosing to exit.
+* (ERICK) Module booking is correctly mapped to module.
+* (ERICK) Added additional getter/setter methods to booking class.
+* (ERICK) `cancelReservation()` now deletes staff/(ect) booking.
+* (ERICK) Created `cancelBookingReservation()` method.
+
+##### v0.7 [21.03.2021]: Test Suite Matching
+* (ERICK) `getRoomsReturnsAll()` test doesn't test with arrays.
+* (ERICK) `timestampAddHr()` disregards nanoseconds.
+* (ERICK) Removed hash override in modules class.
+* (ERICK) `reserveRoomModuleDetailsCorrect` booking fixed.
+* (ERICK) `cancelReservationCancelsAllTypes()` checks corrected.
+* (ERICK) `cancelReservation()` catches NoResultException exceptions.
+* (ERICK) `getReservedRooms()` method fixed.
+* (ERICK) `checkTimeAvailable()` slight javadoc change.
+* (ERICK) `checkTimeAvailableTypicalValues()` assertions fixed.
+* (ERICK) `checkRoomTimeAvailable()` checking updated.
+* (ERICK) `checkTimeAvailableAtypicalValues()` assertions fixed.
+* (ERICK) `checkRoomTimeAvailable()` checking further updated.
+* (ERICK) Created `checkValidTimePeriod()` method.
+* (ERICK) `reserveStudent/Staff()` make use of `checkValidTimePeriod()`.
+* (ERICK) `checkRoomTimeAvailable()` correctly checks if rooms match.
+* (ERICK) `getAvailableRooms()` method fixed.
+* (ERICK) Created `displayAvailableRooms()` methods.
+* (ERICK) Removed `addDummyData()` from mainIO.

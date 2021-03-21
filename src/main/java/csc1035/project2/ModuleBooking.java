@@ -1,6 +1,7 @@
 package csc1035.project2;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * A persistent class made to handle the Module_Booking table, which
@@ -18,29 +19,20 @@ import javax.persistence.*;
 @Table(name = "Module_Booking")
 public class ModuleBooking {
     @Id
-    @Column(name = "Booking_ID", nullable = false)
     private String bid;
 
-    @Column(name = "Module_ID", nullable = false)
-    private String id;
-
-    @ManyToOne
-    @JoinColumn(nullable = false, insertable = false, updatable = false)
-    private Modules module;
-
-    @OneToOne(mappedBy = "moduleBooking")
+    @OneToOne
+    @JoinColumn(name = "Booking_ID")
+    @MapsId
     private Booking booking;
 
-    /**
-     * The constructor that connects the parameter values with the field
-     * variables.
-     *
-     * @param id The module ID.
-     * @param bid The Booking ID.
-     */
-    public ModuleBooking(String bid, String id) {
-        this.id = id;
-        this.bid = bid;
+    @ManyToOne
+    @JoinColumn(name = "Module_ID")
+    private Modules module;
+
+    public ModuleBooking( Booking booking, Modules module ) {
+        this.booking = booking;
+        this.module = module;
     }
 
     /**
@@ -53,35 +45,36 @@ public class ModuleBooking {
      * @param o The object for comparison
      * @return returns true if all attributes in both objects are the same, or if they have the same memory address
      */
+
+
     @Override
-    public boolean equals(Object o){
-        if (this==o) return true;
-        if (o == null || o.getClass() != ModuleBooking.class) return false;
-        ModuleBooking b = (ModuleBooking) o;
-        return this.id.equals(b.getId()) && this.bid.equals(b.getBid());
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ModuleBooking that = (ModuleBooking) o;
+        return Objects.equals(bid, that.bid) &&
+                Objects.equals(booking, that.booking) &&
+                Objects.equals(module, that.module);
     }
 
-    public String getId() {
-        return id;
+    @Override
+    public int hashCode() {
+        return Objects.hash(bid, booking, module);
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public Booking getBooking() {
+        return booking;
     }
 
-    public String getBid() {
-        return bid;
-    }
-
-    public void setBid(String bid) {
-        this.bid = bid;
-    }
-
-    public Modules getModule(){
+    public Modules getModules() {
         return module;
     }
 
-    public void setModule(Modules module){
-        this.module = module;
+    public void setBooking(Booking booking) {
+        this.booking = booking;
+    }
+
+    public void setModules(Modules modules) {
+        this.module = modules;
     }
 }

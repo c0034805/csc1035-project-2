@@ -30,15 +30,10 @@ public class Staff{
     private String lastname;
 
     @OneToMany(mappedBy = "staff", fetch = FetchType.EAGER)
-    private List<StaffBooking> staffBookings;
+    private Set<StaffBooking> staffBookings = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "Teach",
-            joinColumns = {@JoinColumn(name = "Staff_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "Module_ID")}
-    )
-    private Set<Modules> modules = new HashSet<>();
+    @OneToMany( mappedBy = "staff" , fetch = FetchType.EAGER)
+    private Set<Teach> teaches = new HashSet<>();
 
     /**
      * The constructor that connects the parameter values with the field
@@ -49,7 +44,7 @@ public class Staff{
      * @param lastname The staff member's last name.
      */
     public Staff(String id, String firstname, String lastname,
-                 List<StaffBooking> staffBookings) {
+                 Set<StaffBooking> staffBookings) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -98,19 +93,28 @@ public class Staff{
         this.lastname = lastname;
     }
 
-    public List<StaffBooking> getStaffBookings() {
+    public Set<StaffBooking> getStaffBookings() {
         return staffBookings;
     }
 
-    public void setStaffBookings(List<StaffBooking> staffBookings) {
+    public void setStaffBookings(Set<StaffBooking> staffBookings) {
         this.staffBookings = staffBookings;
     }
 
-    public Set<Modules> getModules() {
-        return modules;
+    public void setTeaches(Set<Teach> teaches) {
+        this.teaches = teaches;
     }
 
-    public void setModules(Set<Modules> modules) {
-        this.modules = modules;
+    public Set<Teach> getTeaches() {
+        return teaches;
+    }
+
+    @Override
+    public String toString() {
+        return "Staff{\n" +
+                "ID: "+ id + "\n" +
+                "First name: " + firstname + "\n" +
+                "Last name: " + lastname + "\n" +
+                "}";
     }
 }

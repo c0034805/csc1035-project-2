@@ -1,5 +1,8 @@
 package csc1035.project2;
 
+import org.hibernate.Session;
+
+import javax.persistence.NoResultException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +47,7 @@ public class RoomHandler {
         this.setStudentBookings( new ArrayList<StudentBooking>(ic.getAll(StudentBooking.class)) );
 
     }
-
+    //TODO: Please someone sort the persistent classes out.
     /**
      * Method to reserve a room for a student.
      *
@@ -59,20 +62,12 @@ public class RoomHandler {
     public String reserveRoomStudent ( Students s, Room r, Timestamp st, Timestamp et ) {
         if ( checkRoomTimeAvailable( r, st, et) ) {
 
-            Booking b = new Booking(r.getNum(), st, et);
-            IController ic = new Controller();
+            Booking b = new Booking(st, et);
+            b.setRoom( r );
 
-            r.getBookings().add(b);
-            b.setRoom(r);
+            StudentBooking sb = new StudentBooking(b, s);
+            updateClasses( b, sb );
 
-            ic.update(b);
-
-            StudentBooking sb = new StudentBooking(b.getId(), s.getId());
-
-            s.getStudentBookings().add(sb);
-            sb.setStudent(s);
-
-            ic.update(sb);
             refreshRoomHandler();
             return b.getId();
         }
@@ -92,20 +87,12 @@ public class RoomHandler {
      */
     public String reserveRoomStaff ( Staff s, Room r, Timestamp st, Timestamp et ) {
         if ( checkRoomTimeAvailable( r, st, et) ) {
-            Booking b = new Booking(r.getNum(), st, et);
-            IController ic = new Controller();
+            Booking b = new Booking(st, et);
+            b.setRoom( r );
 
-            r.getBookings().add(b);
-            b.setRoom(r);
+            StaffBooking sb = new StaffBooking( b, s );
+            updateClasses( b, sb );
 
-            ic.update(b);
-
-            StaffBooking sb = new StaffBooking(b.getId(), s.getId());
-
-            s.getStaffBookings().add(sb);
-            sb.setStaff(s);
-
-            ic.update(sb);
             refreshRoomHandler();
             return b.getId();
         }
@@ -125,23 +112,25 @@ public class RoomHandler {
      */
     public String reserveRoomModule ( Modules m, Room r, Timestamp st, Timestamp et ) {
         if ( checkRoomTimeAvailable( r, st, et) ) {
-            Booking b = new Booking(r.getNum(), st, et);
-            IController ic = new Controller();
-
-            r.getBookings().add(b);
+            Booking b = new Booking(st, et);
             b.setRoom(r);
 
-            ic.update(b);
-
-            ModuleBooking mb = new ModuleBooking(b.getId(), m.getId());
-
-            m.getModuleBookings().add(mb);
-            mb.setModule(m);
+            ModuleBooking mb = new ModuleBooking(b, m);
+            updateClasses( b, mb );
 
             refreshRoomHandler();
             return b.getId();
         }
         return "";
+    }
+    //Method specifically to persist bookings in correct order.
+    private <T> void updateClasses( Booking b, Object entityBooking ) {
+        Session ses = HibernateUtil.getSessionFactory().openSession();
+        ses.beginTransaction();
+        ses.persist( b );
+        ses.persist( entityBooking );
+        ses.getTransaction().commit();
+        ses.close();
     }
 
     /**
@@ -156,7 +145,7 @@ public class RoomHandler {
     public void bookingConfirmation ( String bt, Booking b ) {
         System.out.println( "Booking Confirmation: \n\n" +
                             "Booking Type: " + bt + "\n" +
-                            "Room: " + b.getNum() + "\n" +
+                            "Room: " + b.getRoom().getNum() + "\n" +
                             "Start Time: " + b.getStart() + "\n" +
                             "Finish Time: " + b.getEnd() + "\n" +
                             "Booking ID: " + b.getId() + "\n");
@@ -170,8 +159,21 @@ public class RoomHandler {
      */
     public void cancelReservation ( String id ) {
         IController ic = new Controller();
-        ic.delete( Booking.class, id );
-        refreshRoomHandler();
+        try {
+            Booking b = (Booking) ic.getById(Booking.class, id);
+            if (b.getStaffBooking() != null) {
+                ic.delete(StaffBooking.class, id);
+            } else if (b.getStudentBooking() != null) {
+                ic.delete(StudentBooking.class, id);
+            } else if (b.getModuleBooking() != null) {
+                ic.delete(ModuleBooking.class, id);
+            }
+            ic.delete(Booking.class, id);
+            refreshRoomHandler();
+        }
+        catch (NoResultException e) {
+
+        }
     }
 
     /**
@@ -181,13 +183,13 @@ public class RoomHandler {
      */
     public List<Room> getReservedRooms () {
         List<Room> tmp = new ArrayList<>();
-        for ( Room r : this.getRooms() ) {
-            for ( Booking b : this.getBookings() ) {
-                if ( r.getNum() == b.getNum() ) {
-                    tmp.add( r );
-                }
+
+        for ( Booking b : this.getBookings() ) {
+            if ( !tmp.contains( b.getRoom() ) ) {
+                tmp.add( b.getRoom() );
             }
         }
+
         return tmp;
     }
 
@@ -201,10 +203,10 @@ public class RoomHandler {
      * @return List of all available rooms at a specified time.
      */
     public List<Room> getAvailableRooms ( Timestamp t ) {
-        List<Room> tmp = new ArrayList<>( this.getRooms() );
+        List<Room> tmp = this.getRooms();
         for ( Room r : tmp ) {
             for ( Booking b : this.getBookings() ) {
-                if ( r.getNum() == b.getNum() && checkTimeAvailable( t, b.getStart(), b.getEnd() ) ) {
+                if ( r.getNum().equals(b.getRoom().getNum()) && !checkTimeAvailable( t, b.getStart(), b.getEnd() ) ) {
                     tmp.remove( r );
                 }
             }
@@ -236,12 +238,12 @@ public class RoomHandler {
     }
 
     /**
-     * Method to check if time is between two other times.
+     * Method to check if time is not between two other times.
      *
      * @param t Timestamp to be checked.
      * @param st Lower-end time.
      * @param et Upper-end time.
-     * @return If <code>t</code> is between <code>st</code> and <code>et</code>.
+     * @return If <code>t</code> is not between <code>st</code> and <code>et</code>.
      */
     public boolean checkTimeAvailable ( Timestamp t, Timestamp st, Timestamp et ) {
         return !(t.after(st) && t.before(et));
@@ -257,13 +259,15 @@ public class RoomHandler {
      */
     public boolean checkRoomTimeAvailable ( Room r, Timestamp st, Timestamp et ) {
         for ( Booking b : this.getBookings() ) {
-            if ( b.getNum() == r.getNum() ) {
-                if ( !checkTimeAvailable(st, b.getStart(), b.getEnd()) ) {
+            if ( b.getRoom().getNum().equals(r.getNum()) ) {
+                if ( !checkTimeAvailable(st, b.getStart(), b.getEnd()) || st.equals(b.getStart()) ) {
                     System.out.println( "Starting time " + st + " conflicts with booking with time " +
                                         b.getStart() + "-" + b.getEnd() );
                     return false;
                 }
-                else if ( !checkTimeAvailable(et, b.getStart(), b.getEnd()) ) {
+                else if ( !checkTimeAvailable(et, b.getStart(), b.getEnd()) ||
+                        et.equals(b.getEnd()) ||
+                        ( st.before(b.getStart()) && et.after(b.getEnd()) ) ) {
                     System.out.println( "Finish time " + et + " conflicts with booking with time " +
                                         b.getStart() + "-" + b.getEnd() );
                     return false;
@@ -271,6 +275,17 @@ public class RoomHandler {
             }
         }
         return true;
+    }
+
+    /**
+     * Method to check if a given time period is valid.
+     *
+     * @param st Starting time.
+     * @param et Ending time.
+     * @return If <code>st</code> is before and not equal to <code>et</code>.
+     */
+    public boolean checkValidTimePeriod ( Timestamp st, Timestamp et ) {
+        return st.before(et) && !st.equals(et);
     }
 
     /**

@@ -28,8 +28,8 @@ public class ModuleHandlerTest extends MasterTest{
 
         //checks that there is only 1 entry in that table
         Assertions.assertEquals(1,take.size());
-        Assertions.assertEquals(students[0].getId(),take.get(0).getSid());
-        Assertions.assertEquals(modules[0].getId(),take.get(0).getMid());
+        Assertions.assertEquals(students[0],take.get(0).getId().getSid());
+        Assertions.assertEquals(modules[0],take.get(0).getId().getMid());
     }
 
     /**
@@ -43,8 +43,8 @@ public class ModuleHandlerTest extends MasterTest{
 
         //checks that there is only 1 entry in that table
         Assertions.assertEquals(1,take.size());
-        Assertions.assertEquals(students[0].getId(),take.get(0).getSid());
-        Assertions.assertEquals(modules[0].getId(),take.get(0).getMid());
+        Assertions.assertEquals(students[0],take.get(0).getId().getSid());
+        Assertions.assertEquals(modules[0],take.get(0).getId().getMid());
     }
 
     /**
@@ -65,10 +65,10 @@ public class ModuleHandlerTest extends MasterTest{
 
         //checks that all entries present in the collection
         //collection.contains uses equals(), so this should work
-        boolean checker = (take.contains(new Take(students[0].getId(),modules[0].getId()))&&
-                take.contains(new Take(students[0].getId(),modules[1].getId()))&&
-                take.contains(new Take(students[1].getId(),modules[0].getId()))&&
-                take.contains(new Take(students[1].getId(),modules[1].getId())));
+        boolean checker = (take.contains(new Take(students[0],modules[0]))&&
+                take.contains(new Take(students[0],modules[1]))&&
+                take.contains(new Take(students[1],modules[0]))&&
+                take.contains(new Take(students[1],modules[1])));
 
         Assertions.assertTrue(checker);
 
@@ -84,8 +84,8 @@ public class ModuleHandlerTest extends MasterTest{
 
         //checks that there is only 1 entry in that table
         Assertions.assertEquals(1,teach.size());
-        Assertions.assertEquals(staff[0].getId(),teach.get(0).getSid());
-        Assertions.assertEquals(modules[0].getId(),teach.get(0).getMid());
+        Assertions.assertEquals(staff[0],teach.get(0).getId().getSid());
+        Assertions.assertEquals(modules[0],teach.get(0).getId().getMid());
     }
 
     /**
@@ -99,8 +99,8 @@ public class ModuleHandlerTest extends MasterTest{
 
         //checks that there is only 1 entry in that table
         Assertions.assertEquals(1,teach.size());
-        Assertions.assertEquals(staff[0].getId(),teach.get(0).getSid());
-        Assertions.assertEquals(modules[0].getId(),teach.get(0).getMid());
+        Assertions.assertEquals(staff[0],teach.get(0).getId().getSid());
+        Assertions.assertEquals(modules[0],teach.get(0).getId().getMid());
     }
 
     /**
@@ -121,10 +121,10 @@ public class ModuleHandlerTest extends MasterTest{
 
         //checks that all entries present in the collection
         //collection.contains uses equals(), so this should work
-        boolean checker = (teach.contains(new Teach(staff[0].getId(),modules[0].getId()))&&
-                teach.contains(new Teach(staff[0].getId(),modules[1].getId()))&&
-                teach.contains(new Teach(staff[1].getId(),modules[0].getId()))&&
-                teach.contains(new Teach(staff[1].getId(),modules[1].getId())));
+        boolean checker = (teach.contains(new Teach(staff[0],modules[0]))&&
+                teach.contains(new Teach(staff[0],modules[1]))&&
+                teach.contains(new Teach(staff[1],modules[0]))&&
+                teach.contains(new Teach(staff[1],modules[1])));
 
         Assertions.assertTrue(checker);
     }
@@ -154,8 +154,8 @@ public class ModuleHandlerTest extends MasterTest{
         List<Take> take = controller.getAll(Take.class);
 
         Assertions.assertEquals(1,take.size());
-        Assertions.assertEquals(students[0].getId(),take.get(0).getSid());
-        Assertions.assertEquals(modules[0].getId(),take.get(0).getMid());
+        Assertions.assertEquals(students[0],take.get(0).getId().getSid());
+        Assertions.assertEquals(modules[0],take.get(0).getId().getMid());
     }
 
     /**
@@ -183,7 +183,7 @@ public class ModuleHandlerTest extends MasterTest{
         List<Teach> teach = controller.getAll(Teach.class);
 
         Assertions.assertEquals(1,teach.size());
-        Assertions.assertEquals(students[0].getId(),teach.get(0).getSid());
-        Assertions.assertEquals(modules[0].getId(),teach.get(0).getMid());
+        Assertions.assertEquals(students[0],teach.get(0).getId().getSid());
+        Assertions.assertEquals(modules[0],teach.get(0).getId().getMid());
     }
 }

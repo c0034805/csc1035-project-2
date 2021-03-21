@@ -22,7 +22,6 @@ public class Room {
     private String num;
 
     @Column(name = "Type")
-    // TODO: Stop using string IDs for things like this. This should be an enum or a class.
     private String type;
 
     @Column(name = "Max_Capacity")
@@ -31,7 +30,7 @@ public class Room {
     @Column(name = "Social_Distancing_Capacity")
     private int sd_cap;
 
-    @OneToMany(mappedBy = "room")
+    @OneToMany(mappedBy = "room", cascade=CascadeType.ALL)
     private List<Booking> bookings;
 
     /**
@@ -106,5 +105,15 @@ public class Room {
 
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{\n" +
+                "Number: " + num + "\n" +
+                "Type: " + type + "\n" +
+                "Capacity: " + cap + "\n" +
+                "Social Distancing Capacity" + sd_cap + "\n" +
+                "}";
     }
 }

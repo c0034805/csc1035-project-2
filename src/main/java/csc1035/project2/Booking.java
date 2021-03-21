@@ -22,14 +22,10 @@ import java.sql.Timestamp;
 @Table(name = "Booking")
 public class Booking {
     @Id
-    @ColumnDefault(value = "a")
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column(name = "Booking_ID", nullable = false)
     private String id;
-
-    @Column(name = "Room_Number", nullable = false)
-    private String num;
 
     @Column(name = "Start", nullable = false)
     private Timestamp start;
@@ -38,7 +34,7 @@ public class Booking {
     private Timestamp end;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false, name = "Room_Number")
     private Room room;
 
     @OneToOne
@@ -57,12 +53,10 @@ public class Booking {
      * The constructor that connects the parameter values with the field
      * variables.
      *
-     * @param num The room number.
      * @param start The beginning of the booking.
      * @param end The end of the booking.
      */
-    public Booking(String num, Timestamp start, Timestamp end) {
-        this.num = num;
+    public Booking(Timestamp start, Timestamp end) {
         this.start = start;
         this.end = end;
     }
@@ -83,7 +77,6 @@ public class Booking {
         if (o == null || o.getClass() != Booking.class) return false;
         Booking b = (Booking) o;
         return this.id.equals(b.getId()) &&
-                this.num.equals(b.getNum()) &&
                 this.start == b.getStart() &&
                 this.end == b.getEnd();
     }
@@ -94,14 +87,6 @@ public class Booking {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getNum() {
-        return num;
-    }
-
-    public void setNum(String num) {
-        this.num = num;
     }
 
     public Timestamp getStart() {
@@ -126,5 +111,29 @@ public class Booking {
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+
+    public StaffBooking getStaffBooking() {
+        return staffBooking;
+    }
+
+    public StudentBooking getStudentBooking() {
+        return studentBooking;
+    }
+
+    public ModuleBooking getModuleBooking() {
+        return moduleBooking;
+    }
+
+    public void setStaffBooking(StaffBooking staffBooking) {
+        this.staffBooking = staffBooking;
+    }
+
+    public void setStudentBooking(StudentBooking studentBooking) {
+        this.studentBooking = studentBooking;
+    }
+
+    public void setModuleBooking(ModuleBooking moduleBooking) {
+        this.moduleBooking = moduleBooking;
     }
 }
