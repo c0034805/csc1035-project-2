@@ -47,7 +47,6 @@ public class RoomHandler {
         this.setStudentBookings( new ArrayList<StudentBooking>(ic.getAll(StudentBooking.class)) );
 
     }
-    //TODO: Please someone sort the persistent classes out.
     /**
      * Method to reserve a room for a student.
      *
@@ -151,9 +150,11 @@ public class RoomHandler {
                             "Booking ID: " + b.getId() + "\n");
     }
 
-    // TODO: Make sure to test when deleting a reservation that the module/student/staff booking also deletes.
     /**
      * Method to cancel reservation by id.
+     *
+     * <p>Method checks to see if the booking is associated with any entity-bookings and deletes them
+     * first.</p>
      *
      * @param id Booking id to cancel.
      */
