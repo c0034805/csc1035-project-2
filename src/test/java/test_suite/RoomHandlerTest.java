@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +31,9 @@ public class RoomHandlerTest extends MasterTest{
     public Timestamp timestampAddHr(Timestamp stmp, float hr){
 
         hr *= 3600000;
-        return new Timestamp((long) (stmp.getTime()+hr));
+        Timestamp t = new Timestamp((long) (stmp.getTime()+hr));
+        t.setNanos( 0 );
+        return t;
     }
 
     /**
