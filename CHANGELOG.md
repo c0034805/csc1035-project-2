@@ -87,3 +87,4 @@
 * (ERICK) `getRoomsReturnsAll()` test doesn't test with arrays.
 * (ERICK) `timestampAddHr()` disregards nanoseconds.
 * (ERICK) Removed hash override in modules class.
+* (ERICK) `reserveRoomModuleDetailsCorrect` booking fixed.

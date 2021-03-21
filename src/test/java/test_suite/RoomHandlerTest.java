@@ -171,7 +171,7 @@ public class RoomHandlerTest extends MasterTest{
     @Test
     public void reserveRoomModuleDetailsCorrect(){
 
-        studentReservation(11,12);
+        moduleReservation(11,12);
 
         Booking b = (Booking)controller.getAll(Booking.class).get(0);
         ModuleBooking mb = (ModuleBooking) controller.getAll(ModuleBooking.class).get(0);
