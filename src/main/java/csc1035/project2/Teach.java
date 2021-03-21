@@ -111,4 +111,13 @@ public class Teach {
             return Objects.hash(sid, mid);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Take{\n" +
+                "ID: " + id + "\n" +
+                "Staff: " + staff + "\n" +
+                "Modules: " + modules + "\n" +
+                "}\n";
+    }
 }

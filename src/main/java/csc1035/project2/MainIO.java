@@ -549,39 +549,31 @@ public class MainIO {
     private void displayOptions(){
         Scanner sc = new Scanner(System.in);
 
-        boolean quit = false;
-        while(!quit) {
+        boolean quit = true;
+        while(quit) {
             System.out.println("1: Display all students.\n" +
-                    "2: Display all staff.\n" +
-                    "3: Display all rooms.\n" +
-                    "4: Display all modules.\n" +
-                    "5: Return to main menu.\n");
+                               "2: Display all staff.\n" +
+                               "3: Display all rooms.\n" +
+                               "4: Display all modules.\n" +
+                               "5: Display which modules are taken by which students.\n" +
+                               "6: Display which modules are taught by which tutors.\n" +
+                               "7: Return to main menu.\n");
 
             System.out.println("Please select an option: ");
             int choice = Integer.parseInt(sc.nextLine());
 
             switch (choice) {
-                case 1 -> {
-                    displayStudents();
+                case 1 -> displayStudents();
+                case 2 -> displayStaff();
+                case 3 -> displayRooms();
+                case 4 -> displayModules();
+                case 5 -> displayTake();
+                case 6 -> displayTeach();
+                case 7 -> System.out.println("Returning to main menu.");
+                default -> {
+                    System.out.println("Not a valid option.");
                     quit = false;
                 }
-                case 2 -> {
-                    displayStaff();
-                    quit = true;
-                }
-                case 3 -> {
-                    displayRooms();
-                    quit = true;
-                }
-                case 4 -> {
-                    displayModules();
-                    quit = true;
-                }
-                case 5 ->{
-                    System.out.println("Returning to main menu.");
-                    quit = true;
-                }
-                default -> System.out.println("Not a valid option.");
             }
         }
     }
@@ -619,6 +611,24 @@ public class MainIO {
 
         for(Modules module: modules){
             System.out.println(module);
+        }
+    }
+
+    private void displayTake(){
+        IController<Take> ic = new Controller<>();
+        List<Take> takes = new ArrayList<>(ic.getAll((Take.class)));
+
+        for(Take take: takes){
+            System.out.println(take);
+        }
+    }
+
+    private void displayTeach(){
+        IController<Teach> ic = new Controller<>();
+        List<Teach> teaches = new ArrayList<>(ic.getAll((Teach.class)));
+
+        for(Teach teach: teaches){
+            System.out.println(teach);
         }
     }
 }

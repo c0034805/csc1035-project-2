@@ -110,4 +110,13 @@ public class Take {
             return Objects.hash(sid, mid);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Take{\n" +
+                "ID: " + id + "\n" +
+                "Students: " + students + "\n" +
+                "Modules: " + modules + "\n" +
+                "}\n";
+    }
 }
