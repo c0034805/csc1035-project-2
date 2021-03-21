@@ -238,12 +238,12 @@ public class RoomHandler {
     }
 
     /**
-     * Method to check if time is between two other times.
+     * Method to check if time is not between two other times.
      *
      * @param t Timestamp to be checked.
      * @param st Lower-end time.
      * @param et Upper-end time.
-     * @return If <code>t</code> is between <code>st</code> and <code>et</code>.
+     * @return If <code>t</code> is not between <code>st</code> and <code>et</code>.
      */
     public boolean checkTimeAvailable ( Timestamp t, Timestamp st, Timestamp et ) {
         return !(t.after(st) && t.before(et));

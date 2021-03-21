@@ -91,3 +91,4 @@
 * (ERICK) `cancelReservationCancelsAllTypes()` checks corrected.
 * (ERICK) `cancelReservation()` catches NoResultException exceptions.
 * (ERICK) `getReservedRooms()` method fixed.
+* (ERICK) `checkTimeAvailable()` slight javadoc change.
