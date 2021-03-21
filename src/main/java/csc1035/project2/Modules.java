@@ -85,12 +85,6 @@ public class Modules {
                 Objects.equals(moduleBookings, modules.moduleBookings);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, credits, weeks, moduleRequirements, takes, teaches, moduleBookings);
-    }
-
-
     public String getId() {
         return id;
     }

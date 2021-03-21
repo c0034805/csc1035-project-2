@@ -86,3 +86,4 @@
 ##### v0.7 [21.03.2021]: Test Suite Matching
 * (ERICK) `getRoomsReturnsAll()` test doesn't test with arrays.
 * (ERICK) `timestampAddHr()` disregards nanoseconds.
+* (ERICK) Removed hash override in modules class.
