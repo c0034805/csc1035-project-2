@@ -2,6 +2,7 @@ package csc1035.project2;
 
 import org.hibernate.Session;
 
+import javax.persistence.NoResultException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -158,13 +159,21 @@ public class RoomHandler {
      */
     public void cancelReservation ( String id ) {
         IController ic = new Controller();
-        Booking b = (Booking) ic.getById( Booking.class, id );
+        try {
+            Booking b = (Booking) ic.getById(Booking.class, id);
+            if (b.getStaffBooking() != null) {
+                ic.delete(StaffBooking.class, id);
+            } else if (b.getStudentBooking() != null) {
+                ic.delete(StudentBooking.class, id);
+            } else if (b.getModuleBooking() != null) {
+                ic.delete(ModuleBooking.class, id);
+            }
+            ic.delete(Booking.class, id);
+            refreshRoomHandler();
+        }
+        catch (NoResultException e) {
 
-        if(b.getStaffBooking() != null) {ic.delete( StaffBooking.class, id );}
-        else if(b.getStudentBooking() != null) {ic.delete( StudentBooking.class, id );}
-        else if(b.getModuleBooking() != null) {ic.delete( ModuleBooking.class, id );}
-        ic.delete( Booking.class, id );
-        refreshRoomHandler();
+        }
     }
 
     /**
