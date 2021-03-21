@@ -97,3 +97,4 @@
 * (ERICK) `checkTimeAvailableAtypicalValues()` assertions fixed.
 * (ERICK) `checkRoomTimeAvailable()` checking further updated.
 * (ERICK) Created `checkValidTimePeriod()` method.
+* (ERICK) `reserveStudent/Staff()` make use of `checkValidTimePeriod()`.
