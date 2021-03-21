@@ -259,7 +259,7 @@ public class RoomHandler {
      */
     public boolean checkRoomTimeAvailable ( Room r, Timestamp st, Timestamp et ) {
         for ( Booking b : this.getBookings() ) {
-            if ( b.getRoom().getNum() == r.getNum() ) {
+            if ( b.getRoom().getNum().equals(r.getNum()) ) {
                 if ( !checkTimeAvailable(st, b.getStart(), b.getEnd()) || st.equals(b.getStart()) ) {
                     System.out.println( "Starting time " + st + " conflicts with booking with time " +
                                         b.getStart() + "-" + b.getEnd() );
