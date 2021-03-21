@@ -260,12 +260,13 @@ public class RoomHandler {
     public boolean checkRoomTimeAvailable ( Room r, Timestamp st, Timestamp et ) {
         for ( Booking b : this.getBookings() ) {
             if ( b.getRoom().getNum() == r.getNum() ) {
-                if ( !checkTimeAvailable(st, b.getStart(), b.getEnd()) ) {
+                if ( !checkTimeAvailable(st, b.getStart(), b.getEnd()) || st.equals(b.getStart()) ) {
                     System.out.println( "Starting time " + st + " conflicts with booking with time " +
                                         b.getStart() + "-" + b.getEnd() );
                     return false;
                 }
                 else if ( !checkTimeAvailable(et, b.getStart(), b.getEnd()) ||
+                        et.equals(b.getEnd()) ||
                         ( st.before(b.getStart()) && et.after(b.getEnd()) ) ) {
                     System.out.println( "Finish time " + et + " conflicts with booking with time " +
                                         b.getStart() + "-" + b.getEnd() );

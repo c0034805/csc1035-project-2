@@ -95,3 +95,4 @@
 * (ERICK) `checkTimeAvailableTypicalValues()` assertions fixed.
 * (ERICK) `checkRoomTimeAvailable()` checking updated.
 * (ERICK) `checkTimeAvailableAtypicalValues()` assertions fixed.
+* (ERICK) `checkRoomTimeAvailable()` checking further updated.
