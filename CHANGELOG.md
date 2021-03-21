@@ -94,3 +94,4 @@
 * (ERICK) `checkTimeAvailable()` slight javadoc change.
 * (ERICK) `checkTimeAvailableTypicalValues()` assertions fixed.
 * (ERICK) `checkRoomTimeAvailable()` checking updated.
+* (ERICK) `checkTimeAvailableAtypicalValues()` assertions fixed.
