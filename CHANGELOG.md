@@ -96,3 +96,4 @@
 * (ERICK) `checkRoomTimeAvailable()` checking updated.
 * (ERICK) `checkTimeAvailableAtypicalValues()` assertions fixed.
 * (ERICK) `checkRoomTimeAvailable()` checking further updated.
+* (ERICK) Created `checkValidTimePeriod()` method.

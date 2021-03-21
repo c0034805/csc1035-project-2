@@ -278,6 +278,17 @@ public class RoomHandler {
     }
 
     /**
+     * Method to check if a given time period is valid.
+     *
+     * @param st Starting time.
+     * @param et Ending time.
+     * @return If <code>st</code> is before and not equal to <code>et</code>.
+     */
+    public boolean checkValidTimePeriod ( Timestamp st, Timestamp et ) {
+        return st.before(et) && !st.equals(et);
+    }
+
+    /**
      * Checks if string is an integer.
      *
      * @param s String to check.
