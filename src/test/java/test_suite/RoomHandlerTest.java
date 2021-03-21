@@ -320,8 +320,10 @@ public class RoomHandlerTest extends MasterTest{
      */
     @Test
     public void checkTimeAvailableTypicalValues(){
-        Assertions.assertTrue(handler.checkTimeAvailable(timestampAddHr(day,5.5F),timestampAddHr(day,5),timestampAddHr(day,6)));
-        Assertions.assertTrue(handler.checkTimeAvailable(timestampAddHr(day,5.5F),timestampAddHr(day,0),timestampAddHr(day,20)));
+        Assertions.assertFalse(handler.checkTimeAvailable(timestampAddHr(day,5.5F),timestampAddHr(day,5),timestampAddHr(day,6)));
+        Assertions.assertFalse(handler.checkTimeAvailable(timestampAddHr(day,5.5F),timestampAddHr(day,0),timestampAddHr(day,20)));
+        Assertions.assertTrue(handler.checkTimeAvailable(timestampAddHr(day,5.5F),timestampAddHr(day,6),timestampAddHr(day,7)));
+        Assertions.assertTrue(handler.checkTimeAvailable(timestampAddHr(day,5.5F),timestampAddHr(day,5.6F),timestampAddHr(day,20)));
     }
 
     /**
