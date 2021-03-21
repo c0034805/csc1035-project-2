@@ -168,4 +168,14 @@ public class Modules {
     public void setTeaches(Set<Teach> teaches) {
         this.teaches = teaches;
     }
+
+    @Override
+    public String toString() {
+        return "Module{\n" +
+                "ID: " + id + "\n" +
+                "Name: " + name + "\n" +
+                "Credits: " + credits + "\n" +
+                "Weeks: " + weeks + "\n" +
+                "}";
+    }
 }

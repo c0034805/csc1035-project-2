@@ -549,20 +549,21 @@ public class MainIO {
     private void displayOptions(){
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("1: Display all students.\n" +
-                           "2: Display all staff.\n" +
-                           "3: Display all rooms.\n" +
-                           "4: Return to main menu.\n");
-
-        System.out.println("Please select an option: ");
-        int choice = Integer.parseInt(sc.nextLine());
-
         boolean quit = false;
         while(!quit) {
+            System.out.println("1: Display all students.\n" +
+                    "2: Display all staff.\n" +
+                    "3: Display all rooms.\n" +
+                    "4: Display all modules.\n" +
+                    "5: Return to main menu.\n");
+
+            System.out.println("Please select an option: ");
+            int choice = Integer.parseInt(sc.nextLine());
+
             switch (choice) {
                 case 1 -> {
                     displayStudents();
-                    quit = true;
+                    quit = false;
                 }
                 case 2 -> {
                     displayStaff();
@@ -572,7 +573,11 @@ public class MainIO {
                     displayRooms();
                     quit = true;
                 }
-                case 4 ->{
+                case 4 -> {
+                    displayModules();
+                    quit = true;
+                }
+                case 5 ->{
                     System.out.println("Returning to main menu.");
                     quit = true;
                 }
@@ -605,6 +610,15 @@ public class MainIO {
 
         for(Room room: rooms){
             System.out.println(room);
+        }
+    }
+
+    private void displayModules(){
+        IController<Modules> ic = new Controller<>();
+        List<Modules> modules = new ArrayList<>(ic.getAll(Modules.class));
+
+        for(Modules module: modules){
+            System.out.println(module);
         }
     }
 }
