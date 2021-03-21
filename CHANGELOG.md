@@ -101,3 +101,4 @@
 * (ERICK) `checkRoomTimeAvailable()` correctly checks if rooms match.
 * (ERICK) `getAvailableRooms()` method fixed.
 * (ERICK) Created `displayAvailableRooms()` methods.
+* (ERICK) Removed `addDummyData()` from mainIO.
