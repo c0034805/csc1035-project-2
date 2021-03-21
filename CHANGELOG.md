@@ -73,7 +73,7 @@
 * (ERICK) Take/Teach removal finally fixed.
 * (ERICK) Module handler test updated to match embedded classes.
 
-##### v0.63 [20.03.2021]
+##### v0.63 [20.03.2021]:
 * (ERICK) Reinstated booking table change to get staff reservations to work.
 * (ERICK) Updated student class structure to match staff structure.
 * (ERICK) Updated module class structure to match staff structure.
@@ -82,3 +82,6 @@
 * (ERICK) Added additional getter/setter methods to booking class.
 * (ERICK) `cancelReservation()` now deletes staff/(ect) booking.
 * (ERICK) Created `cancelBookingReservation()` method.
+
+##### v0.7 [21.03.2021]: Test Suite Matching
+* (ERICK) `getRoomsReturnsAll()` test doesn't test with arrays.

@@ -38,8 +38,10 @@ public class RoomHandlerTest extends MasterTest{
      */
     @Test
     public void getRoomsReturnsAll() {
-        Object[] rooms = handler.getRooms().toArray();
-        Assertions.assertArrayEquals(rooms,this.rooms);
+        List<Room> rooms = handler.getRooms();
+        for( Room r : this.rooms ) {
+            Assertions.assertTrue( rooms.contains(r) );
+        }
     }
 
     /**
