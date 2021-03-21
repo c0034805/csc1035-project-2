@@ -265,7 +265,8 @@ public class RoomHandler {
                                         b.getStart() + "-" + b.getEnd() );
                     return false;
                 }
-                else if ( !checkTimeAvailable(et, b.getStart(), b.getEnd()) ) {
+                else if ( !checkTimeAvailable(et, b.getStart(), b.getEnd()) ||
+                        ( st.before(b.getStart()) && et.after(b.getEnd()) ) ) {
                     System.out.println( "Finish time " + et + " conflicts with booking with time " +
                                         b.getStart() + "-" + b.getEnd() );
                     return false;

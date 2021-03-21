@@ -93,3 +93,4 @@
 * (ERICK) `getReservedRooms()` method fixed.
 * (ERICK) `checkTimeAvailable()` slight javadoc change.
 * (ERICK) `checkTimeAvailableTypicalValues()` assertions fixed.
+* (ERICK) `checkRoomTimeAvailable()` checking updated.
