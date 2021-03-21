@@ -88,3 +88,4 @@
 * (ERICK) `timestampAddHr()` disregards nanoseconds.
 * (ERICK) Removed hash override in modules class.
 * (ERICK) `reserveRoomModuleDetailsCorrect` booking fixed.
+* (ERICK) `cancelReservationCancelsAllTypes()` checks corrected.

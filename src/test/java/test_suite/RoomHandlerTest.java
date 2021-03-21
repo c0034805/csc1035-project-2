@@ -195,8 +195,10 @@ public class RoomHandlerTest extends MasterTest{
         staffReservation(12,13);
         moduleReservation(13,14);
         List<Booking> bookings = controller.getAll(Booking.class);
-        Assertions.assertEquals(1,bookings.size());
+        Assertions.assertEquals(3,bookings.size());
         Assertions.assertEquals(1,controller.getAll(StudentBooking.class).size());
+        Assertions.assertEquals(1,controller.getAll(ModuleBooking.class).size());
+        Assertions.assertEquals(1,controller.getAll(StaffBooking.class).size());
 
         handler.cancelReservation(bookings.get(0).getId());
         handler.cancelReservation(bookings.get(1).getId());
