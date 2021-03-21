@@ -183,13 +183,13 @@ public class RoomHandler {
      */
     public List<Room> getReservedRooms () {
         List<Room> tmp = new ArrayList<>();
-        for ( Room r : this.getRooms() ) {
-            for ( Booking b : this.getBookings() ) {
-                if ( r.getNum() == b.getRoom().getNum() ) {
-                    tmp.add( r );
-                }
+
+        for ( Booking b : this.getBookings() ) {
+            if ( !tmp.contains( b.getRoom() ) ) {
+                tmp.add( b.getRoom() );
             }
         }
+
         return tmp;
     }
 

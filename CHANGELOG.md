@@ -90,3 +90,4 @@
 * (ERICK) `reserveRoomModuleDetailsCorrect` booking fixed.
 * (ERICK) `cancelReservationCancelsAllTypes()` checks corrected.
 * (ERICK) `cancelReservation()` catches NoResultException exceptions.
+* (ERICK) `getReservedRooms()` method fixed.
