@@ -55,7 +55,7 @@ public class MainIO {
             System.out.println("1: Staff reservation.\n" +
                                "2: Student reservation.\n" +
                                "3: Cancel reservation.\n" +
-                               "4: Find available rooms..\n" +
+                               "4: Find available rooms.\n" +
                                "5: Return to main menu.");
 
             System.out.println("Please select an option:");
