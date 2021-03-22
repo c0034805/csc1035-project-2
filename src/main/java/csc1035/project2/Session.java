@@ -2,7 +2,13 @@ package csc1035.project2;
 
 import java.util.List;
 
+/**
+ * This class encapsulates all the information about a particular session in a weekly timetable.
+ */
 public class Session {
+    /**
+     * This enum should be used instead of using integer offsets from monday for allocating a day for a session.
+     */
     enum day {
         MONDAY,
         TUESDAY,
