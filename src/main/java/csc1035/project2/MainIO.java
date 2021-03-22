@@ -547,8 +547,8 @@ public class MainIO {
     private void displayOptions(){
         Scanner sc = new Scanner(System.in);
 
-        boolean quit = true;
-        while(quit) {
+        boolean quit = false;
+        while(!quit) {
             System.out.println("1: Display all students.\n" +
                                "2: Display all staff.\n" +
                                "3: Display all rooms.\n" +
@@ -567,11 +567,11 @@ public class MainIO {
                 case 4 -> displayModules();
                 case 5 -> displayTake();
                 case 6 -> displayTeach();
-                case 7 -> System.out.println("Returning to main menu.");
-                default -> {
-                    System.out.println("Not a valid option.");
-                    quit = false;
+                case 7 -> {
+                    System.out.println("Returning to main menu.");
+                    quit = true;
                 }
+                default -> System.out.println("Not a valid option.");
             }
         }
     }
