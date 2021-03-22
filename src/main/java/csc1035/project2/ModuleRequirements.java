@@ -50,10 +50,10 @@ public class ModuleRequirements {
      * @param practicals The number of practicals.
      * @param plength The practical length.
      */
-    public ModuleRequirements(String id, int lecturers, int llength,
+    public ModuleRequirements(String id, int lectures, int llength,
                               int practicals, int plength, Date commencing) {
         this.id = id;
-        this.lectures = lecturers;
+        this.lectures = lectures;
         this.llength = llength;
         this.practicals = practicals;
         this.plength = plength;

@@ -42,6 +42,7 @@ public class Staff{
      * @param id The staff ID.
      * @param firstname The staff member's first name.
      * @param lastname The staff member's last name.
+     * @param staffBookings Room bookings for this staff member.
      */
     public Staff(String id, String firstname, String lastname,
                  Set<StaffBooking> staffBookings) {
