@@ -24,6 +24,7 @@ public class TimetableHandler {
      * Generate a weekly recurring timetable for all specified modules
      *
      * @param sd Allocate rooms at diminished capacity
+     * @param mod List of modules that must be included in the weekly timetable
      */
     public List<Session> generateSchoolTimetable(boolean sd, List<String> mod) {
         IController ic = new Controller();
